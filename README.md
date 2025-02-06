@@ -4,17 +4,21 @@ Profesores: Los profesores podrán ver los tramos libres en los que pueden reser
 Vicedirector: Puede hacer lo mismo que los profesores y además pueden añadir o eliminar profesores (!Al eliminar un profesor también se deben borrar sus reservas)
 
 **---- Requisitos ----**
+
 -- Salón de actos --
+
   - Solo podrán haber 3 grupos simultaneamente por hora
   - Son 6 horas por dia
 
 -- Profesores --
+
   - Tener cuenta propia y poder logearse
   - Reservar tramos libres
   - Listar sus reservas
   - Anular sus propias reservas
 
   -- Vicedirector --
+  
     - Extiende la clase profesores
     - Este podrá crear y eliminar profesores
     - Ver todas las reservas
