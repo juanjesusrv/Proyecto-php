@@ -10,12 +10,12 @@ Vicedirector: Puede hacer lo mismo que los profesores y además pueden añadir o
   - Solo podrán haber 3 grupos simultaneamente por hora
   - Son 6 horas por dia
 
--- Profesores --
-
-  - Tener cuenta propia y poder logearse
-  - Reservar tramos libres
-  - Listar sus reservas
-  - Anular sus propias reservas
+  -- Profesores --
+  
+    - Tener cuenta propia y poder logearse
+    - Reservar tramos libres
+    - Listar sus reservas
+    - Anular sus propias reservas
 
   -- Vicedirector --
   
