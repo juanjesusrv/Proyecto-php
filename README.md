@@ -24,6 +24,7 @@ Vicedirector: Puede hacer lo mismo que los profesores y además pueden añadir o
     - Ver todas las reservas
 
 **---- Diagramas ----**
+
 Los diagramas a desarrollar son:
   - Diagrama entidad-relación y modelo relacional
   - Diagrama de flujo
