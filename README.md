@@ -6,9 +6,9 @@ Vicedirector: Puede hacer lo mismo que los profesores y además pueden añadir o
 **---- Requisitos ----**
 
 -- Salón de actos --
-
-  - Solo podrán haber 3 grupos simultaneamente por hora
-  - Son 6 horas por dia
+  
+    - Solo podrán haber 3 grupos simultaneamente por hora
+    - Son 6 horas por dia
 
   -- Profesores --
   
