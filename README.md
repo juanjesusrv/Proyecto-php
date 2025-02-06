@@ -1,7 +1,7 @@
 # Proyecto-php
 Proyecto final de PHP, este programa va a administrar el sistema de gestión de reservas del salón de actos en un instituto. En el programa existen los siguientes usuarios:
 Profesores: Los profesores podrán ver los tramos libres en los que pueden reservar, además tendrán un listado con sus reservas y podrán cancelarlas.
-Vicedirector: Puede hacer lo mismo que los profesores y además pueden añadir o eliminar profesores (!Al eliminar un profesor también se deben borrar sus reservas)
+Vicedirector: Puede hacer lo mismo que los profesores y además pueden añadir o eliminar profesores (Al eliminar un profesor también se deben borrar sus reservas)
 
 **---- Requisitos ----**
 
