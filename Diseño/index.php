@@ -7,22 +7,15 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header><a href="index.html"><img src="iesjorgeguillen.svg" width="300px"></a>
-        <h1>IES LOS PEDROCHES</h1>
-    </header>
+    <?php require_once "header.php" ?>
     <main>
-        <form action="menu.php">
+        <form action="menu.php" method="post">
             <p>Iniciar Sesión</p>
             <br><input type="text" id="usr" name="usr" placeholder="Usuario" required><br>
             <input type="text" id="con" name="con" placeholder="Contraseña" required><br>
             <input type="submit" value="Iniciár Sesión">
         </form>
     </main>
-    <footer>
-        <img src="footer-eu.png" width="200px">
-        <img src="footer-gob-esp.png" width="200px">
-        <img src="footer-fondos.png" width="200px">
-        <img src="logo_junta_blanco.png" width="200px">
-    </footer>
+    <?php require_once "footer.php" ?>
 </body>
 </html>
