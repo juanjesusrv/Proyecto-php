@@ -57,6 +57,21 @@ main {
     margin-block: 70px;
 }
 
+.contenido {
+    background-color: white;
+    width:400px;
+    height:500px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.136);
+    margin: 20px;
+    padding-inline: 20px;
+    padding-block: 20px;
+    overflow-y: scroll;
+}
+
 /* FORMULARIO */
 
 form {
