@@ -1,0 +1,22 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36" version="26.0.11">
+  <diagram name="Página-1" id="iBby-zhWkvjCqV7w-NlJ">
+    <mxGraphModel dx="1050" dy="557" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="s7fYocxtLP4It3Uf2HsN-3" value="Aplicación" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" vertex="1" parent="1">
+          <mxGeometry x="110" y="260" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="s7fYocxtLP4It3Uf2HsN-6" value="Profesor" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" vertex="1" parent="1">
+          <mxGeometry x="110" y="400" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="s7fYocxtLP4It3Uf2HsN-7" value="Reservas" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;" vertex="1" parent="1">
+          <mxGeometry x="280" y="150" width="300" height="430" as="geometry" />
+        </mxCell>
+        <mxCell id="s7fYocxtLP4It3Uf2HsN-8" value="Subdirector" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="510" width="30" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
