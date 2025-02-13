@@ -21,16 +21,46 @@ header {
     box-shadow: 10px 10px 50px rgba(0, 0, 0, 0.084);
 }
 
-header h1 {
-    color: rgb(32, 54, 118);
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 70px;
-    margin-inline: 100px;
+@media (min-width:1100px) {
+    header h1 {
+        color: rgb(32, 54, 118);
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 70px;
+        margin-inline: 100px;
+    }
+
+    header img {
+        height: 130px;
+        width: 130px;
+    }
 }
 
-header img {
-    height: 130px;
-    width: 130px;
+@media (max-width:1100px) {
+    header h1 {
+        color: rgb(32, 54, 118);
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 50px;
+        margin-inline: 70px;
+    }
+    
+    header img {
+        height: 100px;
+        width: 100px;
+    }
+}
+
+@media (max-width:900px) {
+    header h1 {
+        color: rgb(32, 54, 118);
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 30px;
+        margin-inline: 0px;
+    }
+    
+    header img {
+        height: 100px;
+        width: 100px;
+    }
 }
 
 footer {
