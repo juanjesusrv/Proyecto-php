@@ -9,7 +9,7 @@
 <body>
     <?php require_once "header.php" ?>
     <main>
-        <form action="menu.php" method="post">
+        <form action="./validaciones/validacionUsuario.php" method="post">
             <p>Iniciar Sesión</p>
             <br><input type="text" id="usr" name="usr" placeholder="Usuario" required><br>
             <input type="text" id="con" name="con" placeholder="Contraseña" required><br>
