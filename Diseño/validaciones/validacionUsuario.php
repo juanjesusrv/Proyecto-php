@@ -23,6 +23,7 @@
 
             if (mysqli_num_rows($result) > 0) { // Si la consulta devuelve algún resultado
 
+                $_SESSION["con"] = $con;
                 $row = mysqli_fetch_assoc($result); // Guardamos los datos del usuario en un array
                 $_SESSION['idUsuario'] = $row['idUsuario']; // Guardamos el id del usuario en una variable de sesión
                 $_SESSION['nombreUsuario'] = $row['nombreUsuario']; // Guardamos el nombre del usuario en una variable de sesión

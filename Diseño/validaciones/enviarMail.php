@@ -17,10 +17,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql=`select * from reservas where idReserva="`+$idReserva+`"`;
     $resultado=mysqli_query($_SESSION["con"],$sql);
 
+    $idUsuarios=$_SESSION["idUsuario"];
     if(mysqli_num_rows($resultado)==1){
         $campos=mysqli_fetch_assoc($resultado);
-        $idUsuario=$campos["idUsuario"];
         $idAsignatura=$campos["idAsignatura"];
+        $fecha=$campos["fecha"];
     }
 
     $sql=`select * from asignaturas where idAsignatura="`+$idAsignatura+`"`;
@@ -32,25 +33,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $curso=$campos["curso"];
     }
 
-    $sql=`select * from usuarios where idUsuarios="`+$idUsuarios+`"`;
+    $sql=`SELECT * FROM usuarios-asignaturas WHERE idAsignatura="`+$idAsignatura+`" and idUsuario=""`+$idUsuarios+`"`;
     $resultado=mysqli_query($_SESSION["con"],$sql);
 
     if(mysqli_num_rows($resultado)==1){
         $campos=mysqli_fetch_assoc($resultado);
-        $nombreUsuario=$campos["nombreUsuario"];
-        $apellido1=$campos["apellido1"];
-        $apellido2=$campos["apellido2"];
-        $email=$campos["email"];
+        $numAlumnos=$campos["numAlumnos"];
+        $grupo=$campos["grupo"];
     }
 
-    //////////////////////////
+    $sql=`select * from asignaturas where idAsignatura="`+$idAsignatura+`"`;
+    $resultado=mysqli_query($_SESSION["con"],$sql);
+
+    if(mysqli_num_rows($resultado)==1){
+        $campos=mysqli_fetch_assoc($resultado);
+        $nombreAsignatura=$campos["nombreAsignatura"];
+        $curso=$campos["curso"];
+    }
+
+    $sql=`select  from reservas-tramo where idReserva="`+$idReserva+`"`;
+    $resultado=mysqli_query($_SESSION["con"],$sql);
+
+    if(mysqli_num_rows($resultado)>0){
+        while ($fila = mysqli_fetch_assoc($resultado)) {
+            $tramos[] = $fila['idTramo'];
+        }
+    }
+
 
 
     // Captura los datos del formulario
-    $nombre = htmlspecialchars($_POST['nombre']);
-    $email = htmlspecialchars($_POST['email']);
-    $mensaje = htmlspecialchars($_POST['mensaje']);
-    $asunto = htmlspecialchars($_POST['asunto']);
+    $nombre = $_SESSION["apellido1"]+` `+$_SESSION["apellido2"]+`, `+$_SESSION["nombreUsuario"];
+    //$email = $_SESSION["email"];
+    $email = "rjimrui727@g.educaand.es";
+    $asunto = `Reserva de la clase de examenes el dia `+$fecha+` para la asignatura `+$nombreAsignatura;
 
     // Crear mensaje
 
@@ -59,11 +75,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <h1>Resguardo de la reserva del aula de examenes</h1>
         <p>
             ID de la reserva: `+$_SESSION["idReserva"]+`<br>
-            Fecha de la reserva: <br>
-            Asignatura: <br>
-            Curso: <br>
-            Nº alumnos: <br>
-            Profesor: <br>
+            Fecha de la reserva: `+$fecha+`<br>
+            Asignatura: `+$nombreAsignatura+`<br>
+            Curso: `+$curso+` - `+$grupo+`<br>
+            Nº alumnos: `+$numAlumnos+`<br>
+            Profesor: `+$_SESSION["apellido1"]+` `+$_SESSION["apellido2"]+`, `+$_SESSION["nombreUsuario"]+`<br>
             Tramos reservados<br>
             - <br>
         </p>
