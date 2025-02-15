@@ -11,7 +11,21 @@
 
 <body>
     <?php
-        
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            if(isset($_POST["idTramo"])){
+                $idtramo = $_POST["idTramo"];
+                $hora = $_POST["hora"];
+                $idusuario = $_SESSION["idUsuario"];
+                $fecha = date("Y-m-d");
+                $sql = "";
+                $result = mysqli_query($conn, $sql);
+                if($result){
+                    echo "<script>alert('Reserva realizada con éxito')</script>";
+                }else{
+                    echo "<script>alert('Error al realizar la reserva')</script>";
+                }
+            }
+        }
     ?>
     <?php require_once "header.php" ?>
     <main>
@@ -23,9 +37,9 @@
                     <br>
                     <p>Selecciona el tramo</p>
                     //los asteriscos son para modificar con php
-                    <input id="*idtramo" name="*idtramo" type="checkbox">
+                    <input id="<?php echo $idtramo ?>" name="<?php echo $idtramo ?>" type="checkbox">
                     //el #hora es para modificar con el php
-                    <label for="">#hora(tabla tramos)</label>
+                    <label for=""><?php echo $hora ?></label>
                     <br>
                 </form>
             </div>
