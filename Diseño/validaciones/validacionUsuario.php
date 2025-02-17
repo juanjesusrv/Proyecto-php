@@ -1,65 +1,55 @@
 <?php
 
-    if (isset($_POST['provincia'])) { // Si se ha enviado el formulario con la provincia entra en el if
+    session_start(); // Iniciamos la sesión
+
+    if (isset($_POST['usr']) && isset($_POST['con'])) {
         $host = "localhost"; // Nombre del host
         $user = "root"; // Usuario de la base de datos
         $password = ""; // Contraseña de la base de datos
-        $db = "campeonatos"; // Nombre de la base de datos
+        $db = "reservas"; // Nombre de la base de datos
 
-        $provincia = htmlspecialchars($_POST['provincia']); // Guardamos la provincia en una variable
-        
+        /* Guardamos los datos del usuario en variables */
+        $contrasena = htmlspecialchars($_POST['con']); // Guardamos la contraseña en una variable
+        $idUsuario = htmlspecialchars($_POST['usr']); // 
+
+
         $con = mysqli_connect($host, $user, $password, $db); // Conectamos a la base de datos
         
-        $query1 = "SELECT * FROM ciudades WHERE provincia = '$provincia'"; // Creamos la consulta para obtener las ciudades de la provincia
-        $resultado = mysqli_query($con, $query1); // Ejecutamos la consulta
+        if (!$con) {
+            echo "Error al conectar a la base de datos";
+        } else {
+            $query = "SELECT * FROM usuarios WHERE idUsuario = '$idUsuario' AND contrasena = '$contrasena'"; // Creamos la consulta
+            $result = mysqli_query($con, $query); // Realizamos la consulta
 
-        
+            if (mysqli_num_rows($result) > 0) { // Si la consulta devuelve algún resultado
 
-        if (mysqli_num_rows($resultado) > 0) { // Si hay ciudades en la provincia entra en el if
-            echo "<h1>Ciudades de la provincia de " . $provincia . "</h1>";
-            echo "<table border='1'>";
-                echo "<tr>";
-                    echo "<td>Nombre de la ciudad </td>";
-                    echo "<td>Provincia </td>";
-                    echo "<td>Numero de habitantes </td>";
-                echo "</tr>";
-            while ($registro = mysqli_fetch_assoc($resultado)) { // Recorremos las ciudades
-                echo "<tr>";
-                    echo "<td>" . $registro['NombreCiudad'] . "</td>";
-                    echo "<td>" . $registro['Provincia'] . "</td>";
-                    echo "<td>" . $registro['NumHab'] . "</td>";
-                echo "</tr>";
+                $row = mysqli_fetch_assoc($result); // Guardamos los datos del usuario en un array
+                $_SESSION['idUsuario'] = $row['idUsuario']; // Guardamos el id del usuario en una variable de sesión
+                $_SESSION['nombreUsuario'] = $row['nombreUsuario']; // Guardamos el nombre del usuario en una variable de sesión
+                $_SESSION['apellido1'] = $row['apellido1']; // Guardamos el primer apellido del usuario en una variable de sesión
+                $_SESSION['apellido2'] = $row['apellido2']; // Guardamos el segundo apellido del usuario en una variable de sesión
+                $_SESSION['email'] = $row['email']; // Guardamos el email del usuario en una variable de sesión
+                $_SESSION['idDepartamento'] = $row['idDepartamento']; // Guardamos el id del departamento del usuario en una variable de sesión
+                $_SESSION['con'] = $con; // Guardamos la conexión a la base de datos en una variable de sesión
+                $query = "SELECT * FROM `usuarios-roles` WHERE idUsuario = '$idUsuario'"; // Creamos la consulta
+                $result = mysqli_query($con, $query); // Realizamos la consulta
+                
+                if (mysqli_num_rows($result) > 0) { // Si la consulta devuelve algún resultado
+                    $roles = array(); // Creamos un array para almacenar los roles
+                    while ($row = mysqli_fetch_assoc($result)) { // Recorremos los resultados
+                        $roles[] = $row['idRol']; // Añadimos cada rol al array
+                    }
+                    $_SESSION['roles'] = $roles; // Guardamos los roles en una variable de sesión
+                } else {
+                    echo "El usuario no tiene roles asignados"; // Si no devuelve resultados, mostramos un mensaje de error
+                }
+                
+
+                header("Location: ../###"); // Redirigimos a la página principal
+            } else {
+                echo "Usuario o contraseña incorrectos"; // Si no devuelve resultados, mostramos un mensaje de error
             }
-            echo "</table><br>";
-        } else { // Si no hay ciudades en la provincia entra en el else
-            echo "No se encontraron ciudades en la provincia de " . $provincia;
-            echo "<br><br>";
         }
-
-        
-        echo "<button onclick='history.go(-1)'>Volver</button>"; // Botón para volver a la página anterior
-
-        echo "<hr>";
     }
 
 ?>
-
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-
-    <?php if (!isset($_POST['provincia'])): ?> <!-- Si no se ha enviado el formulario muestra el formulario -->
-    <form action="Ej_ConsultaCiudades.php" method="POST">
-        <label for="provincia">Ingrese el nombre de una provincia:</label>
-        <input type="text" name="provincia" id="provincia">
-        <input type="submit" value="Enviar">
-    </form>
-    <?php endif; ?> <!-- Fin del if -->
-
-</body>
-</html>
