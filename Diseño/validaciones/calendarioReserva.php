@@ -1,10 +1,8 @@
 <?php
+    $diaActual="";
     if ($_SERVER["REQUEST_METHOD"] == "POST"&&(isset($_POST["mesBuscar"])||isset($_POST["yearBuscar"]))) {
-        $diaSemana=date('L');
         if ($_POST["mesBuscar"]==date('m')&&$_POST["yearBuscar"]==date('Y')){
             $diaActual=date('d');
-            $mes=date('m');
-            $year=date('Y');
         }
         $mes=$_POST["mesBuscar"];
         $year=$_POST["yearBuscar"];
@@ -13,4 +11,6 @@
         $mes=date('m');
         $year=date('Y');
     }
+    $calendario="<table><tr>Lunes</th><th>Martes</th><th>Miercoles</th><th>Jueves</th><th>Viernes</th><th>Sabado</th><th>Domingo</th></tr>";
+    
 ?>
