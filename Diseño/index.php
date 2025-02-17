@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administración de Tramos Horarios IES Pedroche</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../Estilos/styles.css">
 </head>
 <body>
     <?php require_once "header.php" ?>
