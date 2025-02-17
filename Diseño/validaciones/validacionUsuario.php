@@ -45,7 +45,7 @@
                 }
                 
 
-                header("Location: ../###"); // Redirigimos a la página principal
+                header("Location: ../reserva.php"); // Redirigimos a la página principal
             } else {
                 echo "Usuario o contraseña incorrectos"; // Si no devuelve resultados, mostramos un mensaje de error
             }
