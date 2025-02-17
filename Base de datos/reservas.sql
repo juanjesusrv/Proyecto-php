@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-02-2025 a las 22:00:35
+-- Tiempo de generación: 18-02-2025 a las 00:10:27
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `reservas`
 --
-CREATE DATABASE IF NOT EXISTS `reservas` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `reservas`;
 
 -- --------------------------------------------------------
 
@@ -91,6 +89,13 @@ CREATE TABLE `reservas` (
   `idAsignatura` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `reservas`
+--
+
+INSERT INTO `reservas` (`idReserva`, `fecha`, `idUsuario`, `idAsignatura`) VALUES
+(1, '2025-03-31', '11111111A', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -99,8 +104,15 @@ CREATE TABLE `reservas` (
 
 CREATE TABLE `reservas-tramo` (
   `idReserva` int(11) NOT NULL,
-  `idTramo` int(11) NOT NULL
+  `idTramo` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `reservas-tramo`
+--
+
+INSERT INTO `reservas-tramo` (`idReserva`, `idTramo`) VALUES
+(1, 'T1');
 
 -- --------------------------------------------------------
 
@@ -328,7 +340,7 @@ ALTER TABLE `departamentos`
 -- AUTO_INCREMENT de la tabla `reservas`
 --
 ALTER TABLE `reservas`
-  MODIFY `idReserva` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idReserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -357,7 +369,8 @@ ALTER TABLE `reservas`
 -- Filtros para la tabla `reservas-tramo`
 --
 ALTER TABLE `reservas-tramo`
-  ADD CONSTRAINT `reservas-tramo_ibfk_1` FOREIGN KEY (`idReserva`) REFERENCES `reservas` (`idReserva`);
+  ADD CONSTRAINT `reservas-tramo_ibfk_1` FOREIGN KEY (`idReserva`) REFERENCES `reservas` (`idReserva`),
+  ADD CONSTRAINT `reservas-tramo_ibfk_2` FOREIGN KEY (`idTramo`) REFERENCES `tramos` (`idTramo`);
 
 --
 -- Filtros para la tabla `usuarios`
