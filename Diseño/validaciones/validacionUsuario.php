@@ -31,7 +31,7 @@
                 $_SESSION['apellido2'] = $row['apellido2']; // Guardamos el segundo apellido del usuario en una variable de sesión
                 $_SESSION['email'] = $row['email']; // Guardamos el email del usuario en una variable de sesión
                 $_SESSION['idDepartamento'] = $row['idDepartamento']; // Guardamos el id del departamento del usuario en una variable de sesión
-
+                $_SESSION['con'] = $con; // Guardamos la conexión a la base de datos en una variable de sesión
                 $query = "SELECT * FROM `usuarios-roles` WHERE idUsuario = '$idUsuario'"; // Creamos la consulta
                 $result = mysqli_query($con, $query); // Realizamos la consulta
                 
