@@ -41,7 +41,9 @@
                 </form>
             </div>
         </div>
-        <div class="listaReservas">Lista de Reservas</div>
+        <div class="listaReservas">
+             <?php require_once "validaciones/listaReserva.php" ?>
+        </div>
     </main>
     <?php require_once "footer.php" ?>
 </body>
