@@ -5,12 +5,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../Estilos/styles.css">
+    <link rel="stylesheet" href="Estilos/styles.css">
     <title>Reservas</title>
 </head>
 
 <body>
-    <?php require_once "header.php" ?>
+    <?php require_once "./plantillas/header.php" ?>
     <main>
         <div class="reservas">
             <div class="contenedorEstandar">Calendario</div>
@@ -31,7 +31,7 @@
              <?php require_once "validaciones/listaReserva.php" ?>
         </div>
     </main>
-    <?php require_once "footer.php" ?>
+    <?php require_once "./plantillas/footer.php" ?>
 </body>
 
 </html>
