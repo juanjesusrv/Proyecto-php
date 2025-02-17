@@ -12,11 +12,8 @@
 <body>
     <?php
         if($_SERVER["REQUEST_METHOD"] == "POST"){
-            if(isset($_POST["idTramo"])){
-                $idtramo = $_POST["idTramo"];
-                $hora = $_POST["hora"];
-                $idusuario = $_SESSION["idUsuario"];
-                $fecha = date("Y-m-d");
+            if(isset($_POST["fecha"])){
+                $fecha = $_POST["fecha"];
                 $sql = "";
                 $result = mysqli_query($conn, $sql);
                 if($result){
