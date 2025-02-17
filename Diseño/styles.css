@@ -51,10 +51,9 @@ footer {
     justify-content: center;
     margin-top: auto;
     color: white;
-
-    img {
-        margin: 20px;
-    }
+}
+footer img {
+    margin: 20px;
 }
 
 /* CONTENIDO */
