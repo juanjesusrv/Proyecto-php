@@ -1,4 +1,4 @@
-body{
+body {
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -89,8 +89,8 @@ main {
 
 .contenido {
     background-color: white;
-    width:400px;
-    height:500px;
+    width: 400px;
+    height: 500px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     border-radius: 20px;
     display: flex;
@@ -104,11 +104,11 @@ main {
 
 /* FORMULARIO */
 
-form {
+.formularioLogin {
     background-color: white;
-    width:600px;
-    height:400px;
-    padding-bottom:20px;
+    width: 600px;
+    height: 400px;
+    padding-bottom: 20px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     border-radius: 20px;
     display: flex;
@@ -116,39 +116,79 @@ form {
     justify-content: center;
     flex-direction: column;
     box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.136);
-    
+
+    p {
+        font-size: larger;
+        padding-right: 280px;
+        margin-bottom: 0px;
+    }
+
+    input {
+        margin: 10px;
+        width: 375px;
+        height: 35px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size: larger;
+        border-radius: 5px;
+        border: 1px solid gray;
+        box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.199);
+    }
+
+    input[type="submit"] {
+        background-color: rgb(93, 190, 93);
+        color: white;
+        font-size: larger;
+        border-radius: 5px;
+        border: 1px solid rgb(33, 94, 53);
+        transition: background-color 300ms ease-in-out;
+    }
+
+    input[type="submit"]:hover {
+        cursor: pointer;
+        background-color: rgb(33, 94, 53);
+        font-size: larger;
+        border-radius: 5px;
+        border: 1px solid rgb(16, 54, 28);
+    }
+
 }
 
-form>p {
-    font-size: larger;
-    padding-right: 280px;
-    margin-bottom: 0px;
+
+/* ********** */
+/*  Reservas */
+/* ********** */
+
+.reservas {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
 }
 
-input {
-    margin: 10px;
-    width: 375px;
-    height: 35px;
+.contenedorEstandar {
+    background-color: white;
+    width: 600px;
+    height: 400px;
+    padding-bottom: 20px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: larger;
-    border-radius: 5px;
-    border: 1px solid gray;
-    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.199);
-   }
-
-input[type="submit"] {
-    background-color: rgb(93, 190, 93);
-    color:white;
-    font-size: larger;
-    border-radius: 5px;
-    border: 1px solid rgb(33, 94, 53);
-    transition: background-color 300ms ease-in-out;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.136);
 }
 
-input[type="submit"]:hover {
-    cursor: pointer;
-    background-color: rgb(33, 94, 53);
-    font-size: larger;
-    border-radius: 5px;
-    border: 1px solid rgb(16, 54, 28);
+.listaReservas {
+    background-color: white;
+    width: 80%;
+    height: 400px;
+    padding-bottom: 20px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.136);
+    margin-top: 40px;
 }
