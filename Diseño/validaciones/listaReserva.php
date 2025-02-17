@@ -1,3 +1,4 @@
+<?php session_start() ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,12 +10,12 @@
     <div>
         <h1>Resguardo de la reserva del aula de examenes</h1>
         <p>
-            ID de la reserva: <br>
+            ID de la reserva: 
             Fecha de la reserva: <br>
             Asignatura: <br>
             Curso: <br>
             Nº alumnos: <br>
-            Profesor: <br>
+            Profesor: <br><br><?php echo $_SESSION['nombreUsuario']  ?>
             Tramos reservados<br>
             - <br>
         </p>
