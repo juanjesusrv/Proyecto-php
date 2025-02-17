@@ -10,20 +10,6 @@
 </head>
 
 <body>
-    <?php
-        if($_SERVER["REQUEST_METHOD"] == "POST"){
-            if(isset($_POST["fecha"])){
-                $fecha = $_POST["fecha"];
-                $sql = "";
-                $result = mysqli_query($conn, $sql);
-                if($result){
-                    echo "<script>alert('Reserva realizada con éxito')</script>";
-                }else{
-                    echo "<script>alert('Error al realizar la reserva')</script>";
-                }
-            }
-        }
-    ?>
     <?php require_once "header.php" ?>
     <main>
         <div class="reservas">
@@ -33,10 +19,10 @@
                     <p>Haz tu Reserva</p>
                     <br>
                     <p>Selecciona el tramo</p>
-                    //los asteriscos son para modificar con php
-                    <input id="<?php echo $idtramo ?>" name="<?php echo $idtramo ?>" type="checkbox">
-                    //el #hora es para modificar con el php
-                    <label for=""><?php echo $hora ?></label>
+                    <!-- los asteriscos son para modificar con php -->
+                    <input id="*" name="*" type="checkbox">
+                    <!-- el #hora es para modificar con el php -->
+                    <label for="">*</label>
                     <br>
                 </form>
             </div>
