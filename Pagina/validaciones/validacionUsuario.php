@@ -3,18 +3,13 @@
     session_start(); // Iniciamos la sesión
 
     if (isset($_POST['usr']) && isset($_POST['con'])) {
-        $host = "localhost"; // Nombre del host
-        $user = "root"; // Usuario de la base de datos
-        $password = ""; // Contraseña de la base de datos
-        $db = "reservas"; // Nombre de la base de datos
+        
+        require_once "./conexion.php"; // Incluimos el archivo de conexión a la base de datos
 
         /* Guardamos los datos del usuario en variables */
         $contrasena = htmlspecialchars($_POST['con']); // Guardamos la contraseña en una variable
         $idUsuario = htmlspecialchars($_POST['usr']); // 
 
-
-        $con = mysqli_connect($host, $user, $password, $db); // Conectamos a la base de datos
-        
         if (!$con) {
             echo "Error al conectar a la base de datos";
         } else {

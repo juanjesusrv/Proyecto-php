@@ -1,6 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
-<?php session_start(); ?>
+<html lang="es">
+<?php session_start(); 
+
+require_once "./validaciones/conexion.php";
+
+?>
 
 <head>
     <meta charset="UTF-8">
