@@ -12,5 +12,10 @@
         $year=date('Y');
     }
     $calendario="<table><tr>Lunes</th><th>Martes</th><th>Miercoles</th><th>Jueves</th><th>Viernes</th><th>Sabado</th><th>Domingo</th></tr>";
+    $calendario.="<tr>";
+    for($i=1;$i<date("w",strtotime($year."-".$mes."-01"));$i++){
+        $calendario.="<td></td>";
+    } 
+    $calendario.="</tr>";
     
 ?>
