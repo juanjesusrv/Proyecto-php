@@ -1,0 +1,33 @@
+.menu {
+    width: 140px;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #FFC83D;
+}
+
+.menu li {
+    border-bottom: 1px solid #FFC83D;
+}
+
+.menu a {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    color: #333;
+    padding: 5px;
+    background-color: #E5F3FE;
+}
+
+.menu a:hover {
+    cursor: pointer;
+    background-color: #c8e2f7;
+}
+
+.menu li:last-child {
+    border-bottom: none;
+}
+
+.menu a::before {
+    content: "\1F449";
+}
