@@ -1,5 +1,4 @@
 <?php
-$con = $_SESSION["con"];
 
 if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["fecha"])) {
     if (isset($_POST["fecha"])) {
@@ -40,16 +39,20 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["fecha"])) {
     }
 }
 
-
 ?>
 
-<form action="" method="post">
-                    <p>Haz tu Reserva</p>
-                    <br>
-                    <p>Selecciona el tramo</p>
-                    <!-- los asteriscos son para modificar con php -->
-                    <input id="*" name="*" type="checkbox">
-                    <!-- el #hora es para modificar con el php -->
-                    <label for="">*</label>
-                    <br>
+<form action="reservas_tramos.php" method="post">
+    <p>Haz tu Reserva</p>
+    <br>
+    <p>Selecciona el tramo</p>
+    <select name="tramo" id="tramo">
+        <?php
+        $sql4 = "select * from tramos";
+        $result4 = mysqli_query($con, $sql4);
+        while ($tramo = mysqli_fetch_assoc($result4)) { ?>
+            <option value="<?php echo $tramo["idTramo"] ?>"><?php echo $tramo["idTramo"]. " - ". $tramo["hora"] ?></option>
+        <?php }; ?>
+    </select>
+    <label for="">hora</label>
+    <br>
 </form>
