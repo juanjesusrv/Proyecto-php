@@ -1,0 +1,28 @@
+/* HEADER */
+header {
+    li a {
+        margin: 0 5px;
+        text-decoration: none;
+        color: black;
+        padding: 10px 15px 10px 15px;
+        background-color:  rgb(217, 216, 216);
+        transition: 0.5s linear;
+        border-radius: 5px;
+        display: block;
+    }
+
+    ul {
+        display: flex;
+    }
+
+    li {
+        list-style-type: none;
+    }
+
+    li a:hover {
+        background-color: rgb(32, 54, 118);
+        transform: scale(1.1);
+        color: white;
+    }
+
+}
