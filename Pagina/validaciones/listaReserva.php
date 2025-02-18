@@ -2,7 +2,17 @@
 
 if (!$con) {
     echo "Error al conectar a la base de datos";
-} 
+}
+
+if (!isset($_SESSION['eleccion'])) {
+    $_SESSION['eleccion'] = true;
+}
+
+if (isset($_POST['cambiar_vista'])) {
+    $_SESSION['eleccion'] = !$_SESSION['eleccion'];
+}
+
+$eleccion = $_SESSION['eleccion'];
 ?>
 
 <!DOCTYPE html>
@@ -30,7 +40,16 @@ if (!$con) {
 </head>
 <body>
     <div>
-        <h1>Lista de reservas de <?= $_SESSION['nombreUsuario']?></h1>
+        <h1>Lista de reservas de <?= $_SESSION['nombreUsuario'] ?></h1>
+        
+        <?php if (in_array(2, $_SESSION['roles'])) { ?>
+            <form method="post" style="margin-bottom: 10px;">
+                <button type="submit" name="cambiar_vista">
+                    <?= $eleccion ? "Ver solo mis reservas" : "Ver todas las reservas"; ?>
+                </button>
+            </form>
+        <?php } ?>
+
         <table>
             <tr>
                 <th>ID Reserva</th>
@@ -39,50 +58,63 @@ if (!$con) {
                 <th>Asignatura</th>
                 <th>Curso</th>
                 <th>Grupo</th>
+                <?php if (in_array(2, $_SESSION['roles']) && $eleccion) { ?>
+                    <th>ID Usuario</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                <?php } ?>
             </tr>
 
-            <?php if (in_array(1, $_SESSION['roles'])) { ?> <!-- Si el usuario tiene el rol 1 -->
-                <?php
-                    
+            <?php
+            $idUsuario = mysqli_real_escape_string($con, $_SESSION['idUsuario']);
 
-                    $idUsuario = mysqli_real_escape_string($con, $_SESSION['idUsuario']);
+            if (in_array(2, $_SESSION['roles']) && $eleccion) {
+                $query = "SELECT r.idReserva, r.fecha, t.hora, a.nombreAsignatura, a.curso, ua.grupo, r.idUsuario, u.nombreUsuario, u.apellido1 
+                        FROM reservas r 
+                        JOIN `reservas-tramo` rt ON r.idReserva = rt.idReserva 
+                        JOIN tramos t ON rt.idTramo = t.idTramo 
+                        JOIN asignaturas a ON r.idAsignatura = a.idAsignatura 
+                        JOIN `usuarios-asignaturas` ua ON r.idUsuario = ua.idUsuario 
+                        AND r.idAsignatura = ua.idAsignatura 
+                        JOIN usuarios u ON r.idUsuario = u.idUsuario";
+            } else {
+                $query = "SELECT r.idReserva, r.fecha, t.hora, a.nombreAsignatura, a.curso, ua.grupo 
+                        FROM reservas r 
+                        JOIN `reservas-tramo` rt ON r.idReserva = rt.idReserva 
+                        JOIN tramos t ON rt.idTramo = t.idTramo 
+                        JOIN asignaturas a ON r.idAsignatura = a.idAsignatura 
+                        JOIN `usuarios-asignaturas` ua ON r.idUsuario = ua.idUsuario 
+                        AND r.idAsignatura = ua.idAsignatura 
+                        WHERE r.idUsuario = '$idUsuario'";
+            }
 
-                    $query = "SELECT r.idReserva, r.fecha, t.hora, a.nombreAsignatura, a.curso, ua.grupo 
-                            FROM reservas r 
-                            JOIN `reservas-tramo` rt ON r.idReserva = rt.idReserva 
-                            JOIN tramos t ON rt.idTramo = t.idTramo 
-                            JOIN asignaturas a ON r.idAsignatura = a.idAsignatura 
-                            JOIN `usuarios-asignaturas` ua ON r.idUsuario = ua.idUsuario 
-                            AND r.idAsignatura = ua.idAsignatura 
-                            WHERE r.idUsuario = '$idUsuario'";
+            $result = mysqli_query($con, $query);
+            if (!$result) {
+                die("Error en la consulta: " . mysqli_error($con));
+            }
 
-                    $result = mysqli_query($con, $query);
-                    if (!$result) {
-                        die("Error en la consulta: " . mysqli_error($con)); // Muestra el error de SQL
+            if (mysqli_num_rows($result) > 0) {
+                while ($row = mysqli_fetch_assoc($result)) {
+                    echo "<tr>";
+                    echo "<td>" . $row['idReserva'] . "</td>";
+                    echo "<td>" . $row['fecha'] . "</td>";
+                    echo "<td>" . $row['hora'] . "</td>";
+                    echo "<td>" . $row['nombreAsignatura'] . "</td>";
+                    echo "<td>" . $row['curso'] . "</td>";
+                    echo "<td>" . $row['grupo'] . "</td>";
+                    if (in_array(2, $_SESSION['roles']) && $eleccion) {
+                        echo "<td>" . $row['idUsuario'] . "</td>";
+                        echo "<td>" . $row['nombreUsuario'] . "</td>";
+                        echo "<td>" . $row['apellido1'] . "</td>";
                     }
-
-                    if (mysqli_num_rows($result) > 0) {
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            echo "<tr>";
-                                echo "<td>" . $row['idReserva'] . "</td>";
-                                echo "<td>" . $row['fecha'] . "</td>";
-                                echo "<td>" . $row['hora'] . "</td>";
-                                echo "<td>" . $row['nombreAsignatura'] . "</td>";
-                                echo "<td>" . $row['curso'] . "</td>";
-                                echo "<td>" . $row['grupo'] . "</td>";
-                            echo "</tr>";
-                        }
-                    } else {
-                        echo "No hay reservas";
-                    }
-                ?>
-
-            <?php } ?> 
-
+                    echo "</tr>";
+                }
+            } else {
+                echo "<tr><td colspan='6'>No hay reservas</td></tr>";
+            }
+            ?>
         </table>
     </div>
-    <div>
-        <img src="../imgs/" alt=""> I.E.S. Jorge Guillén
-    </div>
+    
 </body>
 </html>
