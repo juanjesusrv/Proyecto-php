@@ -5,6 +5,9 @@
     <?php
     if (isset($_SESSION['idUsuario'])) {
         echo "<p>Bienvenido, ".$_SESSION['nombreUsuario']." ".$_SESSION['apellido1']." ".$_SESSION['apellido2']."</p>";
+        ?>
+            <a href="Validaciones/cerrar_sesion.php" class="botones">Cerrar Sesion</a>
+        <?php
     }
     //si el rol es 2, mostrar el enlace a la página de administración
     if (isset($_SESSION['roles'])) {
@@ -14,8 +17,8 @@
                 ?>
                 <nav class="navegacion">
                     <ul>
-                        <li><a href="reserva.php">Reservas</a></li>
-                        <li><a href="#">Profesorado</a></li>
+                        <li><a href="reserva.php" class="botones">Reservas</a></li>
+                        <li><a href="gestion_profesorado.php" class="botones">Profesorado</a></li>
                     </ul>
                 </nav>
                 <?php
