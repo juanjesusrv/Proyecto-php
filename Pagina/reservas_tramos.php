@@ -49,7 +49,9 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["fecha"])) {
         <?php
         $sql4 = "select * from tramos";
         $result4 = mysqli_query($con, $sql4);
-        while ($tramo = mysqli_fetch_assoc($result4)) { ?>
+        while ($tramo = mysqli_fetch_assoc($result4)) { 
+            //mostrar solo los tramos que esten libres
+            ?>
             <option value="<?php echo $tramo["idTramo"] ?>"><?php echo $tramo["idTramo"]. " - ". $tramo["hora"] ?></option>
         <?php }; ?>
     </select>
