@@ -19,16 +19,7 @@ require_once "./validaciones/conexion.php";
         <div class="reservas">
             <div class="contenedorEstandar">Calendario</div>
             <div class="contenedorEstandar">
-                <form action="" method="post">
-                    <p>Haz tu Reserva</p>
-                    <br>
-                    <p>Selecciona el tramo</p>
-                    <!-- los asteriscos son para modificar con php -->
-                    <input id="*" name="*" type="checkbox">
-                    <!-- el #hora es para modificar con el php -->
-                    <label for="">*</label>
-                    <br>
-                </form>
+                <?php require_once "reservas_tramos.php" ?> 
             </div>
         </div>
         <div class="listaReservas">
