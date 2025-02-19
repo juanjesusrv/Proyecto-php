@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-02-2025 a las 00:10:27
+-- Tiempo de generación: 18-02-2025 a las 21:38:12
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -94,7 +94,9 @@ CREATE TABLE `reservas` (
 --
 
 INSERT INTO `reservas` (`idReserva`, `fecha`, `idUsuario`, `idAsignatura`) VALUES
-(1, '2025-03-31', '11111111A', 1);
+(1, '2025-03-31', '11111111A', 1),
+(2, '2025-03-31', '11111111A', 10),
+(3, '2025-02-28', '11111111C', 6);
 
 -- --------------------------------------------------------
 
@@ -112,7 +114,9 @@ CREATE TABLE `reservas-tramo` (
 --
 
 INSERT INTO `reservas-tramo` (`idReserva`, `idTramo`) VALUES
-(1, 'T1');
+(1, 'T1'),
+(2, 'T4'),
+(3, 'T2');
 
 -- --------------------------------------------------------
 
@@ -340,7 +344,7 @@ ALTER TABLE `departamentos`
 -- AUTO_INCREMENT de la tabla `reservas`
 --
 ALTER TABLE `reservas`
-  MODIFY `idReserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idReserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
