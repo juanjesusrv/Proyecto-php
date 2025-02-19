@@ -57,6 +57,7 @@
         $calendario.="<td></td>";
     } 
     $calendario.="</tr>";
+    
 ?>
 $tramo["idTramo"]." - ".$tramo["hora"]
 <button type="submit" name="fecha" value="" ></button>
