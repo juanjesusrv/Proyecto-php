@@ -45,16 +45,34 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["fecha"])) {
     <p>Haz tu Reserva</p>
     <br>
     <p>Selecciona el tramo</p>
+    <label for="tramo">Hora:</label>
     <select name="tramo" id="tramo">
         <?php
-        $sql4 = "select * from tramos";
-        $result4 = mysqli_query($con, $sql4);
-        while ($tramo = mysqli_fetch_assoc($result4)) {
-            //mostrar solo los tramos que esten libres
-            if ($array_tramos[$tramo["idTramo"]] == null) { ?>
-                <option value="<?php echo $tramo["idTramo"] ?>"><?php echo $tramo["idTramo"] . " - " . $tramo["hora"] ?></option>
-        <?php } }; ?>
+        if (isset($fecha)) {
+            $sql4 = "SELECT t.* 
+                     FROM tramos t 
+                     LEFT JOIN `reservas-tramo` rt ON t.idTramo = rt.idTramo 
+                     LEFT JOIN reservas r ON rt.idReserva = r.idReserva AND r.fecha = '$fecha' 
+                     WHERE r.idReserva IS NULL";
+            $result4 = mysqli_query($con, $sql4);
+
+
+            if (mysqli_num_rows($result4) == 0) {
+                echo "<option>No hay tramos disponibles</option>";
+            } else {
+                while ($tramo = mysqli_fetch_assoc($result4)) {
+                    //mostrar solo los tramos que esten libres
+                    if (!isset($array_tramos[$tramo["idTramo"]])) { ?>
+                        <option value="<?php echo $tramo["idTramo"] ?>"><?php echo $tramo["idTramo"] . " - " . $tramo["hora"] ?></option>
+        <?php }
+                }
+            }
+        } else {
+            echo "<option>Por favor, selecciona una fecha primero</option>";
+        }
+        ?>
     </select>
-    <label for="">hora</label>
     <br>
+    <br>
+    <button type="submit">Enviar</button>
 </form>
