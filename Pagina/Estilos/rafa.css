@@ -1,0 +1,12 @@
+.calenReDiaVacio{
+    background-color: green;
+}
+.calenReDiaMedio{
+    background-color: yellow;
+}
+.calenReDiaLleno{
+    background-color: red;
+}
+.calenReDiaNoSeleccionable{
+    background-color: gray;
+}

@@ -110,6 +110,7 @@
         echo date("w",strtotime($year."-".$mes."-".$ultimoDiaMes));
         $calendario.="</tr></table>";
         echo '<form action="reserva.php" method="post">
+        <input type="hidden" name="numAlumnos" value="'.$numeroAlumnos.'">
         <input type="hidden" name="idAsignatura" value="'.$_POST["idAsignatura"].'">
         <input type="hidden" name="mesBuscar" value="'.$mes.'">
         <input type="hidden" name="yearBuscar" value="'.$year.'">';
@@ -136,14 +137,35 @@
     }
 
     function tramosLibres($fecha,$idAsig,$numAlum,$aTramos,$con){
-        $sql="SELECT * FROM ";
-        return "todos";
         $tramosLLenos=0;
-        // foreach($aTramos as $ocupado){
-        //     if(($ocupado+$numAlum)>100){
-        //         $tramosLLenos++;
-        //     }
-        // }
+        
+        $sql = "SELECT * FROM reservas WHERE fecha = '$fecha'"; //sacamos todas las reservas de la fecha seleccionada
+        $result = mysqli_query($con, $sql);
+        while ($fila = mysqli_fetch_assoc($result)) {
+
+            $sql3 = "SELECT * FROM `usuarios-asignaturas` WHERE idAsignatura = '".$fila["idAsignatura"]."' AND idUsuario = '".$fila["idUsuario"]."'";  //sacamos el numero de alumnos de la asignatura
+            $numAlumnos = 0;
+            $result3 = mysqli_query($con, $sql3);
+            foreach ($result3 as $fila3) {
+                $numAlumnos = $fila3["numAlumnos"]; //guardamos el numero de alumnos
+            }
+
+            $sql2 = "SELECT * FROM `reservas-tramo` WHERE idReserva = '".$fila["idReserva"]."'"; //sacamos los tramos de la reserva
+            $result2 = mysqli_query($con, $sql2);
+            while ($fila2 = mysqli_fetch_assoc($result2)) {
+                if($_SESSION["idUsuario"]==$fila["idUsuario"]){
+                    $aTramos[$fila2["idTramo"]] = 101;
+                }else{
+                    $aTramos[$fila2["idTramo"]] += $numAlumnos;
+                }
+            }
+        }
+
+        foreach($aTramos as $ocupado){
+            if(($ocupado+$numAlum)>100){
+                $tramosLLenos++;
+            }
+        }
 
         if($tramosLLenos>=count($aTramos)){
             return "ninguno";
