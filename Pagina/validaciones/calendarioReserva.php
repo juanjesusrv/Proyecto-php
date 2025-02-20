@@ -19,8 +19,8 @@
 </form>
 <?php
     if(($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["idAsignatura"])){
-        $numeroAlumnos=numeroAlumnos($_POST["idAsignatura"]);
-        $arrayTramos=listaTramos();
+        $numeroAlumnos=numeroAlumnos($_POST["idAsignatura"],$con);
+        $arrayTramos=listaTramos($con);
         $diaActual="";
         if (isset($_POST["mesBuscar"])||isset($_POST["yearBuscar"])) {
             if ($_POST["mesBuscar"]==date('m')&&$_POST["yearBuscar"]==date('Y')){
@@ -78,7 +78,7 @@
                     if(date($year.'-'.$mes.'-'.$dia<date('Y-m-d'))){
                         $calendario.='<td class="calenReDiaNoSeleccionable">'.$i.'</td>';
                     }else{
-                        switch(tramosLibres($year."-".$mes."-".$dia,$_POST["idAsignatura"],$numeroAlumnos,$arrayTramos)){
+                        switch(tramosLibres($year."-".$mes."-".$dia,$_POST["idAsignatura"],$numeroAlumnos,$arrayTramos,$con)){
                         case "todos":
                             $calendario.='<td class="calenReDiaVacio"><button type="submit" name="fecha" value="'.($year."-".$mes."-".$dia).'" >'.$i.'</button></td>';
                             break;
@@ -109,14 +109,14 @@
     }
 
 
-    function numeroAlumnos($idAsignatura) {
+    function numeroAlumnos($idAsignatura,$con) {
         $sql='SELECT * FROM `usuarios-asignaturas` WHERE idUsuario="'.$_SESSION['idUsuario'].'" and idAsignatura="'.$idAsignatura.'"';
         $resultado=mysqli_query($con, $sql);
         $curso=mysqli_fetch_assoc($resultado);
         return $curso["numAlumnos"];
     }
 
-    function listaTramos(){
+    function listaTramos($con){
         $sql='SELECT idTramo FROM tramos ';
         $resultado=mysqli_query($con, $sql);
         $resul=[];
@@ -126,15 +126,15 @@
         return $resul;
     }
 
-    function tramosLibres($fecha,$idAsig,$numAlum,$aTramos){
+    function tramosLibres($fecha,$idAsig,$numAlum,$aTramos,$con){
         $sql="SELECT * FROM ";
-
+        return "todos";
         $tramosLLenos=0;
-        foreach($aTramos as $ocupado){
-            if(($ocupado+$numAlum)>100){
-                $tramosLLenos++;
-            }
-        }
+        // foreach($aTramos as $ocupado){
+        //     if(($ocupado+$numAlum)>100){
+        //         $tramosLLenos++;
+        //     }
+        // }
 
         if($tramosLLenos>=count($aTramos)){
             return "ninguno";
