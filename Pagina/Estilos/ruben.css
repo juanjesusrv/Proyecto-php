@@ -17,9 +17,17 @@ header {
     transition: 0.5s linear;
     border-radius: 5px;
     display: block;
+    border: none;
 }
 .botones:hover {
     background-color: rgb(32, 54, 118);
     transform: scale(0.95);
     color: white;
+}
+
+.formularioProfesores{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
