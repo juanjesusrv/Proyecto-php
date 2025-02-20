@@ -40,6 +40,9 @@ $eleccion = $_SESSION['eleccion'];
 </head>
 <body>
     <div>
+        <?php if (!isset($_SESSION['nombreUsuario'])) { //Salta un error de inicio de sesión si no hay una cuenta iniciada
+            header('Location: ../Pagina/errorsesion.php');
+         } ?>
         <h1>Lista de reservas de <?= $_SESSION['nombreUsuario'] ?></h1>
         
         <?php if (in_array(2, $_SESSION['roles'])) { ?>
