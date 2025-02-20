@@ -10,6 +10,11 @@ require_once "./validaciones/conexion.php";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="Estilos/styles.css">
+    <link rel="stylesheet" href="Estilos/jj.css">
+    <link rel="stylesheet" href="Estilos/dani.css">
+    <link rel="stylesheet" href="Estilos/pablo.css">
+    <link rel="stylesheet" href="Estilos/rafa.css">
+    <link rel="stylesheet" href="Estilos/ruben.css">
     <title>Reservas</title>
 </head>
 
@@ -17,7 +22,9 @@ require_once "./validaciones/conexion.php";
     <?php require_once "./plantillas/header.php" ?>
     <main>
         <div class="reservas">
-            <div class="contenedorEstandar">Calendario</div>
+            <div class="contenedorEstandar">
+            <?php require_once "./validaciones/calendarioReserva.php" ?> 
+            </div>
             <div class="contenedorEstandar">
                 <?php require_once "reservas_tramos.php" ?> 
             </div>
