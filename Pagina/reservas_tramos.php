@@ -1,8 +1,8 @@
 <?php
 $array_tramos_reservaUsuario = array(); //para guardar los tramos que tiene reservados el usuario
-$fecha = "2025-03-31"; //para probar que funciona
+$fecha = $_POST["fecha"];
 
-if ((($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["fecha"])) || 1 == 1) {
+if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["fecha"])) {
     $array_tramos = array(); //para guardar los tramos que tienen alumnos
 
     //$fecha = $_POST["fecha"];
