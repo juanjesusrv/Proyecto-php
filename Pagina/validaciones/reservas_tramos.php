@@ -4,7 +4,7 @@ $array_tramos_reservaUsuario = array(); //para guardar los tramos que tiene rese
 if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["fecha"])) {
     $fecha = $_POST["fecha"];
     $asignaturaSeleccionada = $_POST["idAsignatura"];
-    $numAlumnos = $_POST["numAlumnos"];
+    $alumnosAsignatura = $_POST["numAlumnos"];
     $array_tramos = array(); //para guardar los tramos que tienen alumnos
 
     $sql = "SELECT * FROM reservas WHERE fecha = '$fecha'"; //sacamos todas las reservas de la fecha seleccionada
@@ -51,17 +51,18 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["fecha"])) {
         while ($tramo = mysqli_fetch_assoc($result5)) {
 
             if (!in_array($tramo["idTramo"], $array_tramos_reservaUsuario)) {
-                if ((isset($array_tramos[$tramo["idTramo"]]) && $array_tramos[$tramo["idTramo"]] + $numAlumnos <= 100) || !isset($array_tramos[$tramo["idTramo"]]) ) { ?>
+                if ((isset($array_tramos[$tramo["idTramo"]]) && ($array_tramos[$tramo["idTramo"]] + $alumnosAsignatura) <= 100) || !isset($array_tramos[$tramo["idTramo"]])) { ?>
                     <input type="checkbox" id="tramos" name="tramos[]" value="<?php echo $tramo["idTramo"] ?>">
                     <label for="tramos"><?php echo $tramo["idTramo"] . ": " . $tramo["hora"] ?></label><br>
-    <?php }
+        <?php }
             }
         }
-    }
+        ?><button class="botones" type="submit">Enviar</button>
+    <?php }
     ?>
     <br>
     <br>
-    <button class="botones" type="submit">Enviar</button>
+
     <input type="hidden" name="idAsignatura" value="<?php echo $asignaturaSeleccionada ?>">
     <input type="hidden" name="fecha" value="<?php echo $fecha ?>">
 </form>
