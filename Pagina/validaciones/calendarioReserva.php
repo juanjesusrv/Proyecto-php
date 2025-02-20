@@ -15,7 +15,7 @@
             }
         ?>
     </select>
-    <button type="submit">Seleccionar</button>
+    <button class="botonesCalendario" type="submit">Seleccionar</button>
 </form>
 <?php
     if(($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["idAsignatura"])){
@@ -56,11 +56,11 @@
                 if(date('m')>=8){echo '<option value="'.(date('Y')+1).'">'.(date('Y')+1).'</option>';}
             ?>
             </select>
-            <button type="submit">Seleccionar</button>
-        </form>
+            <button class="botonesCalendario" type="submit">Seleccionar</button>
+        </form><br>
         <?php
         $ultimoDiaMes=date("t", strtotime($year."-".$mes."-01"));
-        $calendario="<table><tr><th>Lun</th><th>Mar</th><th>Mie</th><th>Jue</th><th>Vie</th><th>Sab</th><th>Dom</th></tr>";
+        $calendario="<table class='tablaCalendario'><tr><th>Lun</th><th>Mar</th><th>Mie</th><th>Jue</th><th>Vie</th><th>Sab</th><th>Dom</th></tr>";
         if(strtotime($year."-".$mes."-01")!=1){
             $calendario.="<tr>";
             if(date("w",strtotime($year."-".$mes."-01"))==0){
@@ -107,7 +107,7 @@
                 $calendario.="<td></td>";
             }
         }
-        echo date("w",strtotime($year."-".$mes."-".$ultimoDiaMes));
+
         $calendario.="</tr></table>";
         echo '<form action="reserva.php" method="post">
         <input type="hidden" name="numAlumnos" value="'.$numeroAlumnos.'">
