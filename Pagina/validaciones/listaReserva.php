@@ -109,11 +109,31 @@ $eleccion = $_SESSION['eleccion'];
                         echo "<td>" . $row['idUsuario'] . "</td>";
                         echo "<td>" . $row['nombreUsuario'] . "</td>";
                         echo "<td>" . $row['apellido1'] . "</td>";
+                    } else if (in_array(2, $_SESSION['roles']) && !$eleccion) {
+                        echo "<td>
+                            <form action='./validaciones/eliminarReserva.php' method='post'>
+                            <input type='hidden' name='idReserva' value='" . $row['idReserva'] . "'>
+                            <input type='hidden' name='hora' value='" . $row['hora'] . "'>
+                            <button type='submit'><img src='./imgs/papelera.png' width='20' height='20'></button>
+                            </form>
+                        </td>";
+                    } else {
+                        echo "<td>
+                            <form action='./validaciones/eliminarReserva.php' method='post'>
+                            <input type='hidden' name='idReserva' value='" . $row['idReserva'] . "'>
+                            <input type='hidden' name='hora' value='" . $row['hora'] . "'>
+                            <button type='submit'><img src='./imgs/papelera.png' width='20' height='20'></button>
+                            </form>
+                        </td>";
                     }
                     echo "</tr>";
                 }
             } else {
-                echo "<tr><td colspan='6'>No hay reservas</td></tr>";
+                if (in_array(2, $_SESSION['roles']) && $eleccion) {
+                    echo "<tr><td colspan='9'>No hay reservas</td></tr>";
+                } else {
+                    echo "<tr><td colspan='6'>No hay reservas</td></tr>";
+                }
             }
             ?>
         </table>
