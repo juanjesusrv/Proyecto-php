@@ -1,6 +1,6 @@
 <header>
     <a href="index.php"><img src="./imgs/iesjorgeguillen.svg" width="300px"></a>
-    <h1>IES LOS PEDROCHES</h1>
+    <h1>IES JORGE GUILLÉN</h1>
     <link rel="stylesheet" href="Estilos/ruben.css">
     <?php
     if (isset($_SESSION['idUsuario'])) {
