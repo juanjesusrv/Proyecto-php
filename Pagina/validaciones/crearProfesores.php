@@ -1,28 +1,5 @@
 <!-- Creamos el formulario para añadir profesores -->
 <link rel="stylesheet" href="../Estilos/ruben.css">
-<form action="./validaciones/crearProfesores.php" method="POST" class="formularioProfesores">
-    <h2>Añadir profesor</h2>
-    <input type="text" name="idUsuario" id="idUsuario" placeholder="DNI" required>
-    <input type="password" name="contrasena" id="contrasena" placeholder="Contraseña" required>
-    <input type="text" name="nombre" id="nombre" placeholder="Nombre" required>
-    <input type="text" name="apellido1" id="apellido1" placeholder="Primer apellido" required>
-    <input type="text" name="apellido2" id="apellido2" placeholder="Segundo apellido" required>
-    <input type="email" name="email" id="email" placeholder="Email" required>
-    <br>
-    <select name="departamento" id="departamento" required>
-        <option value="">Selecciona un departamento</option>
-        <?php
-        $sql = "SELECT * FROM departamentos";
-        $resultado = mysqli_query($con, $sql);
-        while ($fila = mysqli_fetch_assoc($resultado)) {
-            echo "<option value='" . $fila['idDepartamento'] . "'>" . $fila['nombreDepartamento'] . "</option>";
-        }
-        ?>
-    </select>
-    <button type="submit" class="botones">Añadir usuario</button>
-</form>
-
-
 <?php
 // Comprobamos si se han enviado los datos del formulario
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -44,6 +21,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $sql = "INSERT INTO usuarios (idUsuario, contrasena, nombreUsuario, apellido1, apellido2, email, idDepartamento) VALUES ('$idUsuario','$contrasena','$nombre', '$apellido1', '$apellido2', '$email', '$departamento')";
         mysqli_query($con, $sql);
         header("Location: ../gestion_profesorado.php");
+        
     }
 }
+
 ?>
+<form action="./validaciones/crearProfesores.php" method="POST" class="formularioProfesores">
+    <h2>Añadir profesor</h2>
+    <input type="text" name="idUsuario" id="idUsuario" placeholder="DNI" required>
+    <input type="password" name="contrasena" id="contrasena" placeholder="Contraseña" required>
+    <input type="text" name="nombre" id="nombre" placeholder="Nombre" required>
+    <input type="text" name="apellido1" id="apellido1" placeholder="Primer apellido" required>
+    <input type="text" name="apellido2" id="apellido2" placeholder="Segundo apellido" required>
+    <input type="email" name="email" id="email" placeholder="Email" required>
+    <br>
+    <select name="departamento" id="departamento" required>
+        <option value="">Selecciona un departamento</option>
+        <?php
+        $sql = "SELECT * FROM departamentos";
+        $resultado = mysqli_query($con, $sql);
+        while ($fila = mysqli_fetch_assoc($resultado)) {
+            echo "<option value='" . $fila['idDepartamento'] . "'>" . $fila['nombreDepartamento'] . "</option>";
+        }
+        ?>
+    </select>
+    <br>
+    <button type="submit" class="botones">Añadir usuario</button>
+</form>
