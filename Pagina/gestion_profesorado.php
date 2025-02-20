@@ -17,10 +17,10 @@ require_once "./validaciones/conexion.php";
     <?php require_once "./plantillas/header.php" ?>
     <main>
         <div class="listaReservas">
-            <?php require_once "validaciones/" ?>
+            <?php require_once "validaciones/crearProfesores.php" ?>
         </div>
         <div class="listaReservas">
-            <?php require_once "validaciones/" ?>
+            <?php require_once "validaciones/eliminarProfesores.php" ?>
         </div>
     </main>
     <?php require_once "./plantillas/footer.php" ?>
