@@ -1,12 +1,44 @@
-.calenReDiaVacio{
-    background-color: green;
-}
-.calenReDiaMedio{
-    background-color: yellow;
-}
-.calenReDiaLleno{
-    background-color: red;
-}
-.calenReDiaNoSeleccionable{
-    background-color: gray;
+#calendarioReservas{
+    .botonesCalendario{
+        margin: 0 5px;
+        text-decoration: none;
+        color: black;
+        padding: 5px 10px;
+        background-color:  rgb(217, 216, 216);
+        transition: 0.5s linear;
+        border-radius: 5px;
+        display: block;
+        &:hover {
+            background-color: rgb(32, 54, 118);
+            transform: scale(0.95);
+            color: white;
+        }
+    }
+    .tablaCalendario{
+        td, th{
+            text-align: center;
+        }
+        .calenReDiaVacio{
+            background-color:  rgba(0, 150, 0,0.5);
+        }
+        .calenReDiaMedio{
+            background-color: rgba(150, 150, 0, 0.5);
+        }
+        .calenReDiaLleno{
+            background-color: rgba(255, 0, 0,0.5);
+        }
+        .calenReDiaNoSeleccionable{
+            background-color: rgba(128, 128, 128,0.5);
+        }
+        button{
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-size: 16px;
+            background: transparent;
+            border: none;
+            width: 100%;
+            &:hover{
+                cursor: pointer;
+            }
+        }
+    }
 }
