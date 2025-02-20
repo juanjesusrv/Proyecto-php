@@ -22,14 +22,14 @@ require_once "./validaciones/conexion.php";
     <?php require_once "./plantillas/header.php" ?>
     <main>
         <div class="reservas">
-            <div class="contenedorEstandar">
+            <div id="calendarioReservas" class="contenedorEstandar">
             <?php require_once "./validaciones/calendarioReserva.php" ?> 
             </div>
-            <div class="contenedorEstandar">
+            <div id="reservaTramos" class="contenedorEstandar">
                 <?php require_once "validaciones/reservas_tramos.php" ?> 
             </div>
         </div>
-        <div class="listaReservas">
+        <div id="listaReservas" class="listaReservas">
              <?php require_once "validaciones/listaReserva.php" ?>
         </div>
     </main>

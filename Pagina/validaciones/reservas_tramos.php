@@ -57,12 +57,12 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["fecha"])) {
         <?php }
             }
         }
-        ?><button class="botones" type="submit">Enviar</button>
+        ?>
+        <br>
+        <br>
+        <button class="botones" type="submit">Enviar</button>
     <?php }
     ?>
-    <br>
-    <br>
-
     <input type="hidden" name="idAsignatura" value="<?php echo $asignaturaSeleccionada ?>">
     <input type="hidden" name="fecha" value="<?php echo $fecha ?>">
 </form>
