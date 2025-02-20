@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php session_start();
+
+require_once "./validaciones/conexion.php";
+
+?>
 
 <head>
     <meta charset="UTF-8">
@@ -10,9 +15,14 @@
 
 <body>
     <?php require_once "./plantillas/header.php" ?>
-
-    
-
+    <main>
+        <div class="listaReservas">
+            <?php require_once "validaciones/" ?>
+        </div>
+        <div class="listaReservas">
+            <?php require_once "validaciones/" ?>
+        </div>
+    </main>
     <?php require_once "./plantillas/footer.php" ?>
 </body>
 
