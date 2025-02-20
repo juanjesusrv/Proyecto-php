@@ -26,7 +26,7 @@ require_once "./validaciones/conexion.php";
             <?php require_once "./validaciones/calendarioReserva.php" ?> 
             </div>
             <div class="contenedorEstandar">
-                <?php require_once "reservas_tramos.php" ?> 
+                <?php require_once "validaciones/reservas_tramos.php" ?> 
             </div>
         </div>
         <div class="listaReservas">

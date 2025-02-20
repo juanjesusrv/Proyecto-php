@@ -1,11 +1,11 @@
 <?php
 $array_tramos_reservaUsuario = array(); //para guardar los tramos que tiene reservados el usuario
-$fecha = $_POST["fecha"];
 
 if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["fecha"])) {
+    $fecha = $_POST["fecha"];
+    $asignaturaSeleccionada = $_POST["idAsignatura"];
     $array_tramos = array(); //para guardar los tramos que tienen alumnos
 
-    //$fecha = $_POST["fecha"];
     $sql = "SELECT * FROM reservas WHERE fecha = '$fecha'"; //sacamos todas las reservas de la fecha seleccionada
     $result = mysqli_query($con, $sql);
     while ($fila = mysqli_fetch_assoc($result)) {
@@ -40,7 +40,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["fecha"])) {
 }
 ?>
 
-<form action="reservas_tramos.php" method="post">
+<form action="./validaciones/crearReservas.php" method="post">
     <label for="tramo">Selecciona uno o varios tramos:</label>
     <br>
     <?php
@@ -63,4 +63,6 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["fecha"])) {
     <br>
     <br>
     <button class="botones" type="submit">Enviar</button>
+    <input type="hidden" name="idAsignatura" value="<?php echo $asignaturaSeleccionada ?>">
+    <input type="hidden" name="fecha" value="<?php echo $fecha ?>">
 </form>
