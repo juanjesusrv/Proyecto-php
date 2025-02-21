@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idUsuario']) && isset(
 } else {
 ?>
 
-    <form action="./validaciones/asignarAsignaturaAprofesor.php" method="POST" class="formularioProfesores">
+    <form action="./validaciones/asignarAsignaturaAprofesor.php" method="POST" class="formularioSecundario">
         <h2>Añadir asignación</h2>
         <select name="idUsuario" id="idUsuario" required>
             <option value="">Selecciona un usuario</option>
