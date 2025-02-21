@@ -66,7 +66,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
             ?>
         </select>
-        <br>
         <select name="idAsignatura" id="idAsignatura" required>
             <option value="">Selecciona una asignatura</option>
             <?php
@@ -77,10 +76,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
             ?>
         </select>
-        <br>
         <input type="number" name="numAlumnos" id="numAlumnos" placeholder="Número de alumnos" required>
         <input type="text" name="grupo" id="grupo" placeholder="Grupo" pattern="[A-Za-z]" title="Debe ser una sola letra" required>
-        <br>
         <button type="submit" class="botones">Añadir asignación</button>
     </form>
 <?php

@@ -12,6 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $apellido2 = htmlspecialchars($_POST['apellido2']);
     $email = htmlspecialchars($_POST['email']);
     $departamento = htmlspecialchars($_POST['departamento']);
+    $rol = htmlspecialchars($_POST['rol']);
 
     if (!$con) {
         echo "Error al conectar a la base de datos";
@@ -27,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             if (mysqli_query($con, $sql)) {
                 // Añadimos el rol de usuario
-                $sql2 = "INSERT INTO `usuarios-roles` (idUsuario, idRol) VALUES ('$idUsuario', 1)";
+                $sql2 = "INSERT INTO `usuarios-roles` (idUsuario, idRol) VALUES ('$idUsuario', '$rol')";
                 mysqli_query($con, $sql2);
                 header("Location: ../gestion_profesorado.php"); // Redirigimos a la página de gestión
             } else {
@@ -53,7 +54,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <input type="text" name="apellido1" id="apellido1" placeholder="Primer apellido" required>
         <input type="text" name="apellido2" id="apellido2" placeholder="Segundo apellido" required>
         <input type="email" name="email" id="email" placeholder="Email" required>
-        <br>
         <select name="departamento" id="departamento" required>
             <option value="">Selecciona un departamento</option>
             <?php
@@ -64,7 +64,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
             ?>
         </select>
-        <br>
+        <select name="rol" id="rol" required>
+            <option value="">Selecciona un rol</option>
+            <?php
+            $sql = "SELECT * FROM roles";
+            $resultado = mysqli_query($con, $sql);
+            while ($fila = mysqli_fetch_assoc($resultado)) {
+                echo "<option value='" . $fila['idRol'] . "'>" . $fila['nombreRol'] . "</option>";
+            }
+            ?>
+        </select>
         <button type="submit" class="botones">Añadir usuario</button>
     </form>
     <?php
