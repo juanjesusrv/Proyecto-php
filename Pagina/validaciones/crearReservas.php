@@ -20,6 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["tramos"])) {
             $sql3 = "INSERT INTO `reservas-tramo` (idReserva, idTramo) VALUES ('$idReserva','$tramo')";
             mysqli_query($con, $sql3);
         }
+        require_once "enviarMail.php";
         enviarMail($con,$idReserva,$tramos,"crear");
         header("Location: ../reserva.php");
     }

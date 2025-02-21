@@ -32,7 +32,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             die("Error en la consulta: " . mysqli_error($con));
         }
     }
-
+    $query="SELECT idTramo FROM tramos WHERE hora = '$hora'";
+    $result = mysqli_query($con, $query);
+    $result = mysqli_fetch_assoc($result);
+    
+    require_once "enviarMail.php";
+    enviarMail($con,$idReserva,[$result["idTramo"]],"borrar");
     header("Location: ../reserva.php");
 
 }
