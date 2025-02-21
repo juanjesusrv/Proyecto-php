@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idUsuario']) && isset(
 } else {
     ?>
 
-    <form action="./validaciones/crearProfesores.php" method="POST" class="formularioProfesores">
+    <form action="./validaciones/crearProfesores.php" method="POST" class="formularioSecundario">
         <h2>Añadir profesor</h2>
         <input type="text" name="idUsuario" id="idUsuario" placeholder="DNI" required>
         <input type="password" name="contrasena" id="contrasena" placeholder="Contraseña" required>

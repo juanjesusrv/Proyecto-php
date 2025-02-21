@@ -25,9 +25,24 @@ header {
     color: white;
 }
 
-.formularioProfesores{
+.formularioSecundario{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+.formularioSecundario input {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    width: 250px;
+}
+.formularioSecundario input:focus {
+    border-color:rgb(255, 255, 255);
+}
+.formularioSecundario select {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    width: 272px;
 }
