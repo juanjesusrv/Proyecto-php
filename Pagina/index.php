@@ -12,7 +12,7 @@
         <form class="formularioLogin" action="./validaciones/validacionUsuario.php" method="post">
             <p>Iniciar Sesión</p>
             <br><input type="text" id="usr" name="usr" placeholder="Usuario" required><br>
-            <input type="text" id="con" name="con" placeholder="Contraseña" required><br>
+            <input type="password" id="con" name="con" placeholder="Contraseña" required><br>
             <input type="submit" value="Iniciár Sesión">
         </form>
     </main>
