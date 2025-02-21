@@ -1,8 +1,5 @@
 <?php
-
 session_start();
-
-
 
 require 'PHPMailer/src/Exception.php';
 require 'PHPMailer/src/PHPMailer.php';
@@ -11,23 +8,19 @@ require 'PHPMailer/src/SMTP.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-function enviarMail(){
-    
-}
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+function enviarMail($con,$idReserva,$tramos,$tipoMensaje){
+    $idUsuarios=$_SESSION["idUsuario"];
 
     // Consulta a la base de datos
-    $idReserva=$_POST['idReserva'];
     $sql=`select * from reservas where idReserva="`+$idReserva+`"`;
-    $resultado=mysqli_query($_SESSION["con"],$sql);
-
-    $idUsuarios=$_SESSION["idUsuario"];
+    $resultado=mysqli_query($con,$sql);
     if(mysqli_num_rows($resultado)==1){
         $campos=mysqli_fetch_assoc($resultado);
         $idAsignatura=$campos["idAsignatura"];
         $fecha=$campos["fecha"];
     }
+
+}
 
     $sql=`select * from asignaturas where idAsignatura="`+$idAsignatura+`"`;
     $resultado=mysqli_query($_SESSION["con"],$sql);
@@ -132,5 +125,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } catch (Exception $e) {
         echo "<p class='error'>No se pudo enviar el mensaje. Error de Mailer: {$mail->ErrorInfo}</p>";
     }
-}
+
 ?>

@@ -366,8 +366,7 @@ ALTER TABLE `asignaturas`
 -- Filtros para la tabla `reservas`
 --
 ALTER TABLE `reservas`
-  ADD CONSTRAINT `reservas_ibfk_2` FOREIGN KEY (`idAsignatura`) REFERENCES `usuarios-asignaturas` (`idAsignatura`),
-  ADD CONSTRAINT `reservas_ibfk_3` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios-asignaturas` (`idUsuario`);
+  ADD CONSTRAINT `reservas_ibfk_1` FOREIGN KEY (`idAsignatura`,`idUsuario`) REFERENCES `usuarios-asignaturas` (`idAsignatura`,`idUsuario`);
 
 --
 -- Filtros para la tabla `reservas-tramo`
@@ -393,8 +392,8 @@ ALTER TABLE `usuarios-asignaturas`
 -- Filtros para la tabla `usuarios-roles`
 --
 ALTER TABLE `usuarios-roles`
-  ADD CONSTRAINT `usuarios-roles_ibfk_2` FOREIGN KEY (`idRol`) REFERENCES `roles` (`idRol`),
-  ADD CONSTRAINT `usuarios-roles_ibfk_3` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`idUsuario`);
+  ADD CONSTRAINT `usuarios-roles_ibfk_1` FOREIGN KEY (`idRol`) REFERENCES `roles` (`idRol`),
+  ADD CONSTRAINT `usuarios-roles_ibfk_2` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`idUsuario`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

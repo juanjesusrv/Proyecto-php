@@ -114,7 +114,7 @@ main {
 .contenido {
     background-color: white;
     width: 400px;
-    min-height: 500px;
+    height: 500px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     border-radius: 20px;
     display: flex;
