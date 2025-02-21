@@ -56,12 +56,11 @@ $eleccion = $_SESSION['eleccion'];
             <?php
             $idUsuario = mysqli_real_escape_string($con, $_SESSION['idUsuario']);
 
-            if (isset($_POST['borra'])) {   //Si recibe un elemento que borrar, lo borra (NO FUNCIONA)
+            if (isset($_POST['borra'])) {   //Si recibe un elemento que borrar, lo borra
                 //Borra los datos relacionados
-                $query = "DELETE FROM `usuarios-asignaturas` WHERE idUsuario = '" . $_POST['borra'] . "'";
+                $query = "DELETE FROM `usuarios-roles` WHERE idUsuario = '" . $_POST['borra'] . "';";
                 $result = mysqli_query($con, $query);
-                //Borra el usuario
-                $query = "DELETE FROM usuarios WHERE idUsuario = '" . $_POST['borra'] . "'";
+                $query = "DELETE FROM usuarios WHERE idUsuario = '" . $_POST['borra'] . "';";
                 $result = mysqli_query($con, $query);
                 echo '<b>El usuario ' . $_POST['borra'] . ' ha sido eliminado.</b><br>';
 
