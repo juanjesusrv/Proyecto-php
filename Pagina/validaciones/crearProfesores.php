@@ -1,8 +1,8 @@
 <link rel="stylesheet" href="../Estilos/ruben.css">
 <?php
+require_once "conexion.php";
 // Comprobamos si se han enviado los datos del formulario
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    require_once "./conexion.php";
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idUsuario']) && isset($_POST['contrasena']) && isset($_POST['nombre']) && isset($_POST['apellido1']) && isset($_POST['apellido2']) && isset($_POST['email']) && isset($_POST['departamento']) && isset($_POST['rol'])) {
 
     /* Guardamos los datos del usuario en variables */
     $idUsuario = htmlspecialchars($_POST['idUsuario']);
