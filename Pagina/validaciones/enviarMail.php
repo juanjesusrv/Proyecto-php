@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 require 'PHPMailer/src/Exception.php';
 require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/SMTP.php';
@@ -12,7 +10,7 @@ function enviarMail($con,$idReserva,$tramos,$tipoMensaje){
     $idUsuarios=$_SESSION["idUsuario"];
 
     // Consulta a la base de datos
-    $sql=`select * from reservas where idReserva="`+$idReserva+`"`;
+    $sql='SELECT * from reservas where idReserva="'.$idReserva.'"';
     $resultado=mysqli_query($con,$sql);
     if(mysqli_num_rows($resultado)==1){
         $campos=mysqli_fetch_assoc($resultado);
@@ -20,83 +18,68 @@ function enviarMail($con,$idReserva,$tramos,$tipoMensaje){
         $fecha=$campos["fecha"];
     }
 
-}
-
-    $sql=`select * from asignaturas where idAsignatura="`+$idAsignatura+`"`;
-    $resultado=mysqli_query($_SESSION["con"],$sql);
-
+    $sql='SELECT * from asignaturas where idAsignatura="'.$idAsignatura.'"';
+    $resultado=mysqli_query($con,$sql);
     if(mysqli_num_rows($resultado)==1){
         $campos=mysqli_fetch_assoc($resultado);
         $nombreAsignatura=$campos["nombreAsignatura"];
         $curso=$campos["curso"];
     }
 
-    $sql=`SELECT * FROM usuarios-asignaturas WHERE idAsignatura="`+$idAsignatura+`" and idUsuario=""`+$idUsuarios+`"`;
-    $resultado=mysqli_query($_SESSION["con"],$sql);
-
+    $sql='SELECT * FROM `usuarios-asignaturas` WHERE idAsignatura="'.$idAsignatura.'" and idUsuario="'.$idUsuarios.'"';
+    $resultado=mysqli_query($con,$sql);
     if(mysqli_num_rows($resultado)==1){
         $campos=mysqli_fetch_assoc($resultado);
         $numAlumnos=$campos["numAlumnos"];
         $grupo=$campos["grupo"];
     }
 
-    $sql=`select * from asignaturas where idAsignatura="`+$idAsignatura+`"`;
-    $resultado=mysqli_query($_SESSION["con"],$sql);
-
+    $sql='SELECT * from asignaturas where idAsignatura="'.$idAsignatura.'"';
+    $resultado=mysqli_query($con,$sql);
     if(mysqli_num_rows($resultado)==1){
         $campos=mysqli_fetch_assoc($resultado);
         $nombreAsignatura=$campos["nombreAsignatura"];
         $curso=$campos["curso"];
     }
 
-    $sql=`select  from reservas-tramo where idReserva="`+$idReserva+`"`;
-    $resultado=mysqli_query($_SESSION["con"],$sql);
-
-    if(mysqli_num_rows($resultado)>0){
-        while ($fila = mysqli_fetch_assoc($resultado)) {
-            $tramos[] = $fila['idTramo'];
-        }
-    }
-
-
-
-    // Captura los datos del formulario
-    $nombre = $_SESSION["apellido1"]+` `+$_SESSION["apellido2"]+`, `+$_SESSION["nombreUsuario"];
+    // Opciones del destinatario
+    $nombre = $_SESSION["apellido1"].' '.$_SESSION["apellido2"].', '.$_SESSION["nombreUsuario"];
     //$email = $_SESSION["email"];
     $email = "rjimrui727@g.educaand.es";
-    $asunto = `Reserva de la clase de examenes el dia `+$fecha+` para la asignatura `+$nombreAsignatura;
+    $asunto = 'Reserva de la clase de examenes el dia '.$fecha.' para la asignatura '.$nombreAsignatura;
 
+    if($tipoMensaje=="crear"){
+        $mensaje='<div>
+            <h1>Resguardo de la reserva del aula de examenes</h1>';
+    }
+    if($tipoMensaje=="borrar"){
+        $mensaje='<div>
+            <h1>Resguardo del borrado de la reserva</h1>';
+    }
     // Crear mensaje
-
-    $mensaje=`
-    <div>
-        <h1>Resguardo de la reserva del aula de examenes</h1>
-        <p>
-            ID de la reserva: `+$_SESSION["idReserva"]+`<br>
-            Fecha de la reserva: `+$fecha+`<br>
-            Profesor: `+$_SESSION["apellido1"]+` `+$_SESSION["apellido2"]+`, `+$_SESSION["nombreUsuario"]+`<br>
-            Asignatura: `+$nombreAsignatura+`<br>
-            Curso: `+$curso+` - `+$grupo+`<br>
-            Nº alumnos: `+$numAlumnos+`<br><br>
+    $mensaje.='<p>
+            ID de la reserva: '.$idReserva.'<br>
+            Fecha de la reserva: '.$fecha.'<br>
+            Profesor: '.$_SESSION["apellido1"].' '.$_SESSION["apellido2"].', '.$_SESSION["nombreUsuario"].'<br>
+            Asignatura: '.$nombreAsignatura.'<br>
+            Curso: '.$curso.' - '.$grupo.'<br>
+            Nº alumnos: '.$numAlumnos.'<br><br>
             Tramos reservados<br>
-            `;
+            ';
             foreach($tramos as $tramo){
                 $sqlHoras='SELECT * FROM tramos WHERE idTramo="'.$tramo.'"';
                 $hora=mysqli_query($con,$sqlHoras);
+                $hora=mysqli_fetch_assoc($hora);
                 $mensaje.='-'.$tramo.': '.$hora["hora"].'<br>';
             }
-
-    $mensaje.=`
-        </p>
-    </div>
+    $mensaje.='</p></div>
     <div style="display: flex;">
         <img src="../Diseño/imgs/iesjorgeguillen.svg" alt="">
         <p>I.E.S. Jorge Guillén<p>
     </div>
-    `;
+    ';
 
-
-    // Crear una instancia de PHPMailer
+            // Crear una instancia de PHPMailer
     $mail = new PHPMailer(true);
 
     try {
@@ -125,5 +108,5 @@ function enviarMail($con,$idReserva,$tramos,$tipoMensaje){
     } catch (Exception $e) {
         echo "<p class='error'>No se pudo enviar el mensaje. Error de Mailer: {$mail->ErrorInfo}</p>";
     }
-
+} 
 ?>
