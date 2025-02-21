@@ -30,6 +30,12 @@
             }
             $mes=$_POST["mesBuscar"];
             $year=$_POST["yearBuscar"];
+        }else if(isset($_POST["fecha"])){
+            $mes=date('m',strtotime($_POST["fecha"]));
+            $year=date('Y',strtotime($_POST["fecha"]));
+            if ($mes==date('m')&&$year==date('Y')){
+                $diaActual=date('d');
+            }
         }else{
             $diaActual=date('d');
             $mes=date('m');
