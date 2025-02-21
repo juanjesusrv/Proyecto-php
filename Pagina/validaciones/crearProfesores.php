@@ -17,34 +17,58 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!$con) {
         echo "Error al conectar a la base de datos";
     } else {
-        //Añadimos el profesor a la base de datos
-        $sql = "INSERT INTO usuarios (idUsuario, contrasena, nombreUsuario, apellido1, apellido2, email, idDepartamento) VALUES ('$idUsuario','$contrasena','$nombre', '$apellido1', '$apellido2', '$email', '$departamento')";
-        mysqli_query($con, $sql);
-        header("Location: ../gestion_profesorado.php");
-        
-    }
-}
+        // Verificamos si el idUsuario ya existe en la base de datos
+        $sql_comprobarIdUsuario = "SELECT idUsuario FROM usuarios WHERE idUsuario = '$idUsuario'";
+        $result_check = mysqli_query($con, $sql_comprobarIdUsuario);
 
-?>
-<form action="./validaciones/crearProfesores.php" method="POST" class="formularioProfesores">
-    <h2>Añadir profesor</h2>
-    <input type="text" name="idUsuario" id="idUsuario" placeholder="DNI" required>
-    <input type="password" name="contrasena" id="contrasena" placeholder="Contraseña" required>
-    <input type="text" name="nombre" id="nombre" placeholder="Nombre" required>
-    <input type="text" name="apellido1" id="apellido1" placeholder="Primer apellido" required>
-    <input type="text" name="apellido2" id="apellido2" placeholder="Segundo apellido" required>
-    <input type="email" name="email" id="email" placeholder="Email" required>
-    <br>
-    <select name="departamento" id="departamento" required>
-        <option value="">Selecciona un departamento</option>
-        <?php
-        $sql = "SELECT * FROM departamentos";
-        $resultado = mysqli_query($con, $sql);
-        while ($fila = mysqli_fetch_assoc($resultado)) {
-            echo "<option value='" . $fila['idDepartamento'] . "'>" . $fila['nombreDepartamento'] . "</option>";
+        // Si el idUsuario ya existe, mostramos un mensaje y no insertamos
+        if (mysqli_num_rows($result_check) == 0) {
+            $sql = "INSERT INTO usuarios (idUsuario, contrasena, nombreUsuario, apellido1, apellido2, email, idDepartamento) 
+                    VALUES ('$idUsuario','$contrasena','$nombre', '$apellido1', '$apellido2', '$email', '$departamento')";
+
+            if (mysqli_query($con, $sql)) {
+                // Añadimos el rol de usuario
+                $sql2 = "INSERT INTO `usuarios-roles` (idUsuario, idRol) VALUES ('$idUsuario', 1)";
+                mysqli_query($con, $sql2);
+                header("Location: ../gestion_profesorado.php"); // Redirigimos a la página de gestión
+            } else {
+                echo "Error al insertar los datos en la base de datos.";
+                ?>
+                <a href="../gestion_profesorado.php">Volver</a>
+                <?php
+            }
+        } else {
+            echo "El usuario ya existe en la base de datos.";
+            ?>
+            <a href="../gestion_profesorado.php">Volver</a>
+            <?php
         }
-        ?>
-    </select>
-    <br>
-    <button type="submit" class="botones">Añadir usuario</button>
-</form>
+    }
+}else {
+    // Si el formulario no se ha enviado, mostramos el formulario
+    ?>
+    <form action="./validaciones/crearProfesores.php" method="POST" class="formularioProfesores">
+        <h2>Añadir profesor</h2>
+        <input type="text" name="idUsuario" id="idUsuario" placeholder="DNI" required>
+        <input type="password" name="contrasena" id="contrasena" placeholder="Contraseña" required>
+        <input type="text" name="nombre" id="nombre" placeholder="Nombre" required>
+        <input type="text" name="apellido1" id="apellido1" placeholder="Primer apellido" required>
+        <input type="text" name="apellido2" id="apellido2" placeholder="Segundo apellido" required>
+        <input type="email" name="email" id="email" placeholder="Email" required>
+        <br>
+        <select name="departamento" id="departamento" required>
+            <option value="">Selecciona un departamento</option>
+            <?php
+            $sql = "SELECT * FROM departamentos";
+            $resultado = mysqli_query($con, $sql);
+            while ($fila = mysqli_fetch_assoc($resultado)) {
+                echo "<option value='" . $fila['idDepartamento'] . "'>" . $fila['nombreDepartamento'] . "</option>";
+            }
+            ?>
+        </select>
+        <br>
+        <button type="submit" class="botones">Añadir usuario</button>
+    </form>
+    <?php
+}
+?>
