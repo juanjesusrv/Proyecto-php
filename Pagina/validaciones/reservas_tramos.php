@@ -42,6 +42,9 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["fecha"])) {
 ?>
 
 <form action="./validaciones/crearReservas.php" method="post">
+    <p><?php if(isset($_POST["fecha"])){
+        echo $_POST["fecha"];
+    } ?></p>
     <label for="tramo">Selecciona uno o varios tramos:</label>
     <br>
     <?php
