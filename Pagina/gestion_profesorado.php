@@ -16,21 +16,22 @@ require_once "./validaciones/conexion.php";
 <body>
     <?php require_once "./plantillas/header.php" ?>
     <main>
-    <div class="reservas">
+        <div class="reservas">
         <div class="contenedorEstandar">
-            <?php require_once "validaciones/eliminarProfesores.php" ?>
-        </div>
-        <div class="contenedorEstandar">
-            <?php require_once "validaciones/cambiarVice.php" ?>
-        </div>
-</div>
-    <div class="reservas">
-            <div class="contenedorEstandar">
-            <?php require_once "./validaciones/crearProfesores.php" ?> 
+                <?php require_once "./validaciones/crearProfesores.php" ?>
             </div>
             <div class="contenedorEstandar">
-                <?php require_once "validaciones/asignarAsignaturaAprofesor.php" ?> 
+                <?php require_once "validaciones/eliminarProfesores.php" ?>
             </div>
+        </div>
+        <div class="reservas">
+            <div class="contenedorEstandar">
+                <?php require_once "validaciones/asignarAsignaturaAprofesor.php" ?>
+            </div>
+            <div class="contenedorEstandar">
+                <?php require_once "validaciones/cambiarVice.php" ?>
+            </div>
+
         </div>
     </main>
     <?php require_once "./plantillas/footer.php" ?>
