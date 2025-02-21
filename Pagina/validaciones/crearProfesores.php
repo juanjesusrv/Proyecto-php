@@ -1,6 +1,7 @@
 <link rel="stylesheet" href="../Estilos/ruben.css">
 <?php
 require_once "conexion.php";
+
 // Comprobamos si se han enviado los datos del formulario
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idUsuario']) && isset($_POST['contrasena']) && isset($_POST['nombre']) && isset($_POST['apellido1']) && isset($_POST['apellido2']) && isset($_POST['email']) && isset($_POST['departamento']) && isset($_POST['rol'])) {
 
@@ -15,14 +16,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idUsuario']) && isset(
     $rol = htmlspecialchars($_POST['rol']);
 
     if (!$con) {
-        echo "Error al conectar a la base de datos";
+        header("Location: ../gestion_profesorado.php?errorP=Error al conectar a la base de datos");
+        exit();
     } else {
         // Verificamos si el idUsuario ya existe en la base de datos
         $sql_comprobarIdUsuario = "SELECT idUsuario FROM usuarios WHERE idUsuario = '$idUsuario'";
         $result_check = mysqli_query($con, $sql_comprobarIdUsuario);
 
-        //Si no existe, lo añadimos
         if (mysqli_num_rows($result_check) == 0) {
+            // Insertamos el usuario
             $sql = "INSERT INTO usuarios (idUsuario, contrasena, nombreUsuario, apellido1, apellido2, email, idDepartamento) 
                     VALUES ('$idUsuario','$contrasena','$nombre', '$apellido1', '$apellido2', '$email', '$departamento')";
 
@@ -30,22 +32,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idUsuario']) && isset(
                 // Añadimos el rol de usuario
                 $sql2 = "INSERT INTO `usuarios-roles` (idUsuario, idRol) VALUES ('$idUsuario', '$rol')";
                 mysqli_query($con, $sql2);
-                header("Location: ../gestion_profesorado.php"); // Redirigimos a la página de gestión
+                header("Location: ../gestion_profesorado.php");
+                exit();
             } else {
-                echo "Error al insertar los datos en la base de datos.";
-                ?>
-                <a href="../gestion_profesorado.php">Volver</a>
-                <?php
+                header("Location: ../gestion_profesorado.php?errorP=Error al insertar los datos en la base de datos");
+                exit();
             }
         } else {
-            echo "El usuario ya existe en la base de datos.";
-            ?>
-            <a href="../gestion_profesorado.php">Volver</a>
-            <?php
+            header("Location: ../gestion_profesorado.php?errorP=El usuario ya existe en la base de datos");
+            exit();
         }
     }
-}else {
+} else {
     ?>
+
     <form action="./validaciones/crearProfesores.php" method="POST" class="formularioProfesores">
         <h2>Añadir profesor</h2>
         <input type="text" name="idUsuario" id="idUsuario" placeholder="DNI" required>
@@ -76,6 +76,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idUsuario']) && isset(
         </select>
         <button type="submit" class="botones">Añadir usuario</button>
     </form>
+
     <?php
+    // Mostrar mensaje de error si existe en la URL
+    if (isset($_GET['errorP'])) {
+        echo "<p style='color: red; text-align: center;'>" . htmlspecialchars($_GET['errorP']) . "</p>";
+    }
 }
 ?>
