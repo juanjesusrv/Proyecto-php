@@ -65,4 +65,5 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["fecha"])) {
     ?>
     <input type="hidden" name="idAsignatura" value="<?php echo $asignaturaSeleccionada ?>">
     <input type="hidden" name="fecha" value="<?php echo $fecha ?>">
+    <input type="hidden" name="numAlumnos" value="<?php echo $alumnosAsignatura ?>">
 </form>
