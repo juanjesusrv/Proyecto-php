@@ -15,18 +15,6 @@
             <input type="text" id="con" name="con" placeholder="Contraseña" required><br>
             <input type="submit" value="Iniciár Sesión">
         </form>
-
-        <div class="contenido">
-            <h1>Novedades</h1>
-            <h2>Hola</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas nam adipisci, repellat ipsa cupiditate doloremque quos illo cum. Voluptatem libero ea animi amet iste reprehenderit facilis voluptates impedit dicta eos.</p>
-            <h2>Hola</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas nam adipisci, repellat ipsa cupiditate doloremque quos illo cum. Voluptatem libero ea animi amet iste reprehenderit facilis voluptates impedit dicta eos.</p>
-            <h2>Hola</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas nam adipisci, repellat ipsa cupiditate doloremque quos illo cum. Voluptatem libero ea animi amet iste reprehenderit facilis voluptates impedit dicta eos.</p>
-            <h2>Hola</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas nam adipisci, repellat ipsa cupiditate doloremque quos illo cum. Voluptatem libero ea animi amet iste reprehenderit facilis voluptates impedit dicta eos.</p>
-        </div>
     </main>
     <?php require_once "./plantillas/footer.php" ?>
 </body>
