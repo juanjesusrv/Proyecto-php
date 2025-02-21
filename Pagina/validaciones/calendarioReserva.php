@@ -19,7 +19,12 @@
 </form>
 <?php
     if(($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["idAsignatura"])){
-        $numeroAlumnos=numeroAlumnos($_POST["idAsignatura"],$con);
+        if(isset($_POST["numAlumnos"])){
+            $numeroAlumnos=$_POST["numAlumnos"];
+        }else{
+            $numeroAlumnos=numeroAlumnos($_POST["idAsignatura"],$con);
+        }
+        
         $arrayTramos=listaTramos($con);
         $diaActual="";
         if (isset($_POST["mesBuscar"])||isset($_POST["yearBuscar"])) {
