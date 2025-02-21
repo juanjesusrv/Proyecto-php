@@ -1,18 +1,17 @@
-<!-- Creamos el formulario para añadir profesores -->
 <link rel="stylesheet" href="../Estilos/ruben.css">
 <?php
 // Comprobamos si se han enviado los datos del formulario
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    require_once "./conexion.php"; // Incluimos el archivo de conexión a la base de datos
+    require_once "./conexion.php";
 
     /* Guardamos los datos del usuario en variables */
-    $idUsuario = htmlspecialchars($_POST['idUsuario']); // Guardamos el id en una variable
-    $contrasena = htmlspecialchars($_POST['contrasena']); // Guardamos la contraseña en una variable
-    $nombre = htmlspecialchars($_POST['nombre']); // Guardamos el nombre en una variable
-    $apellido1 = htmlspecialchars($_POST['apellido1']); // Guardamos el primer apellido en una variable
-    $apellido2 = htmlspecialchars($_POST['apellido2']); // Guardamos el segundo apellido en una variable
-    $email = htmlspecialchars($_POST['email']); // Guardamos el email en una variable
-    $departamento = htmlspecialchars($_POST['departamento']); // Guardamos el departamento en una variable
+    $idUsuario = htmlspecialchars($_POST['idUsuario']);
+    $contrasena = htmlspecialchars($_POST['contrasena']);
+    $nombre = htmlspecialchars($_POST['nombre']);
+    $apellido1 = htmlspecialchars($_POST['apellido1']);
+    $apellido2 = htmlspecialchars($_POST['apellido2']);
+    $email = htmlspecialchars($_POST['email']);
+    $departamento = htmlspecialchars($_POST['departamento']);
 
     if (!$con) {
         echo "Error al conectar a la base de datos";
@@ -21,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $sql_comprobarIdUsuario = "SELECT idUsuario FROM usuarios WHERE idUsuario = '$idUsuario'";
         $result_check = mysqli_query($con, $sql_comprobarIdUsuario);
 
-        // Si el idUsuario ya existe, mostramos un mensaje y no insertamos
+        //Si no existe, lo añadimos
         if (mysqli_num_rows($result_check) == 0) {
             $sql = "INSERT INTO usuarios (idUsuario, contrasena, nombreUsuario, apellido1, apellido2, email, idDepartamento) 
                     VALUES ('$idUsuario','$contrasena','$nombre', '$apellido1', '$apellido2', '$email', '$departamento')";
@@ -45,7 +44,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 }else {
-    // Si el formulario no se ha enviado, mostramos el formulario
     ?>
     <form action="./validaciones/crearProfesores.php" method="POST" class="formularioProfesores">
         <h2>Añadir profesor</h2>

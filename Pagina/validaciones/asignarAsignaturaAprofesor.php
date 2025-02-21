@@ -1,14 +1,13 @@
 <link rel="stylesheet" href="../Estilos/ruben.css">
 <?php
-// Comprobamos si se han enviado los datos del formulario
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    require_once "./conexion.php"; // Incluimos el archivo de conexión a la base de datos
+    require_once "./conexion.php";
 
     /* Guardamos los datos del usuario en variables */
-    $idUsuario = htmlspecialchars($_POST['idUsuario']); // Guardamos el id en una variable
+    $idUsuario = htmlspecialchars($_POST['idUsuario']);
     $idAsignatura = htmlspecialchars($_POST['idAsignatura']);
     $numAlumnos = htmlspecialchars($_POST['numAlumnos']);
-    $grupo = htmlspecialchars(strtoupper($_POST['grupo'])); // Convierte el grupo a mayúscula
+    $grupo = htmlspecialchars(strtoupper($_POST['grupo']));
 
     // Obtenemos el curso de la asignatura seleccionada
     $sql_curso = "SELECT curso FROM asignaturas WHERE idAsignatura = '$idAsignatura'";
@@ -29,8 +28,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $resultado_check = mysqli_query($con, $sql_comprobarAsignacion);
 
+        //Si no existe la asignación, la insertamos
         if (mysqli_num_rows($resultado_check) > 0) {
-            // Si no existe, procedemos con la inserción de los datos
             $sql = "INSERT INTO `usuarios-asignaturas` (idUsuario, idAsignatura, numAlumnos, grupo) 
                     VALUES ('$idUsuario', '$idAsignatura', '$numAlumnos', '$grupo')";
             if (mysqli_query($con, $sql)) {
@@ -42,7 +41,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <?php
             }
         } else {
-            // Si ya existe la asignación, mostramos un mensaje y no insertamos
             echo "Ya existe un profesor asignado a este grupo en la asignatura y curso seleccionados.";
             ?>
             <a href="../gestion_profesorado.php">Volver</a>
