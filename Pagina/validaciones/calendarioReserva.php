@@ -1,5 +1,6 @@
 <p>Selecciona una asignatura</p>
 <form action="reserva.php" method="post">
+
     <select name="idAsignatura" id="idAsignatura">
         <?php
             $sql="SELECT * from `usuarios-asignaturas` ua
@@ -19,11 +20,7 @@
 </form>
 <?php
     if(($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["idAsignatura"])){
-        if(isset($_POST["numAlumnos"])){
-            $numeroAlumnos=$_POST["numAlumnos"];
-        }else{
-            $numeroAlumnos=numeroAlumnos($_POST["idAsignatura"],$con);
-        }
+        $numeroAlumnos=numeroAlumnos($_POST["idAsignatura"],$con);
         
         $arrayTramos=listaTramos($con);
         $diaActual="";

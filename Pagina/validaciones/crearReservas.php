@@ -31,8 +31,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["tramos"])) {
     </head>
     <form action="../reserva.php" method="post">
         <button class="botones" type="submit">Volver</button>
-        <input type="hidden" name="idAsignatura" value="<?php echo $idAsignatura ?>">
-        <input type="hidden" name="fecha" value="<?php echo $fecha ?>">
+        <input type="hidden" name="idAsignatura" value="<?php echo $_POST["idAsignatura"] ?>">
+        <input type="hidden" name="fecha" value="<?php echo $_POST["fecha"] ?>">
         <input type="hidden" name="numAlumnos" value="<?php echo $_POST["numAlumnos"] ?>">
     </form>
 <?php } ?>
