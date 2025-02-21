@@ -42,8 +42,7 @@ $eleccion = $_SESSION['eleccion'];
         <?php if (!isset($_SESSION['nombreUsuario'])) { //Salta un error de inicio de sesión si no hay una cuenta iniciada
             header('Location: ../Pagina/errorsesion.php');
          } ?>
-        <p>Eliminar Profesores</p>
-
+        <h2>Cambiar Vicedirectór</h2>
         <table>
             <tr>
                 <?php if (in_array(2, $_SESSION['roles']) && $eleccion) { ?>
@@ -56,22 +55,13 @@ $eleccion = $_SESSION['eleccion'];
             <?php
             $idUsuario = mysqli_real_escape_string($con, $_SESSION['idUsuario']);
 
-            if (isset($_POST['borra'])) {   
-            //Si recibe un elemento que borrar, lo borra
-            //Borra las reservas que tenga
-                $query = "DELETE FROM `reservas-tramo` WHERE idReserva IN (SELECT idReserva FROM `reservas` WHERE idUsuario = '" . $_POST['borra'] . "');";
+            if (isset($_POST['cambia'])) {   
+            //Cambia el vicedirectór
+                $query = "DELETE FROM `usuarios-roles` WHERE idUsuario IN ('" . $_SESSION['idUsuario'] . "', '" . $_POST['cambia'] . "');";
                 $result = mysqli_query($con, $query);
-                $query = "DELETE FROM `reservas` WHERE idUsuario = '" . $_POST['borra'] . "';";
+                $query = "INSERT INTO `usuarios-roles` (idUsuario, idRol) VALUES ('" . $_SESSION['idUsuario'] . "', 1), ('" . $_POST['cambia'] . "', 2);";
                 $result = mysqli_query($con, $query);
-            //Borra los datos relacionados
-                $query = "DELETE FROM `usuarios-roles` WHERE idUsuario = '" . $_POST['borra'] . "';";
-                $result = mysqli_query($con, $query);
-                $query = "DELETE FROM `usuarios-asignaturas` WHERE idUsuario = '" . $_POST['borra'] . "';";
-                $result = mysqli_query($con, $query);
-            //Borra el usuario
-                $query = "DELETE FROM usuarios WHERE idUsuario = '" . $_POST['borra'] . "';";
-                $result = mysqli_query($con, $query);
-                echo '<b>El usuario ' . $_POST['borra'] . ' ha sido eliminado.</b><br>';
+                echo '<b>El usuario ' . $_POST['cambia'] . ' ha sido convertido a Vicedirectór.</b><br>';
 
             }
 
@@ -88,7 +78,7 @@ $eleccion = $_SESSION['eleccion'];
                 while ($row = mysqli_fetch_assoc($result)) {
                     //Si la id actuál es la misma que la del usuario iniciado (el vicedirectór) no se muestra.
                     if ($row['idUsuario'] != $_SESSION['idUsuario']) {
-                        echo '<td> <b><input type="submit" value="' . $row['idUsuario'] . '" name="borra"></td>';
+                        echo '<td> <b><input type="submit" value="' . $row['idUsuario'] . '" name="cambia"></td>';
                         echo "<td>" .  $row['nombreUsuario'] . ", " . $row['apellido1'] . "</td></tr>";
                     }
                 }
