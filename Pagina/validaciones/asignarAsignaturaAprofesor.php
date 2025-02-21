@@ -1,6 +1,7 @@
 <link rel="stylesheet" href="../Estilos/ruben.css">
 <?php
 require_once "conexion.php";
+
 // Comprobamos si se han enviado los datos del formulario
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idUsuario']) && isset($_POST['idAsignatura']) && isset($_POST['numAlumnos']) && isset($_POST['grupo'])) {
 
@@ -19,7 +20,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idUsuario']) && isset(
         $curso = mysqli_fetch_assoc($resultado_curso)['curso'];
 
         // Comprobamos si ya existe un profesor asignado al mismo grupo, asignatura y curso
-        // Hacemos un JOIN con la tabla asignaturas para acceder al campo curso
         $sql_comprobarAsignacion = "SELECT * 
                                     FROM `usuarios-asignaturas` uas
                                     JOIN `asignaturas` a ON uas.idAsignatura = a.idAsignatura
@@ -29,32 +29,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idUsuario']) && isset(
 
         $resultado_check = mysqli_query($con, $sql_comprobarAsignacion);
 
-        //Si no existe la asignación, la insertamos
         if (mysqli_num_rows($resultado_check) == 0) {
+            // Insertamos la asignación
             $sql = "INSERT INTO `usuarios-asignaturas` (idUsuario, idAsignatura, numAlumnos, grupo) 
                     VALUES ('$idUsuario', '$idAsignatura', '$numAlumnos', '$grupo')";
             if (mysqli_query($con, $sql)) {
-                header("Location: ../gestion_profesorado.php"); // Redirigimos a la página de gestión
+                header("Location: ../gestion_profesorado.php");
+                exit();
             } else {
-                echo "Error al asignar la asignatura al profesor.";
-                ?>
-                <a href="../gestion_profesorado.php">Volver</a>
-                <?php
+                header("Location: ../gestion_profesorado.php?errorA=Error al asignar la asignatura al profesor");
+                exit();
             }
         } else {
-            echo "Ya existe un profesor asignado a este grupo en la asignatura y curso seleccionados.";
-            ?>
-            <a href="../gestion_profesorado.php">Volver</a>
-    <?php
+            header("Location: ../gestion_profesorado.php?errorA=Ya existe un profesor asignado a este grupo en la asignatura y curso seleccionados");
+            exit();
         }
     } else {
-        echo "No se pudo obtener el curso de la asignatura seleccionada.";
-            ?>
-            <a href="../gestion_profesorado.php">Volver</a>
-            <?php
+        header("Location: ../gestion_profesorado.php?errorA=No se pudo obtener el curso de la asignatura seleccionada");
+        exit();
     }
 } else {
-    ?>
+?>
+
     <form action="./validaciones/asignarAsignaturaAprofesor.php" method="POST" class="formularioProfesores">
         <h2>Añadir asignación</h2>
         <select name="idUsuario" id="idUsuario" required>
@@ -81,6 +77,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idUsuario']) && isset(
         <input type="text" name="grupo" id="grupo" placeholder="Grupo" pattern="[A-Za-z]" title="Debe ser una sola letra" required>
         <button type="submit" class="botones">Añadir asignación</button>
     </form>
-<?php
+
+    <?php
+    // Mostrar mensaje de error si existe en la URL
+    if (isset($_GET['errorA'])) {
+        echo "<p style='color: red; text-align: center;'>" . htmlspecialchars($_GET['errorA']) . "</p>";
+    }
 }
 ?>
