@@ -46,13 +46,15 @@ function enviarMail($con,$idReserva,$tramos,$tipoMensaje){
     $nombre = $_SESSION["apellido1"].' '.$_SESSION["apellido2"].', '.$_SESSION["nombreUsuario"];
     //$email = $_SESSION["email"];
     $email = "rjimrui727@g.educaand.es";
-    $asunto = 'Reserva de la clase de examenes el dia '.$fecha.' para la asignatura '.$nombreAsignatura;
+    
 
     if($tipoMensaje=="crear"){
+        $asunto = 'Reserva de la clase de examenes el dia '.$fecha.' para la asignatura '.$nombreAsignatura;
         $mensaje='<div>
             <h1>Resguardo de la reserva del aula de examenes</h1>';
     }
     if($tipoMensaje=="borrar"){
+        $asunto = 'Borrado de la reserva del dia '.$fecha.' para la asignatura '.$nombreAsignatura;
         $mensaje='<div>
             <h1>Resguardo del borrado de la reserva</h1>';
     }
