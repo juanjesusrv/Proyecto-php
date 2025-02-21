@@ -47,7 +47,7 @@ $eleccion = $_SESSION['eleccion'];
         <table>
             <tr>
                 <?php if (in_array(2, $_SESSION['roles']) && $eleccion) { ?>
-                    <th>ID Usuario</th>
+                    <th>DNI</th>
                     <th>Usuario</th>
                 <?php }
                 ?>
@@ -56,10 +56,19 @@ $eleccion = $_SESSION['eleccion'];
             <?php
             $idUsuario = mysqli_real_escape_string($con, $_SESSION['idUsuario']);
 
-            if (isset($_POST['borra'])) {   //Si recibe un elemento que borrar, lo borra
-                //Borra los datos relacionados
+            if (isset($_POST['borra'])) {   
+            //Si recibe un elemento que borrar, lo borra
+            //Borra las reservas que tenga
+                $query = "DELETE FROM `reservas-tramo` WHERE idReserva IN (SELECT idReserva FROM `reservas` WHERE idUsuario = '" . $_POST['borra'] . "');";
+                $result = mysqli_query($con, $query);
+                $query = "DELETE FROM `reservas` WHERE idUsuario = '" . $_POST['borra'] . "';";
+                $result = mysqli_query($con, $query);
+            //Borra los datos relacionados
                 $query = "DELETE FROM `usuarios-roles` WHERE idUsuario = '" . $_POST['borra'] . "';";
                 $result = mysqli_query($con, $query);
+                $query = "DELETE FROM `usuarios-asignaturas` WHERE idUsuario = '" . $_POST['borra'] . "';";
+                $result = mysqli_query($con, $query);
+            //Borra el usuario
                 $query = "DELETE FROM usuarios WHERE idUsuario = '" . $_POST['borra'] . "';";
                 $result = mysqli_query($con, $query);
                 echo '<b>El usuario ' . $_POST['borra'] . ' ha sido eliminado.</b><br>';
