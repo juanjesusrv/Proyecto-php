@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $resultado_check = mysqli_query($con, $sql_comprobarAsignacion);
 
         //Si no existe la asignación, la insertamos
-        if (mysqli_num_rows($resultado_check) > 0) {
+        if (mysqli_num_rows($resultado_check) == 0) {
             $sql = "INSERT INTO `usuarios-asignaturas` (idUsuario, idAsignatura, numAlumnos, grupo) 
                     VALUES ('$idUsuario', '$idAsignatura', '$numAlumnos', '$grupo')";
             if (mysqli_query($con, $sql)) {
