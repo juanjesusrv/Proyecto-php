@@ -11,7 +11,12 @@ require 'PHPMailer/src/SMTP.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
+function enviarMail(){
+    
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
     // Consulta a la base de datos
     $idReserva=$_POST['idReserva'];
     $sql=`select * from reservas where idReserva="`+$idReserva+`"`;
@@ -76,16 +81,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <p>
             ID de la reserva: `+$_SESSION["idReserva"]+`<br>
             Fecha de la reserva: `+$fecha+`<br>
+            Profesor: `+$_SESSION["apellido1"]+` `+$_SESSION["apellido2"]+`, `+$_SESSION["nombreUsuario"]+`<br>
             Asignatura: `+$nombreAsignatura+`<br>
             Curso: `+$curso+` - `+$grupo+`<br>
-            Nº alumnos: `+$numAlumnos+`<br>
-            Profesor: `+$_SESSION["apellido1"]+` `+$_SESSION["apellido2"]+`, `+$_SESSION["nombreUsuario"]+`<br>
+            Nº alumnos: `+$numAlumnos+`<br><br>
             Tramos reservados<br>
-            - <br>
+            `;
+            foreach($tramos as $tramo){
+                $sqlHoras='SELECT * FROM tramos WHERE idTramo="'.$tramo.'"';
+                $hora=mysqli_query($con,$sqlHoras);
+                $mensaje.='-'.$tramo.': '.$hora["hora"].'<br>';
+            }
+
+    $mensaje.=`
         </p>
     </div>
-    <div>
-        <img src="../Diseño/imgs/iesjorgeguillen.svg" alt=""> I.E.S. Jorge Guillén
+    <div style="display: flex;">
+        <img src="../Diseño/imgs/iesjorgeguillen.svg" alt="">
+        <p>I.E.S. Jorge Guillén<p>
     </div>
     `;
 
