@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-02-2025 a las 21:38:12
+-- Tiempo de generación: 22-02-2025 a las 19:42:27
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -89,15 +89,6 @@ CREATE TABLE `reservas` (
   `idAsignatura` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `reservas`
---
-
-INSERT INTO `reservas` (`idReserva`, `fecha`, `idUsuario`, `idAsignatura`) VALUES
-(1, '2025-03-31', '11111111A', 1),
-(2, '2025-03-31', '11111111A', 10),
-(3, '2025-02-28', '11111111C', 6);
-
 -- --------------------------------------------------------
 
 --
@@ -108,15 +99,6 @@ CREATE TABLE `reservas-tramo` (
   `idReserva` int(11) NOT NULL,
   `idTramo` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `reservas-tramo`
---
-
-INSERT INTO `reservas-tramo` (`idReserva`, `idTramo`) VALUES
-(1, 'T1'),
-(2, 'T4'),
-(3, 'T2');
 
 -- --------------------------------------------------------
 
@@ -168,7 +150,7 @@ INSERT INTO `tramos` (`idTramo`, `hora`) VALUES
 
 CREATE TABLE `usuarios` (
   `idUsuario` varchar(9) NOT NULL,
-  `contrasena` varchar(50) NOT NULL,
+  `contrasena` varchar(70) NOT NULL,
   `nombreUsuario` varchar(50) NOT NULL,
   `apellido1` varchar(50) NOT NULL,
   `apellido2` varchar(50) NOT NULL,
@@ -181,19 +163,10 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`idUsuario`, `contrasena`, `nombreUsuario`, `apellido1`, `apellido2`, `email`, `idDepartamento`) VALUES
-('11111111A', '1234', 'Noemí', 'Salobreña', 'Torres', 'nsaltor759@g.educaand.es', 1),
-('11111111B', '1234', 'Juan Antonio', 'Chaves', 'Naranjo', 'jchanar975@g.educaand.es', 1),
-('11111111C', '1234', 'Carmelo José', 'Jaén', 'Díaz', 'cjaedia071@g.educaand.es', 1),
-('11111111D', '1234', 'Ana', 'Colacio', 'Moyano', 'ana@email.com', 1),
-('11111111E', '1234', 'Luis', 'Martín', 'Jiménez', 'luis.martin@email.com', 5),
-('11111111F', '1234', 'Lucía', 'Hernández', 'Vázquez', 'lucia.hernandez@email.com', 1),
-('11111111G', '1234', 'Pedro', 'García', 'Moreno', 'pedro.garcia@email.com', 2),
-('11111111H', '1234', 'Elena', 'Ramírez', 'Álvarez', 'elena.ramirez@email.com', 3),
-('11111111I', '1234', 'Jorge', 'Díaz', 'Serrano', 'jorge.diaz@email.com', 4),
-('11111111J', '1234', 'Carlos', 'Pérez', 'González', 'carlos.perez@email.com', 5),
-('11111111K', '1234', 'Ana', 'López', 'Martínez', 'ana.lopez@email.com', 2),
-('11111111L', '1234', 'Juan', 'Sánchez', 'Rodríguez', 'juan.sanchez@email.com', 3),
-('11111111M', '1234', 'María', 'Gómez', 'Fernández', 'maria.gomez@email.com', 4);
+('11111111A', '$2y$10$toB/QRB6ZwxP3zSAs/eJ7uI0RSlEIeOVzHO4kIY5BO4Ib0TtodnP.', 'Noemí', 'Salobreña', 'Torres', 'nsaltor759@g.educaand.es', 1),
+('11111111B', '$2y$10$kuaEV6RDiDEJmEbVUUJrZOZwk8dg7sbeBVjiHYDaRUBwYkVXM8Bc.', 'Juan Antonio', 'Chaves', 'Naranjo', 'jchanar975@g.educaand.es', 1),
+('11111111C', '$2y$10$bAzL770ZaA7Y8.qHQoubQeK5Cz5Q3lSS7p.CQbM2hmkp0YjD9VKcC', 'Carmelo José', 'Jaén', 'Díaz', 'cjaedia071@g.educaand.es', 1),
+('11111111D', '$2y$10$oqOfVdIOkAdL42OYHGAkSuC/.MwV3ICXp4tosLm0h30vlwhUtYKOO', 'Ana', 'Colacio', 'Moyano', 'ana@email.com', 1);
 
 -- --------------------------------------------------------
 
@@ -213,17 +186,11 @@ CREATE TABLE `usuarios-asignaturas` (
 --
 
 INSERT INTO `usuarios-asignaturas` (`idUsuario`, `idAsignatura`, `numAlumnos`, `grupo`) VALUES
-('11111111A', 1, 15, 'A'),
-('11111111A', 7, 20, 'A'),
-('11111111A', 10, 20, 'A'),
+('11111111A', 1, 25, 'A'),
 ('11111111B', 4, 15, 'A'),
-('11111111B', 9, 20, 'A'),
-('11111111C', 2, 15, 'A'),
-('11111111C', 3, 15, 'A'),
-('11111111C', 6, 20, 'A'),
-('11111111C', 8, 20, 'A'),
-('11111111D', 5, 4, 'A'),
-('11111111D', 11, 8, 'A');
+('11111111C', 2, 25, 'C'),
+('11111111C', 3, 25, 'A'),
+('11111111D', 5, 10, 'C');
 
 -- --------------------------------------------------------
 
@@ -241,20 +208,10 @@ CREATE TABLE `usuarios-roles` (
 --
 
 INSERT INTO `usuarios-roles` (`idUsuario`, `idRol`) VALUES
-('11111111A', 1),
 ('11111111A', 2),
 ('11111111B', 1),
 ('11111111C', 1),
-('11111111D', 1),
-('11111111E', 1),
-('11111111F', 1),
-('11111111G', 1),
-('11111111H', 1),
-('11111111I', 1),
-('11111111J', 1),
-('11111111K', 1),
-('11111111L', 1),
-('11111111M', 1);
+('11111111D', 1);
 
 --
 -- Índices para tablas volcadas
@@ -279,7 +236,8 @@ ALTER TABLE `departamentos`
 ALTER TABLE `reservas`
   ADD PRIMARY KEY (`idReserva`),
   ADD KEY `idUsuario` (`idUsuario`),
-  ADD KEY `idAsignatura` (`idAsignatura`);
+  ADD KEY `idAsignatura` (`idAsignatura`),
+  ADD KEY `reservas_ibfk_1` (`idAsignatura`,`idUsuario`);
 
 --
 -- Indices de la tabla `reservas-tramo`
@@ -344,7 +302,7 @@ ALTER TABLE `departamentos`
 -- AUTO_INCREMENT de la tabla `reservas`
 --
 ALTER TABLE `reservas`
-  MODIFY `idReserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idReserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -366,7 +324,7 @@ ALTER TABLE `asignaturas`
 -- Filtros para la tabla `reservas`
 --
 ALTER TABLE `reservas`
-  ADD CONSTRAINT `reservas_ibfk_1` FOREIGN KEY (`idAsignatura`,`idUsuario`) REFERENCES `usuarios-asignaturas` (`idAsignatura`,`idUsuario`);
+  ADD CONSTRAINT `reservas_ibfk_1` FOREIGN KEY (`idAsignatura`,`idUsuario`) REFERENCES `usuarios-asignaturas` (`idAsignatura`, `idUsuario`);
 
 --
 -- Filtros para la tabla `reservas-tramo`
