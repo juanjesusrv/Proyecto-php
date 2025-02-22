@@ -1,10 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<?php session_start();
 
+<?php session_start(); 
 require_once "./validaciones/conexion.php";
 
 ?>
+<?php if (in_array(2, $_SESSION['roles'])){ ?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+
 
 <head>
     <meta charset="UTF-8">
@@ -38,3 +43,7 @@ require_once "./validaciones/conexion.php";
 </body>
 
 </html>
+
+<?php } else {
+    header('Location: ./reserva.php');
+} ?>

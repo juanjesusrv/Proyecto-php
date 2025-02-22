@@ -55,16 +55,6 @@ $eleccion = $_SESSION['eleccion'];
             <?php
             $idUsuario = mysqli_real_escape_string($con, $_SESSION['idUsuario']);
 
-            if (isset($_POST['cambia'])) {   
-            //Cambia el vicedirectór
-                $query = "DELETE FROM `usuarios-roles` WHERE idUsuario IN ('" . $_SESSION['idUsuario'] . "', '" . $_POST['cambia'] . "');";
-                $result = mysqli_query($con, $query);
-                $query = "INSERT INTO `usuarios-roles` (idUsuario, idRol) VALUES ('" . $_SESSION['idUsuario'] . "', 1), ('" . $_POST['cambia'] . "', 2);";
-                $result = mysqli_query($con, $query);
-                echo '<b>El usuario ' . $_POST['cambia'] . ' ha sido convertido a Vicedirectór.</b><br>';
-
-            }
-
             $query = "SELECT idUsuario, nombreUsuario, apellido1 
                         FROM usuarios";
 
@@ -74,7 +64,7 @@ $eleccion = $_SESSION['eleccion'];
             }
 
             if (mysqli_num_rows($result) > 0) {
-                echo '<form  action="gestion_profesorado.php" method="post">';
+                echo '<form  action="./validaciones/cambiarViceProces.php" method="post">';
                 while ($row = mysqli_fetch_assoc($result)) {
                     //Si la id actuál es la misma que la del usuario iniciado (el vicedirectór) no se muestra.
                     if ($row['idUsuario'] != $_SESSION['idUsuario']) {
@@ -84,7 +74,7 @@ $eleccion = $_SESSION['eleccion'];
                 }
                 echo "</form>";
             } else {
-                echo "<tr><td colspan='6'>No hay reservas</td></tr>";
+                echo "<tr><td colspan='6'>No hay profesores</td></tr>";
             }
             ?>
         </table>
