@@ -79,7 +79,8 @@ $eleccion = $_SESSION['eleccion'];
                         JOIN asignaturas a ON r.idAsignatura = a.idAsignatura 
                         JOIN `usuarios-asignaturas` ua ON r.idUsuario = ua.idUsuario 
                         AND r.idAsignatura = ua.idAsignatura 
-                        JOIN usuarios u ON r.idUsuario = u.idUsuario";
+                        JOIN usuarios u ON r.idUsuario = u.idUsuario
+                        ORDER BY r.fecha ASC";
             } else {
                 $query = "SELECT r.idReserva, r.fecha, t.hora, a.nombreAsignatura, a.curso, ua.grupo 
                         FROM reservas r 
@@ -88,7 +89,8 @@ $eleccion = $_SESSION['eleccion'];
                         JOIN asignaturas a ON r.idAsignatura = a.idAsignatura 
                         JOIN `usuarios-asignaturas` ua ON r.idUsuario = ua.idUsuario 
                         AND r.idAsignatura = ua.idAsignatura 
-                        WHERE r.idUsuario = '$idUsuario'";
+                        WHERE r.idUsuario = '$idUsuario'
+                        ORDER BY r.fecha ASC";
             }
 
             $result = mysqli_query($con, $query);

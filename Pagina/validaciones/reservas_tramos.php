@@ -52,21 +52,37 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["fecha"])) {
         $sql5 = "SELECT * FROM tramos";
         $result5 = mysqli_query($con, $sql5);
         while ($tramo = mysqli_fetch_assoc($result5)) {
-
             if (!in_array($tramo["idTramo"], $array_tramos_reservaUsuario)) {
                 if ((isset($array_tramos[$tramo["idTramo"]]) && ($array_tramos[$tramo["idTramo"]] + $alumnosAsignatura) <= 100) || !isset($array_tramos[$tramo["idTramo"]])) { ?>
-                    <input type="checkbox" id="tramos" name="tramos[]" value="<?php echo $tramo["idTramo"] ?>">
-                    <label for="tramos"><?php echo $tramo["idTramo"] . ": " . $tramo["hora"] ?></label><br>
+                    <input type="checkbox" class="tramo-checkbox" name="tramos[]" value="<?php echo $tramo["idTramo"] ?>">
+                    <label><?php echo $tramo["idTramo"] . ": " . $tramo["hora"] ?></label><br>
         <?php }
             }
         }
         ?>
         <br>
         <br>
-        <button class="botones" type="submit">Enviar</button>
-    <?php }
-    ?>
+        <button class="botones" type="submit" id="enviarBtn" disabled>Enviar</button>
+    <?php } ?>
     <input type="hidden" name="idAsignatura" value="<?php echo $asignaturaSeleccionada ?>">
     <input type="hidden" name="fecha" value="<?php echo $fecha ?>">
     <input type="hidden" name="numAlumnos" value="<?php echo $alumnosAsignatura ?>">
 </form>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const checkboxes = document.querySelectorAll(".tramo-checkbox");
+        const enviarBtn = document.getElementById("enviarBtn");
+
+        function validarCheckboxes() {
+            const algunoMarcado = [...checkboxes].some(checkbox => checkbox.checked);
+            enviarBtn.disabled = !algunoMarcado;
+        }
+
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener("change", validarCheckboxes);
+        });
+
+        validarCheckboxes(); // Ejecutar al inicio por si hay casillas ya marcadas
+    });
+</script>

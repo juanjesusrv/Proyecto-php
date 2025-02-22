@@ -24,17 +24,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["tramos"])) {
         enviarMail($con,$idReserva,$tramos,"crear");
         header("Location: ../reserva.php");
     }
-} else {
-    echo "No se ha seleccionado ningún tramo"; ?>
-    <br><br>
-
-    <head>
-        <link rel="stylesheet" href="../Estilos/ruben.css">
-    </head>
-    <form action="../reserva.php" method="post">
-        <button class="botones" type="submit">Volver</button>
-        <input type="hidden" name="idAsignatura" value="<?php echo $_POST["idAsignatura"] ?>">
-        <input type="hidden" name="fecha" value="<?php echo $_POST["fecha"] ?>">
-        <input type="hidden" name="numAlumnos" value="<?php echo $_POST["numAlumnos"] ?>">
-    </form>
-<?php } ?>
+}
