@@ -83,6 +83,6 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["fecha"])) {
             checkbox.addEventListener("change", validarCheckboxes);
         });
 
-        validarCheckboxes(); // Ejecutar al inicio por si hay casillas ya marcadas
+        validarCheckboxes();
     });
 </script>

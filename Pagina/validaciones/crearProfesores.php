@@ -8,6 +8,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idUsuario']) && isset(
     /* Guardamos los datos del usuario en variables */
     $idUsuario = htmlspecialchars($_POST['idUsuario']);
     $contrasena = htmlspecialchars($_POST['contrasena']);
+
+    $contrasenaCod = password_hash($contrasena, PASSWORD_BCRYPT);
+
     $nombre = htmlspecialchars($_POST['nombre']);
     $apellido1 = htmlspecialchars($_POST['apellido1']);
     $apellido2 = htmlspecialchars($_POST['apellido2']);
@@ -26,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idUsuario']) && isset(
         if (mysqli_num_rows($result_check) == 0) {
             // Insertamos el usuario
             $sql = "INSERT INTO usuarios (idUsuario, contrasena, nombreUsuario, apellido1, apellido2, email, idDepartamento) 
-                    VALUES ('$idUsuario','$contrasena','$nombre', '$apellido1', '$apellido2', '$email', '$departamento')";
+                    VALUES ('$idUsuario','$contrasenaCod','$nombre', '$apellido1', '$apellido2', '$email', '$departamento')";
 
             if (mysqli_query($con, $sql)) {
                 // Añadimos el rol de usuario
