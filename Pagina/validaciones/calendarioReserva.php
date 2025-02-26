@@ -1,7 +1,6 @@
 <p>Selecciona una asignatura</p>
-<form action="reserva.php" method="post">
-
-    <select name="idAsignatura" id="idAsignatura">
+<div class="contenedorBotonesCalendario"><form action="reserva.php#calendarioReservas" method="post">
+    <table><tr><td><select name="idAsignatura" id="idAsignatura">
         <?php
             $sql="SELECT * from `usuarios-asignaturas` ua
                     join asignaturas a on ua.idAsignatura=a.idAsignatura
@@ -15,9 +14,9 @@
                 echo'>'.$asignatura["nombreAsignatura"].' - '.$asignatura["curso"].' - '.$asignatura["grupo"].'</option>';
             }
         ?>
-    </select>
-    <button class="botonesCalendario" type="submit">Seleccionar</button>
-</form>
+    </select></td><td>
+    <button class="botones" type="submit">Seleccionar</button></td></tr></table>
+</form></div>
 <?php
     if(($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["idAsignatura"])){
         $numeroAlumnos=numeroAlumnos($_POST["idAsignatura"],$con);
@@ -43,29 +42,30 @@
         }
         ?>
         <P>Selecciona una fecha</P>
-        <form action="reserva.php" method="post">
+        <div class="contenedorBotonesCalendario"><form action="reserva.php#calendarioReservas" method="post">
             <input type="hidden" name="idAsignatura" value="<?php echo $_POST["idAsignatura"] ?>">
+            <table><tr><td>
             <select name="mesBuscar" id="mesBuscar">
             <?php 
                 $arrayMeses=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
                 for($i=0;$i<12;$i++){
-                    if($i<10){$numeroMes="0".($i+1);}
+                    if($i<9){$numeroMes="0".($i+1);}
                     else{$numeroMes=($i+1);}
                     echo '<option value="'.$numeroMes.'" ';
                     if($numeroMes==$mes){echo 'selected';}
                     echo'>'.$arrayMeses[$i].'</option>';
                 }
             ?>
-            </select>
+            </select></td><td>
             <select name="yearBuscar" id="yearBuscar">
             <?php
                 if(date('m')<8){echo '<option value="'.(date('Y')-1).'">'.(date('Y')-1).'</option>';}
                 echo '<option value="'.(date('Y')).'" selected>'.(date('Y')).'</option>';
                 if(date('m')>=8){echo '<option value="'.(date('Y')+1).'">'.(date('Y')+1).'</option>';}
             ?>
-            </select>
-            <button class="botonesCalendario" type="submit">Seleccionar</button>
-        </form><br>
+            </select></td><td>
+            <button class="botones" type="submit">Seleccionar</button></td></tr></table>
+        </form></div><br>
         <?php
         $ultimoDiaMes=date("t", strtotime($year."-".$mes."-01"));
         $calendario="<table class='tablaCalendario'><tr><th>Lun</th><th>Mar</th><th>Mie</th><th>Jue</th><th>Vie</th><th>Sab</th><th>Dom</th></tr>";
@@ -108,7 +108,7 @@
                 }else{
                     $calendario.='<td class="calenReDiaNoSeleccionable">'.$i.'</td>';
                 }
-            if($diaSemana==7){ $calendario.="</tr>"; }
+            if($diaSemana==0){ $calendario.="</tr>"; }
         }
         if(date("w",strtotime($year."-".$mes."-".$ultimoDiaMes))!=0){
             for($i=7;$i>date("w",strtotime($year."-".$mes."-".$ultimoDiaMes));$i--){
@@ -117,7 +117,7 @@
         }
 
         $calendario.="</tr></table>";
-        echo '<form action="reserva.php" method="post">
+        echo '<form action="reserva.php#reservaTramos" method="post">
         <input type="hidden" name="numAlumnos" value="'.$numeroAlumnos.'">
         <input type="hidden" name="idAsignatura" value="'.$_POST["idAsignatura"].'">
         <input type="hidden" name="mesBuscar" value="'.$mes.'">
