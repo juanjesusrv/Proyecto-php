@@ -47,7 +47,7 @@ $eleccion = $_SESSION['eleccion'];
         
         <?php if (in_array(2, $_SESSION['roles'])) { ?>
             <form method="post" style="margin-bottom: 10px;">
-                <button type="submit" name="cambiar_vista" id="list-reservas" onclick="window.location.hash='list-reservas';">
+                <button class="botones" type="submit" name="cambiar_vista" id="list-reservas" onclick="window.location.hash='list-reservas';">
                     <?= $eleccion ? "Ver solo mis reservas" : "Ver todas las reservas"; ?>
                 </button>
             </form>
