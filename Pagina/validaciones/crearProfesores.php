@@ -3,7 +3,7 @@
 require_once "conexion.php";
 
 // Comprobamos si se han enviado los datos del formulario
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idUsuario']) && isset($_POST['contrasena']) && isset($_POST['nombre']) && isset($_POST['apellido1']) && isset($_POST['apellido2']) && isset($_POST['email']) && isset($_POST['departamento'])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idUsuario']) && isset($_POST['contrasena']) && isset($_POST['nombre']) && isset($_POST['apellido1']) && isset($_POST['apellido2']) && isset($_POST['email']) && isset($_POST['departamento']) && isset($_POST['rol'])) {
 
     /* Guardamos los datos del usuario en variables */
     $idUsuario = htmlspecialchars($_POST['idUsuario']);
@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idUsuario']) && isset(
     $apellido2 = htmlspecialchars($_POST['apellido2']);
     $email = htmlspecialchars($_POST['email']);
     $departamento = htmlspecialchars($_POST['departamento']);
-    $rol = 1;
+    $rol = htmlspecialchars($_POST['rol']);
 
     if (!$con) {
         header("Location: ../gestion_profesorado.php?errorP=Error al conectar a la base de datos");
@@ -64,6 +64,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idUsuario']) && isset(
             $resultado = mysqli_query($con, $sql);
             while ($fila = mysqli_fetch_assoc($resultado)) {
                 echo "<option value='" . $fila['idDepartamento'] . "'>" . $fila['nombreDepartamento'] . "</option>";
+            }
+            ?>
+        </select>
+        <select name="rol" id="rol" required>
+            <option value="">Selecciona un rol</option>
+            <?php
+            $sql = "SELECT * FROM roles";
+            $resultado = mysqli_query($con, $sql);
+            while ($fila = mysqli_fetch_assoc($resultado)) {
+                echo "<option value='" . $fila['idRol'] . "'>" . $fila['nombreRol'] . "</option>";
             }
             ?>
         </select>
