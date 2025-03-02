@@ -65,9 +65,13 @@ function enviarMail($con,$idReserva,$tramos,$tipoMensaje){
             Profesor: '.$_SESSION["apellido1"].' '.$_SESSION["apellido2"].', '.$_SESSION["nombreUsuario"].'<br>
             Asignatura: '.$nombreAsignatura.'<br>
             Curso: '.$curso.' - '.$grupo.'<br>
-            Nº alumnos: '.$numAlumnos.'<br><br>
-            Tramos reservados<br>
-            ';
+            Nº alumnos: '.$numAlumnos.'<br><br>';
+        if($tipoMensaje=="crear"){
+            $mensaje.='Tramos reservados<br>';
+        }
+        if($tipoMensaje=="borrar"){
+            $mensaje.='Tramos borrados<br>';
+        }
             foreach($tramos as $tramo){
                 $sqlHoras='SELECT * FROM tramos WHERE idTramo="'.$tramo.'"';
                 $hora=mysqli_query($con,$sqlHoras);
