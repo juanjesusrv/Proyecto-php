@@ -76,11 +76,11 @@ function enviarMail($con,$idReserva,$tramos,$tipoMensaje){
                 $sqlHoras='SELECT * FROM tramos WHERE idTramo="'.$tramo.'"';
                 $hora=mysqli_query($con,$sqlHoras);
                 $hora=mysqli_fetch_assoc($hora);
-                $mensaje.='-'.$tramo.': '.$hora["hora"].'<br>';
+                $mensaje.='&nbsp;&nbsp;&nbsp;&nbsp;·'.$tramo.': '.$hora["hora"].'<br>';
             }
-    $mensaje.='</p></div>
+    $mensaje.='</p></div><hr>
     <div style="display: flex;">
-        <img src="../Diseño/imgs/iesjorgeguillen.svg" alt="">
+        <img src="cid:logo">
         <p>I.E.S. Jorge Guillén<p>
     </div>
     ';
@@ -104,8 +104,9 @@ function enviarMail($con,$idReserva,$tramos,$tipoMensaje){
 
         // Contenido del correo
         $mail->isHTML(true);
+        $mail->addEmbeddedImage('../imgs/iesjorgeguillen.png', 'logo');
         $mail->Subject = 'Asunto: ' . $asunto;
-        $mail->Body    = 'Nombre: ' . $nombre . '<br>Email: ' . $email . '<br>Mensaje: ' . $mensaje;
+        $mail->Body    = $mensaje;
         $mail->AltBody = 'Nombre: ' . $nombre . '\nEmail: ' . $email . '\nMensaje: ' . $mensaje;
 
         // Enviar el correo
