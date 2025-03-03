@@ -16,6 +16,7 @@ function enviarMail($con,$idReserva,$tramos,$tipoMensaje){
         $campos=mysqli_fetch_assoc($resultado);
         $idAsignatura=$campos["idAsignatura"];
         $fecha=$campos["fecha"];
+        $numAlumnos=$campos["alumnosReserva"];
     }
 
     $sql='SELECT * from asignaturas where idAsignatura="'.$idAsignatura.'"';
@@ -30,7 +31,6 @@ function enviarMail($con,$idReserva,$tramos,$tipoMensaje){
     $resultado=mysqli_query($con,$sql);
     if(mysqli_num_rows($resultado)==1){
         $campos=mysqli_fetch_assoc($resultado);
-        $numAlumnos=$campos["numAlumnos"];
         $grupo=$campos["grupo"];
     }
 
