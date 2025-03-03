@@ -12,15 +12,15 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["fecha"])) {
     while ($fila = mysqli_fetch_assoc($result)) {
         $idReserva = $fila["idReserva"];
         $idUsuario = $fila["idUsuario"];
-        $idAsignatura = $fila["idAsignatura"];
+        $numAlumnos = $fila["alumnosReserva"];
 
 
-        $sql3 = "SELECT * FROM `usuarios-asignaturas` WHERE idAsignatura = '$idAsignatura' AND idUsuario = '$idUsuario'";  //sacamos el numero de alumnos de la asignatura
-        $numAlumnos = 0;
-        $result3 = mysqli_query($con, $sql3);
-        foreach ($result3 as $fila3) {
-            $numAlumnos = $fila3["numAlumnos"]; //guardamos el numero de alumnos
-        }
+        // $sql3 = "SELECT * FROM `usuarios-asignaturas` WHERE idAsignatura = '$idAsignatura' AND idUsuario = '$idUsuario'";  //sacamos el numero de alumnos de la asignatura
+        // $numAlumnos = 0;
+        // $result3 = mysqli_query($con, $sql3);
+        // foreach ($result3 as $fila3) {
+        //     $numAlumnos = $fila3["numAlumnos"]; //guardamos el numero de alumnos
+        // }
 
         $sql2 = "SELECT * FROM `reservas-tramo` WHERE idReserva = '$idReserva'"; //sacamos los tramos de la reserva
         $result2 = mysqli_query($con, $sql2);
