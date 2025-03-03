@@ -4,7 +4,7 @@ $array_tramos_reservaUsuario = array(); //para guardar los tramos que tiene rese
 if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["fecha"])) {
     $fecha = $_POST["fecha"];
     $asignaturaSeleccionada = $_POST["idAsignatura"];
-    $alumnosAsignatura = $_POST["numAlumnos"];
+    $alumnosAsignatura = $_POST["numeroAlumnos"];
     $array_tramos = array(); //para guardar los tramos que tienen alumnos
 
     $sql = "SELECT * FROM reservas WHERE fecha = '$fecha'"; //sacamos todas las reservas de la fecha seleccionada

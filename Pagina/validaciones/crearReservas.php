@@ -6,10 +6,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["tramos"])) {
     $fecha = $_POST["fecha"];
     $tramos = $_POST["tramos"];
     $idUsuario = $_SESSION["idUsuario"];
+    $numAlumnos = $_POST["numAlumnos"];
 
     if (isset($tramos)) {
 
-        $sql1 = "INSERT INTO reservas (fecha, idUsuario, idAsignatura) VALUES ('$fecha','$idUsuario','$idAsignatura')";
+        $sql1 = "INSERT INTO reservas (fecha, idUsuario, idAsignatura, alumnosReserva) VALUES ('$fecha','$idUsuario','$idAsignatura', '$numAlumnos')";
         mysqli_query($con, $sql1);
 
         $sql2 = "SELECT idReserva FROM reservas ORDER BY idReserva DESC LIMIT 1";
