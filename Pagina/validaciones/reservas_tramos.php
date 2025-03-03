@@ -14,14 +14,6 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["fecha"])) {
         $idUsuario = $fila["idUsuario"];
         $numAlumnos = $fila["alumnosReserva"];
 
-
-        // $sql3 = "SELECT * FROM `usuarios-asignaturas` WHERE idAsignatura = '$idAsignatura' AND idUsuario = '$idUsuario'";  //sacamos el numero de alumnos de la asignatura
-        // $numAlumnos = 0;
-        // $result3 = mysqli_query($con, $sql3);
-        // foreach ($result3 as $fila3) {
-        //     $numAlumnos = $fila3["numAlumnos"]; //guardamos el numero de alumnos
-        // }
-
         $sql2 = "SELECT * FROM `reservas-tramo` WHERE idReserva = '$idReserva'"; //sacamos los tramos de la reserva
         $result2 = mysqli_query($con, $sql2);
         while ($fila2 = mysqli_fetch_assoc($result2)) {
@@ -41,7 +33,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["fecha"])) {
 }
 ?>
 
-<form action="./validaciones/crearReservas.php" method="post">
+<form action="./validaciones/crearReservas.php" method="post" onsubmit="return enviarCorreo();">
     <p><?php if(isset($_POST["fecha"])){
         echo $_POST["fecha"];
     } ?></p>
@@ -85,4 +77,11 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["fecha"])) {
 
         validarCheckboxes();
     });
+
+    function enviarCorreo() {
+            return alert("Se ha enviado un correo electronico confirmando la reserva");
+    }
+
+    
 </script>
+

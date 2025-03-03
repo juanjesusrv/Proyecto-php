@@ -42,7 +42,7 @@ $eleccion = $_SESSION['eleccion'];
         <?php if (!isset($_SESSION['nombreUsuario'])) { //Salta un error de inicio de sesión si no hay una cuenta iniciada
             header('Location: ../Pagina/errorsesion.php');
          } ?>
-        <h2>Cambiar Vicedirectór</h2>
+        <h2>Cambiar vicedirector</h2>
         <table>
             <tr>
                 <?php if (in_array(2, $_SESSION['roles']) && $eleccion) { ?>
@@ -81,7 +81,7 @@ $eleccion = $_SESSION['eleccion'];
     </div>
     <script>
         function confirmarEliminacion() {
-            return confirm("¿Estás seguro de que quieres eliminar la reserva?");
+            return confirm("¿Estás seguro de que quieres cambiar el vicedirector?");
         }
     </script>
 </body>

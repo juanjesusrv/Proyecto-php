@@ -42,7 +42,7 @@ $eleccion = $_SESSION['eleccion'];
         <?php if (!isset($_SESSION['nombreUsuario'])) { //Salta un error de inicio de sesión si no hay una cuenta iniciada
             header('Location: ../Pagina/errorsesion.php');
          } ?>
-        <p>Eliminar Profesores</p>
+        <h2>Eliminar Profesores</h2>
 
         <table>
             <tr>
@@ -101,7 +101,7 @@ $eleccion = $_SESSION['eleccion'];
     </div>
     <script>
         function confirmarEliminacion() {
-            return confirm("¿Estás seguro de que quieres eliminar la reserva?");
+            return confirm("¿Estás seguro de que quieres eliminar el profesor?");
         }
     </script>
 </body>

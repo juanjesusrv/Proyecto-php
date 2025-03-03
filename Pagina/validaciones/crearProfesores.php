@@ -3,7 +3,7 @@
 require_once "conexion.php";
 
 // Comprobamos si se han enviado los datos del formulario
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idUsuario']) && isset($_POST['contrasena']) && isset($_POST['nombre']) && isset($_POST['apellido1']) && isset($_POST['apellido2']) && isset($_POST['email']) && isset($_POST['departamento'])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idUsuario']) && isset($_POST['contrasena']) && isset($_POST['nombre']) && isset($_POST['apellido1']) && isset($_POST['email']) && isset($_POST['departamento'])) {
 
     /* Guardamos los datos del usuario en variables */
     $idUsuario = htmlspecialchars($_POST['idUsuario']);
@@ -13,7 +13,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idUsuario']) && isset(
 
     $nombre = htmlspecialchars($_POST['nombre']);
     $apellido1 = htmlspecialchars($_POST['apellido1']);
-    $apellido2 = htmlspecialchars($_POST['apellido2']);
+    
+    if (isset($_POST['apellido2'])) {
+        $apellido2 = htmlspecialchars($_POST['apellido2']);
+    } else {
+        $apellido2 = "";
+    }
+
     $email = htmlspecialchars($_POST['email']);
     $departamento = htmlspecialchars($_POST['departamento']);
     $rol = 1;
@@ -55,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idUsuario']) && isset(
         <input type="password" name="contrasena" id="contrasena" placeholder="Contraseña" required>
         <input type="text" name="nombre" id="nombre" placeholder="Nombre" required>
         <input type="text" name="apellido1" id="apellido1" placeholder="Primer apellido" required>
-        <input type="text" name="apellido2" id="apellido2" placeholder="Segundo apellido" required>
+        <input type="text" name="apellido2" id="apellido2" placeholder="Segundo apellido">
         <input type="email" name="email" id="email" placeholder="Email" required>
         <select name="departamento" id="departamento" required>
             <option value="">Selecciona un departamento</option>

@@ -3,13 +3,18 @@
 require_once "conexion.php";
 
 // Comprobamos si se han enviado los datos del formulario
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idUsuario']) && isset($_POST['idAsignatura']) && isset($_POST['numAlumnos']) && isset($_POST['grupo'])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idUsuario']) && isset($_POST['idAsignatura']) && isset($_POST['numAlumnos'])) {
 
     /* Guardamos los datos del usuario en variables */
     $idUsuario = htmlspecialchars($_POST['idUsuario']);
     $idAsignatura = htmlspecialchars($_POST['idAsignatura']);
     $numAlumnos = htmlspecialchars($_POST['numAlumnos']);
-    $grupo = htmlspecialchars(strtoupper($_POST['grupo']));
+
+    if (isset($_POST['grupo'])) {
+        $grupo = htmlspecialchars($_POST['grupo']);
+    } else {
+        $grupo = "";
+    }
 
     // Obtenemos el curso de la asignatura seleccionada
     $sql_curso = "SELECT curso FROM asignaturas WHERE idAsignatura = '$idAsignatura'";
@@ -52,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idUsuario']) && isset(
 ?>
 
     <form action="./validaciones/asignarAsignaturaAprofesor.php" method="POST" class="formularioSecundario">
-        <h2>Añadir asignación</h2>
+        <h2>Añadir asignatura</h2>
         <select name="idUsuario" id="idUsuario" required>
             <option value="">Selecciona un usuario</option>
             <?php
@@ -74,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idUsuario']) && isset(
             ?>
         </select>
         <input type="number" name="numAlumnos" id="numAlumnos" placeholder="Número de alumnos" required>
-        <input type="text" name="grupo" id="grupo" placeholder="Grupo" pattern="[A-Za-z]" title="Debe ser una sola letra" required>
+        <input type="text" name="grupo" id="grupo" placeholder="Grupo" pattern="[A-Za-z]" title="Debe ser una sola letra" maxlength="1">
         <button type="submit" class="botones">Añadir asignación</button>
     </form>
 
