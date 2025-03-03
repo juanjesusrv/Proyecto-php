@@ -9,7 +9,12 @@
 <body>
     <?php require_once "./plantillas/header.php" ?>
     <main>
+
+        
         <form class="formularioLogin" action="./validaciones/validacionUsuario.php" method="post">
+            <?php if (isset($_GET['error'])) : ?>
+                <p style="color: red;">Usuario o contraseña incorrectos</p>
+            <?php endif; ?>
             <p>Iniciar Sesión</p>
             <br><input type="text" id="usr" name="usr" placeholder="Usuario" required><br>
             <input type="password" id="con" name="con" placeholder="Contraseña" required><br>

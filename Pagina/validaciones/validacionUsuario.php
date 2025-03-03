@@ -64,7 +64,7 @@ if (isset($_POST['usr']) && isset($_POST['con'])) {
             echo "Usuario o contraseña incorrectos";
         }
     } else {
-        echo "Usuario no encontrado en la base de datos";
+        header("Location: ../index.php?error=1");
     }
 }
 ?>
