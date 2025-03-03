@@ -84,7 +84,7 @@ $eleccion = $_SESSION['eleccion'];
             }
 
             if (mysqli_num_rows($result) > 0) {
-                echo '<form  action="gestion_profesorado.php" method="post">';
+                echo '<form  action="gestion_profesorado.php" method="post" onsubmit="return confirmarEliminacion();">';
                 while ($row = mysqli_fetch_assoc($result)) {
                     //Si la id actuál es la misma que la del usuario iniciado (el vicedirectór) no se muestra.
                     if ($row['idUsuario'] != $_SESSION['idUsuario']) {
@@ -99,6 +99,10 @@ $eleccion = $_SESSION['eleccion'];
             ?>
         </table>
     </div>
-    
+    <script>
+        function confirmarEliminacion() {
+            return confirm("¿Estás seguro de que quieres eliminar la reserva?");
+        }
+    </script>
 </body>
 </html>
