@@ -139,14 +139,6 @@
         echo '</form>';
     }
 
-
-    // function numeroAlumnos($idAsignatura,$con) {
-    //     $sql='SELECT * FROM `usuarios-asignaturas` WHERE idUsuario="'.$_SESSION['idUsuario'].'" and idAsignatura="'.$idAsignatura.'"';
-    //     $resultado=mysqli_query($con, $sql);
-    //     $curso=mysqli_fetch_assoc($resultado);
-    //     return $curso["numAlumnos"];
-    // }
-
     function listaTramos($con){
         $sql='SELECT idTramo FROM tramos ';
         $resultado=mysqli_query($con, $sql);
