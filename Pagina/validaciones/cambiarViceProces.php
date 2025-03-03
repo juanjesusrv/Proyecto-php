@@ -15,7 +15,7 @@ $idUsuario = mysqli_real_escape_string($con, $_SESSION['idUsuario']);
                 // Cerrar la sesión y redirigir al index.php
                 session_unset();  // Elimina todas las variables de sesión
                 session_destroy();  // Destruye la sesión
-                header("Location: ../index.php");  // Redirige al index.php
+                header("Location: /Pagina/index.php");  // Redirige al index.php
                 exit();  // Asegúrate de detener la ejecución del script aquí
             }
 
