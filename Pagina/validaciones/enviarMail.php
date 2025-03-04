@@ -45,7 +45,7 @@ function enviarMail($con,$idReserva,$tramos,$tipoMensaje){
     // Opciones del destinatario
     $nombre = $_SESSION["apellido1"].' '.$_SESSION["apellido2"].', '.$_SESSION["nombreUsuario"];
     //$email = $_SESSION["email"];
-    $email = "rjimrui727@g.educaand.es";
+    $email = "servidorejerciciophp@gmail.com";
     
 
     if($tipoMensaje=="crear"){
