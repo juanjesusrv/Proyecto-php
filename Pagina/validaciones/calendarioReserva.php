@@ -1,4 +1,4 @@
-<p>Selecciona una asignatura</p>
+<h3>Selecciona una asignatura y el numero de alumnos:</h3>
 <div class="contenedorBotonesCalendario"><form action="reserva.php#calendarioReservas" method="post">
     <table><tr><td><select name="idAsignatura" id="idAsignatura">
         <?php
@@ -54,7 +54,7 @@
             $year=date('Y');
         }
         ?>
-        <P>Selecciona una fecha</P>
+        <h3>Selecciona una fecha:</h3>
         <div class="contenedorBotonesCalendario"><form action="reserva.php#calendarioReservas" method="post">
             <input type="hidden" name="idAsignatura" value="<?php echo $_POST["idAsignatura"] ?>">
             <table><tr><td>

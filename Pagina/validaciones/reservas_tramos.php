@@ -31,57 +31,57 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["fecha"])) {
         }
     }
 }
+if (isset($fecha)) {
 ?>
+<div id="reservaTramos" class="contenedorEstandar">
+    <form action="./validaciones/crearReservas.php" method="post" onsubmit="return enviarCorreo();">
+        <h2><?php if (isset($_POST["fecha"])) {
+                echo $_POST["fecha"];
+            } ?></h2>
 
-<form action="./validaciones/crearReservas.php" method="post" onsubmit="return enviarCorreo();">
-    <p><?php if(isset($_POST["fecha"])){
-        echo $_POST["fecha"];
-    } ?></p>
-    <label for="tramo">Selecciona uno o varios tramos:</label>
-    <br>
-    <?php
-    if (isset($fecha)) {
-        $sql5 = "SELECT * FROM tramos";
-        $result5 = mysqli_query($con, $sql5);
-        while ($tramo = mysqli_fetch_assoc($result5)) {
-            if (!in_array($tramo["idTramo"], $array_tramos_reservaUsuario)) {
-                if ((isset($array_tramos[$tramo["idTramo"]]) && ($array_tramos[$tramo["idTramo"]] + $alumnosAsignatura) <= 100) || !isset($array_tramos[$tramo["idTramo"]])) { ?>
-                    <input type="checkbox" class="tramo-checkbox" name="tramos[]" value="<?php echo $tramo["idTramo"] ?>">
-                    <label><?php echo $tramo["idTramo"] . ": " . $tramo["hora"] ?></label><br>
-        <?php }
+        <br>
+        <?php
+       
+            echo '<h3><label for="tramo">Selecciona uno o varios tramos:</label></h3>';
+            $sql5 = "SELECT * FROM tramos";
+            $result5 = mysqli_query($con, $sql5);
+            while ($tramo = mysqli_fetch_assoc($result5)) {
+                if (!in_array($tramo["idTramo"], $array_tramos_reservaUsuario)) {
+                    if ((isset($array_tramos[$tramo["idTramo"]]) && ($array_tramos[$tramo["idTramo"]] + $alumnosAsignatura) <= 100) || !isset($array_tramos[$tramo["idTramo"]])) { ?>
+                        <input type="checkbox" class="tramo-checkbox" name="tramos[]" value="<?php echo $tramo["idTramo"] ?>">
+                        <label><?php echo $tramo["idTramo"] . ": " . $tramo["hora"] ?></label><br>
+            <?php }
+                }
             }
-        }
-        ?>
-        <br>
-        <br>
-        <button class="botones" type="submit" id="enviarBtn" disabled>Enviar</button>
-    <?php } ?>
-    <input type="hidden" name="idAsignatura" value="<?php echo $asignaturaSeleccionada ?>">
-    <input type="hidden" name="fecha" value="<?php echo $fecha ?>">
-    <input type="hidden" name="numAlumnos" value="<?php echo $alumnosAsignatura ?>">
-</form>
+            ?>
+            <br>
+            <br>
+            <button class="botones" type="submit" id="enviarBtn" disabled>Enviar</button>
+            <input type="hidden" name="idAsignatura" value="<?php echo $asignaturaSeleccionada ?>">
+            <input type="hidden" name="fecha" value="<?php echo $fecha ?>">
+            <input type="hidden" name="numAlumnos" value="<?php echo $alumnosAsignatura ?>">
+    </form>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const checkboxes = document.querySelectorAll(".tramo-checkbox");
-        const enviarBtn = document.getElementById("enviarBtn");
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const checkboxes = document.querySelectorAll(".tramo-checkbox");
+            const enviarBtn = document.getElementById("enviarBtn");
 
-        function validarCheckboxes() {
-            const algunoMarcado = [...checkboxes].some(checkbox => checkbox.checked);
-            enviarBtn.disabled = !algunoMarcado;
-        }
+            function validarCheckboxes() {
+                const algunoMarcado = [...checkboxes].some(checkbox => checkbox.checked);
+                enviarBtn.disabled = !algunoMarcado;
+            }
 
-        checkboxes.forEach(checkbox => {
-            checkbox.addEventListener("change", validarCheckboxes);
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener("change", validarCheckboxes);
+            });
+
+            validarCheckboxes();
         });
 
-        validarCheckboxes();
-    });
-
-    function enviarCorreo() {
+        function enviarCorreo() {
             return alert("Se ha enviado un correo electronico confirmando la reserva");
-    }
-
-    
-</script>
-
+        }
+    </script>
+</div>
+<?php } ?>
