@@ -80,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idUsuario']) && isset(
         </select>
         <input type="number" name="numAlumnos" id="numAlumnos" placeholder="Número de alumnos" required>
         <input type="text" name="grupo" id="grupo" placeholder="Grupo" pattern="[A-Za-z]" title="Debe ser una sola letra" maxlength="1">
-        <button type="submit" class="botones">Añadir asignación</button>
+        <button type="submit" class="botones">Añadir asignatura</button>
     </form>
 
     <?php
