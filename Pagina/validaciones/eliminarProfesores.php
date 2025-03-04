@@ -42,7 +42,7 @@ $eleccion = $_SESSION['eleccion'];
         <?php if (!isset($_SESSION['nombreUsuario'])) { //Salta un error de inicio de sesión si no hay una cuenta iniciada
             header('Location: ../Pagina/errorsesion.php');
          } ?>
-        <p>Eliminar Profesores</p>
+        <h2>Eliminar Profesores</h2>
 
         <table>
             <tr>
@@ -84,7 +84,7 @@ $eleccion = $_SESSION['eleccion'];
             }
 
             if (mysqli_num_rows($result) > 0) {
-                echo '<form  action="gestion_profesorado.php" method="post">';
+                echo '<form  action="gestion_profesorado.php" method="post" onsubmit="return confirmarEliminacion();">';
                 while ($row = mysqli_fetch_assoc($result)) {
                     //Si la id actuál es la misma que la del usuario iniciado (el vicedirectór) no se muestra.
                     if ($row['idUsuario'] != $_SESSION['idUsuario']) {
@@ -99,6 +99,10 @@ $eleccion = $_SESSION['eleccion'];
             ?>
         </table>
     </div>
-    
+    <script>
+        function confirmarEliminacion() {
+            return confirm("¿Estás seguro de que quieres eliminar el profesor?");
+        }
+    </script>
 </body>
 </html>

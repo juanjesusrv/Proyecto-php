@@ -4,7 +4,7 @@ $array_tramos_reservaUsuario = array(); //para guardar los tramos que tiene rese
 if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["fecha"])) {
     $fecha = $_POST["fecha"];
     $asignaturaSeleccionada = $_POST["idAsignatura"];
-    $alumnosAsignatura = $_POST["numAlumnos"];
+    $alumnosAsignatura = $_POST["numeroAlumnos"];
     $array_tramos = array(); //para guardar los tramos que tienen alumnos
 
     $sql = "SELECT * FROM reservas WHERE fecha = '$fecha'"; //sacamos todas las reservas de la fecha seleccionada
@@ -12,15 +12,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["fecha"])) {
     while ($fila = mysqli_fetch_assoc($result)) {
         $idReserva = $fila["idReserva"];
         $idUsuario = $fila["idUsuario"];
-        $idAsignatura = $fila["idAsignatura"];
-
-
-        $sql3 = "SELECT * FROM `usuarios-asignaturas` WHERE idAsignatura = '$idAsignatura' AND idUsuario = '$idUsuario'";  //sacamos el numero de alumnos de la asignatura
-        $numAlumnos = 0;
-        $result3 = mysqli_query($con, $sql3);
-        foreach ($result3 as $fila3) {
-            $numAlumnos = $fila3["numAlumnos"]; //guardamos el numero de alumnos
-        }
+        $numAlumnos = $fila["alumnosReserva"];
 
         $sql2 = "SELECT * FROM `reservas-tramo` WHERE idReserva = '$idReserva'"; //sacamos los tramos de la reserva
         $result2 = mysqli_query($con, $sql2);
@@ -41,7 +33,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["fecha"])) {
 }
 ?>
 
-<form action="./validaciones/crearReservas.php" method="post">
+<form action="./validaciones/crearReservas.php" method="post" onsubmit="return enviarCorreo();">
     <p><?php if(isset($_POST["fecha"])){
         echo $_POST["fecha"];
     } ?></p>
@@ -85,4 +77,11 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["fecha"])) {
 
         validarCheckboxes();
     });
+
+    function enviarCorreo() {
+            return alert("Se ha enviado un correo electronico confirmando la reserva");
+    }
+
+    
 </script>
+

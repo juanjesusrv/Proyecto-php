@@ -42,7 +42,7 @@ $eleccion = $_SESSION['eleccion'];
         <?php if (!isset($_SESSION['nombreUsuario'])) { //Salta un error de inicio de sesión si no hay una cuenta iniciada
             header('Location: ../Pagina/errorsesion.php');
          } ?>
-        <h2>Cambiar Vicedirectór</h2>
+        <h2>Cambiar vicedirector</h2>
         <table>
             <tr>
                 <?php if (in_array(2, $_SESSION['roles']) && $eleccion) { ?>
@@ -64,7 +64,7 @@ $eleccion = $_SESSION['eleccion'];
             }
 
             if (mysqli_num_rows($result) > 0) {
-                echo '<form  action="./validaciones/cambiarViceProces.php" method="post">';
+                echo '<form action="./validaciones/cambiarViceProces.php" method="post" onsubmit="return confirmarEliminacion();">';
                 while ($row = mysqli_fetch_assoc($result)) {
                     //Si la id actuál es la misma que la del usuario iniciado (el vicedirectór) no se muestra.
                     if ($row['idUsuario'] != $_SESSION['idUsuario']) {
@@ -79,6 +79,10 @@ $eleccion = $_SESSION['eleccion'];
             ?>
         </table>
     </div>
-    
+    <script>
+        function confirmarEliminacion() {
+            return confirm("¿Estás seguro de que quieres cambiar el vicedirector?");
+        }
+    </script>
 </body>
 </html>

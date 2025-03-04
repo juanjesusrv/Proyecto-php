@@ -14,12 +14,25 @@
                 echo'>'.$asignatura["nombreAsignatura"].' - '.$asignatura["curso"].' - '.$asignatura["grupo"].'</option>';
             }
         ?>
-    </select></td><td>
-    <button class="botones" type="submit">Seleccionar</button></td></tr></table>
+    </select></td>
+    <td>
+        <select name="numeroAlumnos" id="numeroAlumnos">
+        <?php
+            for($i=1;$i<=100;$i++){
+                echo '<option value="'.$i.'" ';
+                if (isset($_POST["numeroAlumnos"])&&$_POST["numeroAlumnos"]==$i){
+                    echo 'selected';
+                }
+                echo'>'.$i.'</option>';
+            }
+        ?>
+        </select>
+    </td></tr>
+    <tr><td colspan="2"><button class="botones" type="submit">Seleccionar</button></td></tr></table>
 </form></div>
 <?php
-    if(($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["idAsignatura"])){
-        $numeroAlumnos=numeroAlumnos($_POST["idAsignatura"],$con);
+    if(($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["idAsignatura"]) && isset($_POST["numeroAlumnos"])){
+        $numeroAlumnos=$_POST["numeroAlumnos"];
         
         $arrayTramos=listaTramos($con);
         $diaActual="";
@@ -118,20 +131,12 @@
 
         $calendario.="</tr></table>";
         echo '<form action="reserva.php#reservaTramos" method="post">
-        <input type="hidden" name="numAlumnos" value="'.$numeroAlumnos.'">
+        <input type="hidden" name="numeroAlumnos" value="'.$numeroAlumnos.'">
         <input type="hidden" name="idAsignatura" value="'.$_POST["idAsignatura"].'">
         <input type="hidden" name="mesBuscar" value="'.$mes.'">
         <input type="hidden" name="yearBuscar" value="'.$year.'">';
         echo $calendario;
         echo '</form>';
-    }
-
-
-    function numeroAlumnos($idAsignatura,$con) {
-        $sql='SELECT * FROM `usuarios-asignaturas` WHERE idUsuario="'.$_SESSION['idUsuario'].'" and idAsignatura="'.$idAsignatura.'"';
-        $resultado=mysqli_query($con, $sql);
-        $curso=mysqli_fetch_assoc($resultado);
-        return $curso["numAlumnos"];
     }
 
     function listaTramos($con){
@@ -150,13 +155,7 @@
         $sql = "SELECT * FROM reservas WHERE fecha = '$fecha'"; //sacamos todas las reservas de la fecha seleccionada
         $result = mysqli_query($con, $sql);
         while ($fila = mysqli_fetch_assoc($result)) {
-
-            $sql3 = "SELECT * FROM `usuarios-asignaturas` WHERE idAsignatura = '".$fila["idAsignatura"]."' AND idUsuario = '".$fila["idUsuario"]."'";  //sacamos el numero de alumnos de la asignatura
-            $numAlumnos = 0;
-            $result3 = mysqli_query($con, $sql3);
-            foreach ($result3 as $fila3) {
-                $numAlumnos = $fila3["numAlumnos"]; //guardamos el numero de alumnos
-            }
+            $numAlumnos = $fila["alumnosReserva"];
 
             $sql2 = "SELECT * FROM `reservas-tramo` WHERE idReserva = '".$fila["idReserva"]."'"; //sacamos los tramos de la reserva
             $result2 = mysqli_query($con, $sql2);

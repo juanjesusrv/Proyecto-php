@@ -61,7 +61,7 @@ if (isset($_POST['usr']) && isset($_POST['con'])) {
             header("Location: ../reserva.php");
             exit();
         } else {
-            echo "Usuario o contraseña incorrectos";
+            header("Location: ../index.php");
         }
     } else {
         header("Location: ../index.php?error=1");

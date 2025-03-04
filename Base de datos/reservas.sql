@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-02-2025 a las 19:42:27
+-- Tiempo de generación: 03-03-2025 a las 23:22:30
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -86,8 +86,20 @@ CREATE TABLE `reservas` (
   `idReserva` int(11) NOT NULL,
   `fecha` date NOT NULL,
   `idUsuario` varchar(9) NOT NULL,
-  `idAsignatura` int(11) NOT NULL
+  `idAsignatura` int(11) NOT NULL,
+  `alumnosReserva` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `reservas`
+--
+
+INSERT INTO `reservas` (`idReserva`, `fecha`, `idUsuario`, `idAsignatura`, `alumnosReserva`) VALUES
+(19, '2025-02-28', '11111111C', 3, 0),
+(21, '2025-03-26', '11111111A', 5, 10),
+(22, '2025-03-26', '11111111A', 1, 1),
+(23, '2025-03-13', '11111111A', 5, 5),
+(25, '2025-03-21', '11111111B', 4, 1);
 
 -- --------------------------------------------------------
 
@@ -99,6 +111,18 @@ CREATE TABLE `reservas-tramo` (
   `idReserva` int(11) NOT NULL,
   `idTramo` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `reservas-tramo`
+--
+
+INSERT INTO `reservas-tramo` (`idReserva`, `idTramo`) VALUES
+(19, 'T5'),
+(19, 'T6'),
+(21, 'T4'),
+(22, 'T5'),
+(23, 'T5'),
+(25, 'T6');
 
 -- --------------------------------------------------------
 
@@ -153,7 +177,7 @@ CREATE TABLE `usuarios` (
   `contrasena` varchar(70) NOT NULL,
   `nombreUsuario` varchar(50) NOT NULL,
   `apellido1` varchar(50) NOT NULL,
-  `apellido2` varchar(50) NOT NULL,
+  `apellido2` varchar(50) DEFAULT NULL,
   `email` varchar(50) NOT NULL,
   `idDepartamento` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -178,7 +202,7 @@ CREATE TABLE `usuarios-asignaturas` (
   `idUsuario` varchar(9) NOT NULL,
   `idAsignatura` int(11) NOT NULL,
   `numAlumnos` int(5) NOT NULL,
-  `grupo` varchar(5) NOT NULL
+  `grupo` varchar(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -187,6 +211,7 @@ CREATE TABLE `usuarios-asignaturas` (
 
 INSERT INTO `usuarios-asignaturas` (`idUsuario`, `idAsignatura`, `numAlumnos`, `grupo`) VALUES
 ('11111111A', 1, 25, 'A'),
+('11111111A', 5, 25, ''),
 ('11111111B', 4, 15, 'A'),
 ('11111111C', 2, 25, 'C'),
 ('11111111C', 3, 25, 'A'),
@@ -302,7 +327,7 @@ ALTER TABLE `departamentos`
 -- AUTO_INCREMENT de la tabla `reservas`
 --
 ALTER TABLE `reservas`
-  MODIFY `idReserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `idReserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`

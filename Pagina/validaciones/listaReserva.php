@@ -61,6 +61,7 @@ $eleccion = $_SESSION['eleccion'];
                 <th>Asignatura</th>
                 <th>Curso</th>
                 <th>Grupo</th>
+                <th>Alumnos</th>
                 <?php if (in_array(2, $_SESSION['roles']) && $eleccion) { ?>
                     <th>ID Usuario</th>
                     <th>Nombre</th>
@@ -72,7 +73,7 @@ $eleccion = $_SESSION['eleccion'];
             $idUsuario = mysqli_real_escape_string($con, $_SESSION['idUsuario']);
 
             if (in_array(2, $_SESSION['roles']) && $eleccion) {
-                $query = "SELECT r.idReserva, r.fecha, t.hora, a.nombreAsignatura, a.curso, ua.grupo, r.idUsuario, u.nombreUsuario, u.apellido1 
+                $query = "SELECT r.idReserva, r.fecha, t.hora, a.nombreAsignatura, a.curso, ua.grupo, alumnosReserva, r.idUsuario, u.nombreUsuario, u.apellido1 
                         FROM reservas r 
                         JOIN `reservas-tramo` rt ON r.idReserva = rt.idReserva 
                         JOIN tramos t ON rt.idTramo = t.idTramo 
@@ -82,7 +83,7 @@ $eleccion = $_SESSION['eleccion'];
                         JOIN usuarios u ON r.idUsuario = u.idUsuario
                         ORDER BY r.fecha ASC";
             } else {
-                $query = "SELECT r.idReserva, r.fecha, t.hora, a.nombreAsignatura, a.curso, ua.grupo 
+                $query = "SELECT r.idReserva, r.fecha, t.hora, a.nombreAsignatura, a.curso, ua.grupo, alumnosReserva 
                         FROM reservas r 
                         JOIN `reservas-tramo` rt ON r.idReserva = rt.idReserva 
                         JOIN tramos t ON rt.idTramo = t.idTramo 
@@ -107,13 +108,14 @@ $eleccion = $_SESSION['eleccion'];
                     echo "<td>" . $row['nombreAsignatura'] . "</td>";
                     echo "<td>" . $row['curso'] . "</td>";
                     echo "<td>" . $row['grupo'] . "</td>";
+                    echo "<td>" . $row['alumnosReserva'] . "</td>";
                     if (in_array(2, $_SESSION['roles']) && $eleccion) {
                         echo "<td>" . $row['idUsuario'] . "</td>";
                         echo "<td>" . $row['nombreUsuario'] . "</td>";
                         echo "<td>" . $row['apellido1'] . "</td>";
                     } else if (in_array(2, $_SESSION['roles']) && !$eleccion) {
                         echo "<td>
-                            <form action='./validaciones/eliminarReserva.php' method='post'>
+                            <form action='./validaciones/eliminarReserva.php' method='post' onsubmit='return confirmarEliminacion();'>
                             <input type='hidden' name='idReserva' value='" . $row['idReserva'] . "'>
                             <input type='hidden' name='hora' value='" . $row['hora'] . "'>
                             <button type='submit'><img src='./imgs/papelera.png' width='20' height='20'></button>
@@ -121,7 +123,7 @@ $eleccion = $_SESSION['eleccion'];
                         </td>";
                     } else {
                         echo "<td>
-                            <form action='./validaciones/eliminarReserva.php' method='post'>
+                            <form action='./validaciones/eliminarReserva.php' method='post' onsubmit='return confirmarEliminacion();'>
                             <input type='hidden' name='idReserva' value='" . $row['idReserva'] . "'>
                             <input type='hidden' name='hora' value='" . $row['hora'] . "'>
                             <button type='submit'><img src='./imgs/papelera.png' width='20' height='20'></button>
@@ -132,14 +134,18 @@ $eleccion = $_SESSION['eleccion'];
                 }
             } else {
                 if (in_array(2, $_SESSION['roles']) && $eleccion) {
-                    echo "<tr><td colspan='9'>No hay reservas</td></tr>";
+                    echo "<tr><td colspan='10'>No hay reservas</td></tr>";
                 } else {
-                    echo "<tr><td colspan='6'>No hay reservas</td></tr>";
+                    echo "<tr><td colspan='7'>No hay reservas</td></tr>";
                 }
             }
             ?>
         </table>
     </div>
-    
+    <script>
+        function confirmarEliminacion() {
+            return confirm("¿Estás seguro de que quieres eliminar la reserva?");
+        }
+    </script>
 </body>
 </html>

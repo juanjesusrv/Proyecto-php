@@ -6,6 +6,7 @@
             border-radius: 5px;
         }
         td, th{
+            justify-items: center;
             border: none;
             padding: 5px;
         }
