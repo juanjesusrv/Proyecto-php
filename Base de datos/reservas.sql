@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-03-2025 a las 23:22:30
+-- Tiempo de generación: 04-03-2025 a las 19:06:19
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -95,7 +95,6 @@ CREATE TABLE `reservas` (
 --
 
 INSERT INTO `reservas` (`idReserva`, `fecha`, `idUsuario`, `idAsignatura`, `alumnosReserva`) VALUES
-(19, '2025-02-28', '11111111C', 3, 0),
 (21, '2025-03-26', '11111111A', 5, 10),
 (22, '2025-03-26', '11111111A', 1, 1),
 (23, '2025-03-13', '11111111A', 5, 5),
@@ -117,8 +116,6 @@ CREATE TABLE `reservas-tramo` (
 --
 
 INSERT INTO `reservas-tramo` (`idReserva`, `idTramo`) VALUES
-(19, 'T5'),
-(19, 'T6'),
 (21, 'T4'),
 (22, 'T5'),
 (23, 'T5'),
