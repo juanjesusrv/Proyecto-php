@@ -15,23 +15,9 @@ function enviarMail($con,$idReserva,$tramos,$tipoMensaje){
     if(mysqli_num_rows($resultado)==1){
         $campos=mysqli_fetch_assoc($resultado);
         $idAsignatura=$campos["idAsignatura"];
+        $grupo=$campos["grupo"];
         $fecha=$campos["fecha"];
         $numAlumnos=$campos["alumnosReserva"];
-    }
-
-    $sql='SELECT * from asignaturas where idAsignatura="'.$idAsignatura.'"';
-    $resultado=mysqli_query($con,$sql);
-    if(mysqli_num_rows($resultado)==1){
-        $campos=mysqli_fetch_assoc($resultado);
-        $nombreAsignatura=$campos["nombreAsignatura"];
-        $curso=$campos["curso"];
-    }
-
-    $sql='SELECT * FROM `usuarios-asignaturas` WHERE idAsignatura="'.$idAsignatura.'" and idUsuario="'.$idUsuarios.'"';
-    $resultado=mysqli_query($con,$sql);
-    if(mysqli_num_rows($resultado)==1){
-        $campos=mysqli_fetch_assoc($resultado);
-        $grupo=$campos["grupo"];
     }
 
     $sql='SELECT * from asignaturas where idAsignatura="'.$idAsignatura.'"';
@@ -45,7 +31,7 @@ function enviarMail($con,$idReserva,$tramos,$tipoMensaje){
     // Opciones del destinatario
     $nombre = $_SESSION["apellido1"].' '.$_SESSION["apellido2"].', '.$_SESSION["nombreUsuario"];
     //$email = $_SESSION["email"];
-    $email = "rjimrui727@g.educaand.es";
+    $email = "servidorejerciciophp@gmail.com";
     
 
     if($tipoMensaje=="crear"){
@@ -64,8 +50,9 @@ function enviarMail($con,$idReserva,$tramos,$tipoMensaje){
             Fecha de la reserva: '.$fecha.'<br>
             Profesor: '.$_SESSION["apellido1"].' '.$_SESSION["apellido2"].', '.$_SESSION["nombreUsuario"].'<br>
             Asignatura: '.$nombreAsignatura.'<br>
-            Curso: '.$curso.' - '.$grupo.'<br>
-            Nº alumnos: '.$numAlumnos.'<br><br>';
+            Curso: '.$curso;
+            if($grupo!=""){$mensaje.=' - '.$grupo;}
+            $mensaje.='<br>Nº alumnos: '.$numAlumnos.'<br><br>';
         if($tipoMensaje=="crear"){
             $mensaje.='Tramos reservados<br>';
         }

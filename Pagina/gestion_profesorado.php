@@ -38,6 +38,10 @@ require_once "./validaciones/conexion.php";
             </div>
 
         </div>
+
+        <div id="listaAsignaturas" class="listaReservas">
+             <?php require_once "validaciones/listaAsignaturas.php" ?>
+        </div>
     </main>
     <?php require_once "./plantillas/footer.php" ?>
 </body>

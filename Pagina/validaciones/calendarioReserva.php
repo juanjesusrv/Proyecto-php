@@ -1,17 +1,19 @@
-<p>Selecciona una asignatura</p>
+<h3>Selecciona una asignatura y el numero de alumnos:</h3>
 <div class="contenedorBotonesCalendario"><form action="reserva.php#calendarioReservas" method="post">
-    <table><tr><td><select name="idAsignatura" id="idAsignatura">
+    <table><tr><td><select name="asignaturaYgrupo" id="asignaturaYgrupo">
         <?php
             $sql="SELECT * from `usuarios-asignaturas` ua
                     join asignaturas a on ua.idAsignatura=a.idAsignatura
                     where ua.idUsuario='".$_SESSION['idUsuario']."'";
             $resultado=mysqli_query($con, $sql);
             while ($asignatura=mysqli_fetch_assoc($resultado)){
-                echo '<option value="'.$asignatura["idAsignatura"].'" ';
+                echo '<option value="'.$asignatura["idAsignatura"].'#'.$asignatura["grupo"].'" ';
                 if (isset($_POST["idAsignatura"])&&$_POST["idAsignatura"]==$asignatura["idAsignatura"]){
                     echo 'selected';
                 }
-                echo'>'.$asignatura["nombreAsignatura"].' - '.$asignatura["curso"].' - '.$asignatura["grupo"].'</option>';
+                echo'>'.$asignatura["nombreAsignatura"].' - '.$asignatura["curso"];
+                if($asignatura["grupo"]!=""){echo' - '.$asignatura["grupo"];}
+                echo'</option>';
             }
         ?>
     </select></td>
@@ -31,7 +33,7 @@
     <tr><td colspan="2"><button class="botones" type="submit">Seleccionar</button></td></tr></table>
 </form></div>
 <?php
-    if(($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["idAsignatura"]) && isset($_POST["numeroAlumnos"])){
+    if(($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["asignaturaYgrupo"]) && isset($_POST["numeroAlumnos"])){
         $numeroAlumnos=$_POST["numeroAlumnos"];
         
         $arrayTramos=listaTramos($con);
@@ -54,9 +56,10 @@
             $year=date('Y');
         }
         ?>
-        <P>Selecciona una fecha</P>
+        <h3>Selecciona una fecha:</h3>
         <div class="contenedorBotonesCalendario"><form action="reserva.php#calendarioReservas" method="post">
-            <input type="hidden" name="idAsignatura" value="<?php echo $_POST["idAsignatura"] ?>">
+            <input type="hidden" name="asignaturaYgrupo" value="<?php echo $_POST["asignaturaYgrupo"] ?>">
+            <input type="hidden" name="numeroAlumnos" value="<?php echo $_POST["numeroAlumnos"] ?>">
             <table><tr><td>
             <select name="mesBuscar" id="mesBuscar">
             <?php 
@@ -105,7 +108,7 @@
                     if(date($year.'-'.$mes.'-'.$dia<date('Y-m-d'))){
                         $calendario.='<td class="calenReDiaNoSeleccionable">'.$i.'</td>';
                     }else{
-                        switch(tramosLibres($year."-".$mes."-".$dia,$_POST["idAsignatura"],$numeroAlumnos,$arrayTramos,$con)){
+                        switch(tramosLibres($year."-".$mes."-".$dia,$numeroAlumnos,$arrayTramos,$con)){
                         case "todos":
                             $calendario.='<td class="calenReDiaVacio"><button type="submit" name="fecha" value="'.($year."-".$mes."-".$dia).'" >'.$i.'</button></td>';
                             break;
@@ -132,7 +135,7 @@
         $calendario.="</tr></table>";
         echo '<form action="reserva.php#reservaTramos" method="post">
         <input type="hidden" name="numeroAlumnos" value="'.$numeroAlumnos.'">
-        <input type="hidden" name="idAsignatura" value="'.$_POST["idAsignatura"].'">
+        <input type="hidden" name="asignaturaYgrupo" value="'.$_POST["asignaturaYgrupo"].'">
         <input type="hidden" name="mesBuscar" value="'.$mes.'">
         <input type="hidden" name="yearBuscar" value="'.$year.'">';
         echo $calendario;
@@ -149,7 +152,7 @@
         return $resul;
     }
 
-    function tramosLibres($fecha,$idAsig,$numAlum,$aTramos,$con){
+    function tramosLibres($fecha,$numAlum,$aTramos,$con){
         $tramosLLenos=0;
         
         $sql = "SELECT * FROM reservas WHERE fecha = '$fecha'"; //sacamos todas las reservas de la fecha seleccionada

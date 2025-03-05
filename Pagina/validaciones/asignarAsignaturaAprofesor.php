@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idUsuario']) && isset(
             $sql = "SELECT * FROM usuarios";
             $resultado = mysqli_query($con, $sql);
             while ($fila = mysqli_fetch_assoc($resultado)) {
-                echo "<option value='" . $fila['idUsuario'] . "'>" . $fila['nombreUsuario'] . "</option>";
+                echo "<option value='" . $fila['idUsuario'] . "'>" . $fila['nombreUsuario'] . " " . $fila['apellido1'] . "</option>";
             }
             ?>
         </select>
@@ -80,10 +80,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idUsuario']) && isset(
         </select>
         <input type="number" name="numAlumnos" id="numAlumnos" placeholder="Número de alumnos" required>
         <input type="text" name="grupo" id="grupo" placeholder="Grupo" pattern="[A-Za-z]" title="Debe ser una sola letra" maxlength="1">
-        <button type="submit" class="botones">Añadir asignación</button>
+        <button type="submit" class="botones">Añadir asignatura</button>
     </form>
 
-    <?php
+<?php
     // Mostrar mensaje de error si existe en la URL
     if (isset($_GET['errorA'])) {
         echo "<p style='color: red; text-align: center;'>" . htmlspecialchars($_GET['errorA']) . "</p>";

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-03-2025 a las 23:22:30
+-- Tiempo de generación: 05-03-2025 a las 17:18:49
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -87,19 +87,9 @@ CREATE TABLE `reservas` (
   `fecha` date NOT NULL,
   `idUsuario` varchar(9) NOT NULL,
   `idAsignatura` int(11) NOT NULL,
+  `grupo` varchar(1) DEFAULT NULL,
   `alumnosReserva` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `reservas`
---
-
-INSERT INTO `reservas` (`idReserva`, `fecha`, `idUsuario`, `idAsignatura`, `alumnosReserva`) VALUES
-(19, '2025-02-28', '11111111C', 3, 0),
-(21, '2025-03-26', '11111111A', 5, 10),
-(22, '2025-03-26', '11111111A', 1, 1),
-(23, '2025-03-13', '11111111A', 5, 5),
-(25, '2025-03-21', '11111111B', 4, 1);
 
 -- --------------------------------------------------------
 
@@ -111,18 +101,6 @@ CREATE TABLE `reservas-tramo` (
   `idReserva` int(11) NOT NULL,
   `idTramo` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `reservas-tramo`
---
-
-INSERT INTO `reservas-tramo` (`idReserva`, `idTramo`) VALUES
-(19, 'T5'),
-(19, 'T6'),
-(21, 'T4'),
-(22, 'T5'),
-(23, 'T5'),
-(25, 'T6');
 
 -- --------------------------------------------------------
 
@@ -202,7 +180,7 @@ CREATE TABLE `usuarios-asignaturas` (
   `idUsuario` varchar(9) NOT NULL,
   `idAsignatura` int(11) NOT NULL,
   `numAlumnos` int(5) NOT NULL,
-  `grupo` varchar(1) DEFAULT NULL
+  `grupo` varchar(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -260,9 +238,7 @@ ALTER TABLE `departamentos`
 --
 ALTER TABLE `reservas`
   ADD PRIMARY KEY (`idReserva`),
-  ADD KEY `idUsuario` (`idUsuario`),
-  ADD KEY `idAsignatura` (`idAsignatura`),
-  ADD KEY `reservas_ibfk_1` (`idAsignatura`,`idUsuario`);
+  ADD KEY `idUsuario` (`idUsuario`,`idAsignatura`,`grupo`);
 
 --
 -- Indices de la tabla `reservas-tramo`
@@ -295,7 +271,7 @@ ALTER TABLE `usuarios`
 -- Indices de la tabla `usuarios-asignaturas`
 --
 ALTER TABLE `usuarios-asignaturas`
-  ADD PRIMARY KEY (`idUsuario`,`idAsignatura`),
+  ADD PRIMARY KEY (`idUsuario`,`idAsignatura`,`grupo`),
   ADD KEY `idAsignatura` (`idAsignatura`),
   ADD KEY `idUsuario` (`idUsuario`) USING BTREE;
 
@@ -349,7 +325,7 @@ ALTER TABLE `asignaturas`
 -- Filtros para la tabla `reservas`
 --
 ALTER TABLE `reservas`
-  ADD CONSTRAINT `reservas_ibfk_1` FOREIGN KEY (`idAsignatura`,`idUsuario`) REFERENCES `usuarios-asignaturas` (`idAsignatura`, `idUsuario`);
+  ADD CONSTRAINT `reservas_ibfk_1` FOREIGN KEY (`idUsuario`,`idAsignatura`,`grupo`) REFERENCES `usuarios-asignaturas` (`idUsuario`, `idAsignatura`, `grupo`);
 
 --
 -- Filtros para la tabla `reservas-tramo`

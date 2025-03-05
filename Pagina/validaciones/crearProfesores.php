@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idUsuario']) && isset(
 
     <form action="./validaciones/crearProfesores.php" method="POST" class="formularioSecundario">
         <h2>Añadir profesor</h2>
-        <input type="text" name="idUsuario" id="idUsuario" placeholder="DNI" required>
+        <input type="text" name="idUsuario" id="idUsuario" placeholder="DNI" pattern="[0-9]{8}[A-Za-z]{1}" required>
         <input type="password" name="contrasena" id="contrasena" placeholder="Contraseña" required>
         <input type="text" name="nombre" id="nombre" placeholder="Nombre" required>
         <input type="text" name="apellido1" id="apellido1" placeholder="Primer apellido" required>

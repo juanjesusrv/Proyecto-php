@@ -43,7 +43,11 @@ $eleccion = $_SESSION['eleccion'];
         <?php if (!isset($_SESSION['nombreUsuario'])) { //Salta un error de inicio de sesión si no hay una cuenta iniciada
             header('Location: ../Pagina/errorsesion.php');
          } ?>
-        <h1>Lista de reservas de <?= $_SESSION['nombreUsuario'] ?></h1>
+         <?php if (in_array(2, $_SESSION['roles']) && $eleccion) { ?>
+        <h1>Lista de reservas del profesorado</h1>
+        <?php }else{ ?>
+            <h1>Lista de reservas de <?= $_SESSION['nombreUsuario'] ?></h1>
+        <?php } ?>
         
         <?php if (in_array(2, $_SESSION['roles'])) { ?>
             <form method="post" style="margin-bottom: 10px;">
@@ -80,6 +84,7 @@ $eleccion = $_SESSION['eleccion'];
                         JOIN asignaturas a ON r.idAsignatura = a.idAsignatura 
                         JOIN `usuarios-asignaturas` ua ON r.idUsuario = ua.idUsuario 
                         AND r.idAsignatura = ua.idAsignatura 
+                        AND r.grupo = ua.grupo
                         JOIN usuarios u ON r.idUsuario = u.idUsuario
                         ORDER BY r.fecha ASC";
             } else {
@@ -90,6 +95,7 @@ $eleccion = $_SESSION['eleccion'];
                         JOIN asignaturas a ON r.idAsignatura = a.idAsignatura 
                         JOIN `usuarios-asignaturas` ua ON r.idUsuario = ua.idUsuario 
                         AND r.idAsignatura = ua.idAsignatura 
+                        AND r.grupo = ua.grupo
                         WHERE r.idUsuario = '$idUsuario'
                         ORDER BY r.fecha ASC";
             }
