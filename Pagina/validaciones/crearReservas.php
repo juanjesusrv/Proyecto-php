@@ -3,6 +3,7 @@ session_start();
 require_once "conexion.php";
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["tramos"])) {
     $idAsignatura = $_POST["idAsignatura"];
+    $grupo= $_POST["grupo"];
     $fecha = $_POST["fecha"];
     $tramos = $_POST["tramos"];
     $idUsuario = $_SESSION["idUsuario"];
@@ -10,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["tramos"])) {
 
     if (isset($tramos)) {
 
-        $sql1 = "INSERT INTO reservas (fecha, idUsuario, idAsignatura, alumnosReserva) VALUES ('$fecha','$idUsuario','$idAsignatura', '$numAlumnos')";
+        $sql1 = "INSERT INTO reservas (fecha, idUsuario, idAsignatura, grupo, alumnosReserva) VALUES ('$fecha','$idUsuario','$idAsignatura','$grupo','$numAlumnos')";
         mysqli_query($con, $sql1);
 
         $sql2 = "SELECT idReserva FROM reservas ORDER BY idReserva DESC LIMIT 1";

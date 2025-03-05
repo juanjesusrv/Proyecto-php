@@ -84,6 +84,7 @@ $eleccion = $_SESSION['eleccion'];
                         JOIN asignaturas a ON r.idAsignatura = a.idAsignatura 
                         JOIN `usuarios-asignaturas` ua ON r.idUsuario = ua.idUsuario 
                         AND r.idAsignatura = ua.idAsignatura 
+                        AND r.grupo = ua.grupo
                         JOIN usuarios u ON r.idUsuario = u.idUsuario
                         ORDER BY r.fecha ASC";
             } else {
@@ -94,6 +95,7 @@ $eleccion = $_SESSION['eleccion'];
                         JOIN asignaturas a ON r.idAsignatura = a.idAsignatura 
                         JOIN `usuarios-asignaturas` ua ON r.idUsuario = ua.idUsuario 
                         AND r.idAsignatura = ua.idAsignatura 
+                        AND r.grupo = ua.grupo
                         WHERE r.idUsuario = '$idUsuario'
                         ORDER BY r.fecha ASC";
             }

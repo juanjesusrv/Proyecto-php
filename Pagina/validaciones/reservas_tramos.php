@@ -3,7 +3,9 @@ $array_tramos_reservaUsuario = array(); //para guardar los tramos que tiene rese
 
 if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["fecha"])) {
     $fecha = $_POST["fecha"];
-    $asignaturaSeleccionada = $_POST["idAsignatura"];
+    $asignaturaYgrupo = explode("#",$_POST["asignaturaYgrupo"]);
+    $asignaturaSeleccionada = $asignaturaYgrupo[0];
+    $grupo= $asignaturaYgrupo[1];
     $alumnosAsignatura = $_POST["numeroAlumnos"];
     $array_tramos = array(); //para guardar los tramos que tienen alumnos
 
@@ -58,6 +60,7 @@ if (isset($fecha)) {
             <br>
             <button class="botones" type="submit" id="enviarBtn" disabled>Enviar</button>
             <input type="hidden" name="idAsignatura" value="<?php echo $asignaturaSeleccionada ?>">
+            <input type="hidden" name="grupo" value="<?php echo $grupo ?>">
             <input type="hidden" name="fecha" value="<?php echo $fecha ?>">
             <input type="hidden" name="numAlumnos" value="<?php echo $alumnosAsignatura ?>">
     </form>
