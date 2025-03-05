@@ -24,12 +24,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idUsuario']) && isset(
     if ($resultado_curso && mysqli_num_rows($resultado_curso) > 0) {
         $curso = mysqli_fetch_assoc($resultado_curso)['curso'];
 
-        // Comprobamos si ya existe un profesor asignado al mismo grupo, asignatura y curso
+        // Comprobamos si ya existe el profesor asignado al mismo curso y asignatura
         $sql_comprobarAsignacion = "SELECT * 
                                     FROM `usuarios-asignaturas` uas
                                     JOIN `asignaturas` a ON uas.idAsignatura = a.idAsignatura
                                     WHERE uas.idAsignatura = '$idAsignatura' 
-                                    AND uas.grupo = '$grupo' 
+                                    AND uas.idUsuario = '$idUsuario'
                                     AND a.curso = '$curso'";
 
         $resultado_check = mysqli_query($con, $sql_comprobarAsignacion);
@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idUsuario']) && isset(
                 exit();
             }
         } else {
-            header("Location: ../gestion_profesorado.php?errorA=Ya existe un profesor asignado a este grupo en la asignatura y curso seleccionados");
+            header("Location: ../gestion_profesorado.php?errorA=Ya existe el profesor asignado a ese curso y asignatura");
             exit();
         }
     } else {
