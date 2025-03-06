@@ -39,8 +39,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idUsuario']) && isset(
             // Insertamos la asignación
             $sql = "INSERT INTO `usuarios-asignaturas` (idUsuario, idAsignatura, numAlumnos, grupo) 
                     VALUES ('$idUsuario', '$idAsignatura', '$numAlumnos', '$grupo')";
-            if (mysqli_query($con, $sql)) {
-                header("Location: ../gestion_profesorado.php");
+            if (mysqli_query($con, $sql)) { ?>
+                <script>
+                    alert("Se ha asignado asignatura con exito");
+                </script>
+    <?php header("Location: ../gestion_profesorado.php");
                 exit();
             } else {
                 header("Location: ../gestion_profesorado.php?errorA=Error al asignar la asignatura al profesor");
@@ -55,9 +58,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idUsuario']) && isset(
         exit();
     }
 } else {
-?>
+    ?>
 
-    <form action="./validaciones/asignarAsignaturaAprofesor.php" method="POST" class="formularioSecundario" onsubmit="return confirmarAsignacionAsignatura();">
+    <form action="./validaciones/asignarAsignaturaAprofesor.php" method="POST" class="formularioSecundario">
         <h2>Añadir asignatura</h2>
         <select name="idUsuario" id="idUsuario" required>
             <option value="">Selecciona un usuario</option>
