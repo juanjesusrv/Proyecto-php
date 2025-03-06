@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idUsuario']) && isset(
                 // Añadimos el rol de usuario
                 $sql2 = "INSERT INTO `usuarios-roles` (idUsuario, idRol) VALUES ('$idUsuario', '$rol')";
                 mysqli_query($con, $sql2);
-                header("Location: ../gestion_profesorado.php?exitoP=El profesor se ha añadido correctamente");
+                header("Location: ../gestion_profesorado.php");
                 exit();
             } else {
                 header("Location: ../gestion_profesorado.php?errorP=Error al insertar los datos en la base de datos");
@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idUsuario']) && isset(
         }
     }
 } else {
-?>
+    ?>
 
     <form action="./validaciones/crearProfesores.php#crearProfesorMensajeMensaje" method="POST" class="formularioSecundario" onsubmit="return confirmarCreacionProfesor();">
         <h2>Añadir profesor</h2>
