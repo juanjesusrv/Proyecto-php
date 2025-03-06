@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idUsuario']) && isset(
                 // Añadimos el rol de usuario
                 $sql2 = "INSERT INTO `usuarios-roles` (idUsuario, idRol) VALUES ('$idUsuario', '$rol')";
                 mysqli_query($con, $sql2);
-                header("Location: ../gestion_profesorado.php");
+                header("Location: ../gestion_profesorado.php?exitoP=El profesor se ha añadido correctamente");
                 exit();
             } else {
                 header("Location: ../gestion_profesorado.php?errorP=Error al insertar los datos en la base de datos");
@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idUsuario']) && isset(
 } else {
 ?>
 
-    <form action="./validaciones/crearProfesores.php" method="POST" class="formularioSecundario" onsubmit="return confirmarCreacionProfesor();">
+    <form action="./validaciones/crearProfesores.php#crearProfesorMensajeMensaje" method="POST" class="formularioSecundario" onsubmit="return confirmarCreacionProfesor();">
         <h2>Añadir profesor</h2>
         <input type="text" name="idUsuario" id="idUsuario" placeholder="DNI" pattern="[0-9]{8}[A-Za-z]{1}" required>
         <input type="password" name="contrasena" id="contrasena" placeholder="Contraseña" required>
@@ -80,6 +80,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idUsuario']) && isset(
     // Mostrar mensaje de error si existe en la URL
     if (isset($_GET['errorP'])) {
         echo "<p style='color: red; text-align: center;'>" . htmlspecialchars($_GET['errorP']) . "</p>";
+    }
+    // Mostrar mensaje de EXITO si existe en la URL
+    if (isset($_GET['exitoP'])) {
+        echo "<p style='color: green; text-align: center;'>" . htmlspecialchars($_GET['exitoP']) . "</p>";
     }
 }
 ?>
