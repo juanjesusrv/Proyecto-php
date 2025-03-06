@@ -30,7 +30,7 @@ if (isset($_POST['usr']) && isset($_POST['con'])) {
         $hashGuardado = $row['contrasena'];
 
         // 4. Verificar si la contraseña coincide
-        if (password_verify($contrasena, $hashGuardado) || ($idUsuario == "11111111A" && $contrasena == "1234")) {
+        if (password_verify($contrasena, $hashGuardado)) {
             echo "Contraseña correcta";
 
             // Guardar datos en la sesión
