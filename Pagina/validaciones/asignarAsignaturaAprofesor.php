@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idUsuario']) && isset(
 } else {
 ?>
 
-    <form action="./validaciones/asignarAsignaturaAprofesor.php" method="POST" class="formularioSecundario">
+    <form action="./validaciones/asignarAsignaturaAprofesor.php" method="POST" class="formularioSecundario" onsubmit="return confirmarAsignacionAsignatura();">
         <h2>Añadir asignatura</h2>
         <select name="idUsuario" id="idUsuario" required>
             <option value="">Selecciona un usuario</option>
@@ -91,3 +91,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idUsuario']) && isset(
     }
 }
 ?>
+<script>
+    function confirmarAsignacionAsignatura() {
+        return alert("Se ha asignado asignatura con exito");
+    }
+</script>
