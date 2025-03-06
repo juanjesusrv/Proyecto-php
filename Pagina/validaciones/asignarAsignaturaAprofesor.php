@@ -12,6 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idUsuario']) && isset(
 
     if (isset($_POST['grupo'])) {
         $grupo = htmlspecialchars($_POST['grupo']);
+        $grupo = strtoupper($grupo);
     } else {
         $grupo = "";
     }
@@ -30,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idUsuario']) && isset(
                                     JOIN `asignaturas` a ON uas.idAsignatura = a.idAsignatura
                                     WHERE uas.idAsignatura = '$idAsignatura' 
                                     AND uas.idUsuario = '$idUsuario'
-                                    AND a.curso = '$curso'";
+                                    AND uas.grupo = '$grupo'";
 
         $resultado_check = mysqli_query($con, $sql_comprobarAsignacion);
 
