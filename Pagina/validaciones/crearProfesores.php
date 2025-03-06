@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idUsuario']) && isset(
 
     $nombre = htmlspecialchars($_POST['nombre']);
     $apellido1 = htmlspecialchars($_POST['apellido1']);
-    
+
     if (isset($_POST['apellido2'])) {
         $apellido2 = htmlspecialchars($_POST['apellido2']);
     } else {
@@ -53,9 +53,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idUsuario']) && isset(
         }
     }
 } else {
-    ?>
+?>
 
-    <form action="./validaciones/crearProfesores.php" method="POST" class="formularioSecundario">
+    <form action="./validaciones/crearProfesores.php" method="POST" class="formularioSecundario" onsubmit="return confirmarCreacionProfesor();">
         <h2>Añadir profesor</h2>
         <input type="text" name="idUsuario" id="idUsuario" placeholder="DNI" pattern="[0-9]{8}[A-Za-z]{1}" required>
         <input type="password" name="contrasena" id="contrasena" placeholder="Contraseña" required>
@@ -76,10 +76,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idUsuario']) && isset(
         <button type="submit" class="botones">Añadir usuario</button>
     </form>
 
-    <?php
+<?php
     // Mostrar mensaje de error si existe en la URL
     if (isset($_GET['errorP'])) {
         echo "<p style='color: red; text-align: center;'>" . htmlspecialchars($_GET['errorP']) . "</p>";
     }
 }
 ?>
+<script>
+    function confirmarCreacionProfesor() {
+        return alert("Se ha creado el profesor con exito");
+    }
+</script>
