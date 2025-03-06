@@ -168,7 +168,12 @@ INSERT INTO `usuarios` (`idUsuario`, `contrasena`, `nombreUsuario`, `apellido1`,
 ('11111111A', '$2y$10$toB/QRB6ZwxP3zSAs/eJ7uI0RSlEIeOVzHO4kIY5BO4Ib0TtodnP.', 'Noemí', 'Salobreña', 'Torres', 'nsaltor759@g.educaand.es', 1),
 ('11111111B', '$2y$10$kuaEV6RDiDEJmEbVUUJrZOZwk8dg7sbeBVjiHYDaRUBwYkVXM8Bc.', 'Juan Antonio', 'Chaves', 'Naranjo', 'jchanar975@g.educaand.es', 1),
 ('11111111C', '$2y$10$bAzL770ZaA7Y8.qHQoubQeK5Cz5Q3lSS7p.CQbM2hmkp0YjD9VKcC', 'Carmelo José', 'Jaén', 'Díaz', 'cjaedia071@g.educaand.es', 1),
-('11111111D', '$2y$10$oqOfVdIOkAdL42OYHGAkSuC/.MwV3ICXp4tosLm0h30vlwhUtYKOO', 'Ana', 'Colacio', 'Moyano', 'ana@email.com', 1);
+('11111111D', '$2y$10$oqOfVdIOkAdL42OYHGAkSuC/.MwV3ICXp4tosLm0h30vlwhUtYKOO', 'Ana', 'Colacio', 'Moyano', 'ana@email.com', 1),
+('11111111E', '$2y$10$DTLdvQufPjtIPIcGfgAYXelmbtFSI1arYeMZAvVH8Fx4PTxj0mvvm', 'Juan Jesús', 'Rivillas', 'Canalejo', 'jrivcan2406@g.educaand.es', 1),
+('11111111F', '$2y$10$NpxG5GhpLpyIaQeSQQp9heGq05n5flmMX49ABGhE/XYOsUsRz2Nf.', 'Rafael', 'Jiménez', 'Ruiz', 'rjimrui727@g.educaant.es', 1),
+('11111111G', '$2y$10$YugnVfVEu3EjMrvFe9PKF.g6wIZAlq7TFEPQrcrI3mcl672L6uKym', 'Daniel', 'Godoy', 'Medina', 'dgodmed486@g.educaand.es', 1),
+('11111111H', '$2y$10$lm28iLdz14YEEDcI92ewvuh9O30Z7uZDQjs/x.RFKW0/WWN8Pmco6', 'Ruben', 'Torrico', 'Suarez', 'rtorsua@g.educaand.es', 1),
+('11111111I', '$2y$10$pCpjVTlQtdRKY5FFKcACZ.YkW5ntqbBlCryMeixM0fnTTDdl4qjxS', 'Pablo', 'Robles', 'Navas', 'prodnav@g.educaand.es', 1);
 
 -- --------------------------------------------------------
 
@@ -193,7 +198,12 @@ INSERT INTO `usuarios-asignaturas` (`idUsuario`, `idAsignatura`, `numAlumnos`, `
 ('11111111B', 4, 15, 'A'),
 ('11111111C', 2, 25, 'C'),
 ('11111111C', 3, 25, 'A'),
-('11111111D', 5, 10, 'C');
+('11111111D', 5, 10, 'C'),
+('11111111E', 8, 18, 'B'),
+('11111111F', 1, 5, 'B'),
+('11111111G', 4, 16, 'A'),
+('11111111H', 10, 20, 'B'),
+('11111111I', 3, 15, 'A');
 
 -- --------------------------------------------------------
 
