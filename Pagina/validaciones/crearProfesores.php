@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idUsuario']) && isset(
 } else {
     ?>
 
-    <form action="./validaciones/crearProfesores.php#crearProfesorMensajeMensaje" method="POST" class="formularioSecundario" onsubmit="return confirmarCreacionProfesor();">
+    <form action="./validaciones/crearProfesores.php#crearProfesorMensajeMensaje" method="POST" class="formularioSecundario">
         <h2>Añadir profesor</h2>
         <input type="text" name="idUsuario" id="idUsuario" placeholder="DNI" pattern="[0-9]{8}[A-Za-z]{1}" required>
         <input type="password" name="contrasena" id="contrasena" placeholder="Contraseña" required>
@@ -87,8 +87,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idUsuario']) && isset(
     }
 }
 ?>
-<script>
-    function confirmarCreacionProfesor() {
-        return alert("Se ha creado el profesor con exito");
-    }
-</script>
