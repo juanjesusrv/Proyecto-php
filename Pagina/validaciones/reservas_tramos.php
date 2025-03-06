@@ -36,7 +36,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["fecha"])) {
 if (isset($fecha)) {
 ?>
 <div id="reservaTramos" class="contenedorEstandar">
-    <form action="./validaciones/crearReservas.php" method="post" onsubmit="return enviarCorreo();">
+    <form action="./validaciones/crearReservas.php#calendarioReservas" method="post" onsubmit="return enviarCorreo();">
         <h2><?php if (isset($_POST["fecha"])) {
                 echo $_POST["fecha"];
             } ?></h2>

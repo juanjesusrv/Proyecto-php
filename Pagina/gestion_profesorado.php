@@ -22,15 +22,15 @@ require_once "./validaciones/conexion.php";
     <?php require_once "./plantillas/header.php" ?>
     <main>
         <div class="reservas">
-        <div class="contenedorEstandar">
+        <div class="contenedorEstandar" id="crearProfesorMensajeMensaje">
                 <?php require_once "./validaciones/crearProfesores.php" ?>
             </div>
-            <div class="contenedorEstandar">
+            <div class="contenedorEstandar" id="eliminarProfesorMensaje">
                 <?php require_once "validaciones/eliminarProfesores.php" ?>
             </div>
         </div>
         <div class="reservas">
-            <div class="contenedorEstandar">
+            <div class="contenedorEstandar" id="asignarAsignaturaMensaje">
                 <?php require_once "validaciones/asignarAsignaturaAprofesor.php" ?>
             </div>
             <div class="contenedorEstandar">

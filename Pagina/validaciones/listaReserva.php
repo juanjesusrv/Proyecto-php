@@ -121,7 +121,7 @@ $eleccion = $_SESSION['eleccion'];
                         echo "<td>" . $row['apellido1'] . "</td>";
                     } else if (in_array(2, $_SESSION['roles']) && !$eleccion) {
                         echo "<td>
-                            <form action='./validaciones/eliminarReserva.php' method='post' onsubmit='return confirmarEliminacion();'>
+                            <form action='./validaciones/eliminarReserva.php#listaReservas' method='post' onsubmit='return confirmarEliminacion();'>
                             <input type='hidden' name='idReserva' value='" . $row['idReserva'] . "'>
                             <input type='hidden' name='hora' value='" . $row['hora'] . "'>
                             <button type='submit'><img src='./imgs/papelera.png' width='20' height='20'></button>

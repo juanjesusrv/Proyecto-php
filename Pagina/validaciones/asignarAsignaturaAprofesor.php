@@ -39,11 +39,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idUsuario']) && isset(
             // Insertamos la asignación
             $sql = "INSERT INTO `usuarios-asignaturas` (idUsuario, idAsignatura, numAlumnos, grupo) 
                     VALUES ('$idUsuario', '$idAsignatura', '$numAlumnos', '$grupo')";
-            if (mysqli_query($con, $sql)) { ?>
-                <script>
-                    alert("Se ha asignado asignatura con exito");
-                </script>
-    <?php header("Location: ../gestion_profesorado.php");
+            if (mysqli_query($con, $sql)) {
+                header("Location: ../gestion_profesorado.php?exitoA=Asignatura asignada correctamente");
                 exit();
             } else {
                 header("Location: ../gestion_profesorado.php?errorA=Error al asignar la asignatura al profesor");
@@ -60,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idUsuario']) && isset(
 } else {
     ?>
 
-    <form action="./validaciones/asignarAsignaturaAprofesor.php" method="POST" class="formularioSecundario">
+    <form action="./validaciones/asignarAsignaturaAprofesor.php#asignarAsignaturaMensaje" method="POST" class="formularioSecundario" onsubmit="return confirmarAsignacionAsignatura();">
         <h2>Añadir asignatura</h2>
         <select name="idUsuario" id="idUsuario" required>
             <option value="">Selecciona un usuario</option>
@@ -92,10 +89,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idUsuario']) && isset(
     if (isset($_GET['errorA'])) {
         echo "<p style='color: red; text-align: center;'>" . htmlspecialchars($_GET['errorA']) . "</p>";
     }
+    // Mostrar mensaje de error si existe en la URL
+    if (isset($_GET['exitoA'])) {
+        echo "<p style='color: green; text-align: center;'>" . htmlspecialchars($_GET['exitoA']) . "</p>";
+    }
 }
 ?>
-<script>
-    function confirmarAsignacionAsignatura() {
-        return alert("Se ha asignado asignatura con exito");
-    }
-</script>

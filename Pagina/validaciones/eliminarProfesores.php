@@ -84,7 +84,7 @@ $eleccion = $_SESSION['eleccion'];
             }
 
             if (mysqli_num_rows($result) > 0) {
-                echo '<form  action="gestion_profesorado.php" method="post" onsubmit="return confirmarEliminacionProfesor();">';
+                echo '<form  action="gestion_profesorado.php#eliminarProfesorMensaje" method="post" onsubmit="return confirmarEliminacionProfesor();">';
                 while ($row = mysqli_fetch_assoc($result)) {
                     //Si la id actuál es la misma que la del usuario iniciado (el vicedirectór) no se muestra.
                     if ($row['idUsuario'] != $_SESSION['idUsuario']) {
