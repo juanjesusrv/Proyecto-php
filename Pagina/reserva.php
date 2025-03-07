@@ -2,6 +2,10 @@
 <html lang="es">
 <?php session_start(); 
 
+if (!isset($_SESSION['idUsuario']) || !isset($_SESSION['nombreUsuario'])) {
+    header("Location: index.php");
+} 
+
 require_once "./validaciones/conexion.php";
 
 ?>

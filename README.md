@@ -1,63 +1,41 @@
-Proyecto final de PHP: Este programa gestionará el sistema de reservas del salón de actos en un instituto.
+Requisitos previos:
 
-## **Usuarios del sistema**
-- **Profesores**:  
-  Los profesores podrán:
-  - Ver los tramos libres en los que pueden reservar.
-  - Consultar un listado con sus reservas.
-  - Cancelar o mover sus reservas.
+    -Importar la base de datos que se encuentra en la carpeta -> Base de datos
+    -Descomprimir la carpetta y mantener todos los archivos en el mismo orden que están
 
-- **Vicedirector**:  
-  El vicedirector podrá:
-  - Realizar todas las acciones disponibles para los profesores.
-  - Añadir nuevos profesores al sistema.
-  - Eliminar profesores (también se eliminarán sus reservas asociadas).
-  - Ver todas las reservas realizadas en el sistema.
+Contenido de las carpetas:
 
-## **Tecnologías a implementar**
-- **PHP**: Lenguaje principal para la lógica del servidor.
-- **MySQL**: Gestión de la base de datos.
-- **HTML**: Estructura del frontend.
-- **CSS**: Estilo y diseño visual del sistema.
-- **JavaScript**: Interactividad y validaciones en el cliente.
+    -Base de datos: Se encuentra el SQL
+    -Diagramas: Aquí se encuentran todos los diagramas usados
+    -Página: aquí se encuentra la página al completo, dentro de esta podemos encontrar:
+        --Estilos: En esta se encuentrar los archivos css
+        --imgs: En esta se encuentran todas las imagenes del proyecto
+        --plantillas: En esta se pueden encontrar tanto el footer como el header
+        --validaciones: Aquí se crean todos los archivos relevantes al funcionamiento del programa, como crear una reserva o crear un professor, también se encuentra dentro el PHPMailer
+        --También se pueden encontrar los archivos principales que son los que le dan la forma a la página, como pueden ser:
+            ---index.php: La página del loggin
+            ---gestion_profesorado: La página a la que accede el vicedirector
+            ---reserva: La página de reservas
 
----
 
-## **Clases del sistema**
+Para empezar a usar el proyecto solo es necesario abrir el index.php con el navegador
 
-### **Salón de Actos**
-- Restricciones:
-  - Un máximo de **100 alumnos** en el salón.
+El usuario principal para iniciar session es:
 
-### **Profesores**
-Los profesores tendrán las siguientes funcionalidades:
-- Iniciar sesión en el sistema.
-- Reservar tramos libres disponibles.
-- Listar y consultar sus reservas activas.
-- Anular o modificar sus propias reservas.
+    username -> 11111111A
+    password -> 1234 
 
-### **Vicedirector**
-El vicedirector contará con las siguientes funcionalidades:
-- Crear nuevos usuarios tipo "Profesor".
-- Eliminar usuarios tipo "Profesor" (incluyendo la eliminación de sus reservas).
-- Ver todas las reservas realizadas en el sistema.
-- Todas las funcionalidades disponibles para los profesores.
+El resto de usuarios son igual pero cambiando la 'A' en el username por otra letra hasta la 'I'.
 
----
+Una vez en la página inicial, suponiendo que entres con el usuario princial, en caso contrario solo te saldrá la página reservas.
+Podrás elegir entre la sección reservas o gestionar profesorado.
 
-## **Diagramas a desarrollar**
-Para una mejor comprensión y diseño del proyecto, se desarrollarán los siguientes diagramas:
-1. **Modelo Entidad-Relación (ERD)**
-2. **Modelo Relacional**
-3. **Diagrama de Actividades** 
-5. **Diagrama de Casos de Uso**
+Resservas:
+En reservas te saldrá  primeramente una opción para elegir la asignatura y el numero de alumnos con los que quieres hacer la reserva, cuando los seleccionas, puedes elegir el día, y por ultimo aparecerá otro recuadro en el que podrás seleccionar el tramo horario.
+Justo debajo se encontrará una lista en la que puedes ver tus propias reservas y eliminarlas, o bien ver la de todos.
 
----
+Gestión de profesorado:
+A esta sección solo tendrá acceso el vicedirector, aquí tendrás un menú en el que puedes moverte y tienes las diferentes opciones, crear un profesor, eliminarlo, asignarle una asignatura, cambiar el vicedirector o ver la lista de todas las asignaturas que tienen asignado un profesor.
 
-## **Miembros del equipo**
-El desarrollo del proyecto estará a cargo de:
-- Juan Jesús Rivillas
-- Rubén Torrico
-- Pablo Robles
-- Daniel Godoy
-- Rafael Jiménez
+
+
