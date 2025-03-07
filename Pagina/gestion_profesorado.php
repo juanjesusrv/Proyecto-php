@@ -17,14 +17,7 @@ if (!isset($_SESSION['roles']) || !in_array(2, $_SESSION['roles'])) {
     <title>Gestión de profesorado</title>
     <link rel="stylesheet" href="Estilos/styles.css">
     <style>
-        /* Ocultar todas las secciones por defecto */
-        .contenido-seccion {
-            display: none;
-        }
-        /* Mostrar la sección activa */
-        .contenido-seccion.activo {
-            display: block;
-        }
+
         .menu ul {
             list-style: none;
             padding: 0;
@@ -59,6 +52,9 @@ if (!isset($_SESSION['roles']) || !in_array(2, $_SESSION['roles'])) {
             padding: 20px;
             border-bottom: 1px solid #ccc;
             border-radius: 8px;
+        }
+        .menu ul li a.activo {
+            background-color: #ccc;
         }
     </style>
 </head>
@@ -136,10 +132,5 @@ if (!isset($_SESSION['roles']) || !in_array(2, $_SESSION['roles'])) {
             });
         });
     </script>
-    <style>
-        .menu ul li a.activo {
-            background-color: #ccc;
-        }
-    </style>
 </body>
 </html>
